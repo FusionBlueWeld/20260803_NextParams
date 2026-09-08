@@ -1,0 +1,414 @@
+{
+  "status": "fail",
+  "stage": "coating",
+  "seed": 0,
+  "trial": "trial_stage_loop_smoke3_coating_s0",
+  "training_samples_broad": 128,
+  "initial_current_context_samples": 5,
+  "completed_iterations": 15,
+  "heldout_samples": 512,
+  "current_incoming_context": {
+    "incoming_viscosity_pa_s": 1.6,
+    "incoming_solids_fraction": 0.5,
+    "incoming_bubble_fraction": 0.005
+  },
+  "oracle_grid_best_controls": {
+    "coating_gap_um": 300.0,
+    "line_speed_m_min": 30.0,
+    "web_tension_n": 100.0
+  },
+  "selected_controls": {
+    "coating_gap_um": 300.0,
+    "line_speed_m_min": 30.0,
+    "web_tension_n": 100.0
+  },
+  "normalized_regret": 0.0,
+  "optimum_found": true,
+  "recommendation_feasible_rate": 0.5333333333333333,
+  "recommendation_probability_brier": 0.0008907732984348502,
+  "heldout_probability_brier_uncalibrated": 0.01972064525527472,
+  "heldout_feasibility_accuracy": 0.974609375,
+  "prediction_errors": {
+    "wet_thickness_um": {
+      "rmse": 0.8744322403489722,
+      "normalized_rmse": 0.0056948210902132545
+    },
+    "wet_solvent_g_m2": {
+      "rmse": 0.5727767443621923,
+      "normalized_rmse": 0.005818068921998677
+    },
+    "wet_solids_g_m2": {
+      "rmse": 0.763049241028983,
+      "normalized_rmse": 0.006390796891368464
+    },
+    "solids_fraction": {
+      "rmse": 0.002013131589123976,
+      "normalized_rmse": 0.006727496344959984
+    },
+    "thickness_cv_fraction": {
+      "rmse": 0.0010515260274028106,
+      "normalized_rmse": 0.014300922616911044
+    },
+    "coating_defect_index": {
+      "rmse": 0.007979372394963831,
+      "normalized_rmse": 0.018749520518040824
+    },
+    "capillary_number": {
+      "rmse": 0.3462369607104982,
+      "normalized_rmse": 0.008727505778123208
+    },
+    "coated_solids_rate_kg_m_h": {
+      "rmse": 1.5897155335686808,
+      "normalized_rmse": 0.006736665448380073
+    }
+  },
+  "maximum_heldout_normalized_rmse": 0.018749520518040824,
+  "support": {
+    "selected": 0.9763293402038448,
+    "heldout_min": 0.07742460334600229,
+    "heldout_median": 0.6146410989626605,
+    "heldout_max": 0.9251556329689111,
+    "heldout_supported_fraction": 0.7265625
+  },
+  "probability_status": "UNCALIBRATED_MODEL_PREDICTIVE_ESTIMATE",
+  "acceptance_checks": {
+    "normalized_regret_le_0_01": true,
+    "recommendation_feasible_rate_ge_0_8": false,
+    "maximum_heldout_nrmse_le_0_1": true,
+    "heldout_feasibility_accuracy_ge_0_9": true,
+    "selected_support_ge_0_5": true
+  },
+  "bundle": "v004\\trials\\trial_stage_loop_smoke3_coating_s0\\output\\stage_bundles\\stage_bundle_run_0016",
+  "history": [
+    {
+      "iteration": 1,
+      "controls": {
+        "coating_gap_um": 300.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 100.0
+      },
+      "predicted_objective": 200.3683983,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.4245341234,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 232.115868830344,
+        "wet_solvent_g_m2": 112.3600100342964,
+        "wet_solids_g_m2": 112.3600100342964,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.03740118587059365,
+        "coating_defect_index": 0.17230002965977664,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 202.2480180617335
+      }
+    },
+    {
+      "iteration": 2,
+      "controls": {
+        "coating_gap_um": 300.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 40.0
+      },
+      "predicted_objective": 209.5950523,
+      "predicted_feasibility_probability": 0.107839317,
+      "support": 0.3226622509,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 240.201693830344,
+        "wet_solvent_g_m2": 116.27410424385522,
+        "wet_solids_g_m2": 116.27410424385522,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.05356445117671609,
+        "coating_defect_index": 0.26692860108834804,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 209.2933876389394
+      }
+    },
+    {
+      "iteration": 3,
+      "controls": {
+        "coating_gap_um": 300.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 160.0
+      },
+      "predicted_objective": 195.2989624,
+      "predicted_feasibility_probability": 0.04138849412,
+      "support": 0.3034671303,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 224.03004383034397,
+        "wet_solvent_g_m2": 108.44591582473755,
+        "wet_solids_g_m2": 108.44591582473755,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.05356445117671609,
+        "coating_defect_index": 0.26692860108834804,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 195.2026484845276
+      }
+    },
+    {
+      "iteration": 4,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 40.0
+      },
+      "predicted_objective": 146.5993545,
+      "predicted_feasibility_probability": 0.0004740577095,
+      "support": 0.546021056,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 168.1411856812408,
+        "wet_solvent_g_m2": 81.39187297069867,
+        "wet_solids_g_m2": 81.39187297069867,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.05356445117671609,
+        "coating_defect_index": 0.26692860108834804,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 146.5053713472576
+      }
+    },
+    {
+      "iteration": 5,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 100.0
+      },
+      "predicted_objective": 138.9701999,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.6409019898,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 162.48110818124078,
+        "wet_solvent_g_m2": 78.65200702400747,
+        "wet_solids_g_m2": 78.65200702400747,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.03740118587059365,
+        "coating_defect_index": 0.17230002965977664,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 141.57361264321347
+      }
+    },
+    {
+      "iteration": 6,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 160.0
+      },
+      "predicted_objective": 136.3653791,
+      "predicted_feasibility_probability": 0.004364517071,
+      "support": 0.5008089686,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 156.82103068124079,
+        "wet_solvent_g_m2": 75.91214107731629,
+        "wet_solids_g_m2": 75.91214107731629,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.05356445117671609,
+        "coating_defect_index": 0.26692860108834804,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 136.64185393916932
+      }
+    },
+    {
+      "iteration": 7,
+      "controls": {
+        "coating_gap_um": 300.0,
+        "line_speed_m_min": 17.5,
+        "web_tension_n": 40.0
+      },
+      "predicted_objective": 121.0258052,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.5442958979,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 233.53921386677445,
+        "wet_solvent_g_m2": 113.04900671247046,
+        "wet_solids_g_m2": 113.04900671247046,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.042998549023560116,
+        "coating_defect_index": 0.20521129977289276,
+        "capillary_number": 13.725490196078432,
+        "coated_solids_rate_kg_m_h": 118.70145704809397
+      }
+    },
+    {
+      "iteration": 8,
+      "controls": {
+        "coating_gap_um": 300.0,
+        "line_speed_m_min": 17.5,
+        "web_tension_n": 160.0
+      },
+      "predicted_objective": 109.5798251,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.4914114463,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 217.36756386677442,
+        "wet_solvent_g_m2": 105.22081829335279,
+        "wet_solids_g_m2": 105.22081829335279,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.042998549023560116,
+        "coating_defect_index": 0.20521129977289276,
+        "capillary_number": 13.725490196078432,
+        "coated_solids_rate_kg_m_h": 110.48185920802042
+      }
+    },
+    {
+      "iteration": 9,
+      "controls": {
+        "coating_gap_um": 120.0,
+        "line_speed_m_min": 5.0,
+        "web_tension_n": 100.0
+      },
+      "predicted_objective": 11.58407131,
+      "predicted_feasibility_probability": 1e-12,
+      "support": 0.4489148019,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 81.29760103328493,
+        "wet_solvent_g_m2": 39.35361814723964,
+        "wet_solids_g_m2": 39.35361814723964,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.04597809961565028,
+        "coating_defect_index": 0.2962552739477737,
+        "capillary_number": 3.9215686274509802,
+        "coated_solids_rate_kg_m_h": 11.806085444171892
+      }
+    },
+    {
+      "iteration": 10,
+      "controls": {
+        "coating_gap_um": 120.0,
+        "line_speed_m_min": 17.5,
+        "web_tension_n": 40.0
+      },
+      "predicted_objective": 44.85304376,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.6259702765,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 93.41568554670977,
+        "wet_solvent_g_m2": 45.219602684988175,
+        "wet_solids_g_m2": 45.219602684988175,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.042998549023560116,
+        "coating_defect_index": 0.20521129977289276,
+        "capillary_number": 13.725490196078432,
+        "coated_solids_rate_kg_m_h": 47.48058281923758
+      }
+    },
+    {
+      "iteration": 11,
+      "controls": {
+        "coating_gap_um": 120.0,
+        "line_speed_m_min": 17.5,
+        "web_tension_n": 100.0
+      },
+      "predicted_objective": 46.24880394,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.6000797675,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 90.18135554670978,
+        "wet_solvent_g_m2": 43.65396500116466,
+        "wet_solids_g_m2": 43.65396500116466,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.026835283717437666,
+        "coating_defect_index": 0.11058272834432134,
+        "capillary_number": 13.725490196078432,
+        "coated_solids_rate_kg_m_h": 45.83666325122289
+      }
+    },
+    {
+      "iteration": 12,
+      "controls": {
+        "coating_gap_um": 120.0,
+        "line_speed_m_min": 17.5,
+        "web_tension_n": 160.0
+      },
+      "predicted_objective": 44.70501904,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.514340157,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 86.94702554670977,
+        "wet_solvent_g_m2": 42.08832731734111,
+        "wet_solids_g_m2": 42.08832731734111,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.042998549023560116,
+        "coating_defect_index": 0.20521129977289276,
+        "capillary_number": 13.725490196078432,
+        "coated_solids_rate_kg_m_h": 44.19274368320817
+      }
+    },
+    {
+      "iteration": 13,
+      "controls": {
+        "coating_gap_um": 120.0,
+        "line_speed_m_min": 30.0,
+        "web_tension_n": 100.0
+      },
+      "predicted_objective": 80.76998563,
+      "predicted_feasibility_probability": 1.0,
+      "support": 0.522618053,
+      "true_feasible": true,
+      "true_outputs": {
+        "wet_thickness_um": 92.8463475321376,
+        "wet_solvent_g_m2": 44.94400401371856,
+        "wet_solids_g_m2": 44.94400401371856,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.03740118587059365,
+        "coating_defect_index": 0.17230002965977664,
+        "capillary_number": 23.52941176470588,
+        "coated_solids_rate_kg_m_h": 80.89920722469341
+      }
+    },
+    {
+      "iteration": 14,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 5.0,
+        "web_tension_n": 40.0
+      },
+      "predicted_objective": 22.29092722,
+      "predicted_feasibility_probability": 1e-12,
+      "support": 0.5058309709,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 147.93087930824865,
+        "wet_solvent_g_m2": 71.60869770436054,
+        "wet_solids_g_m2": 71.60869770436054,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.062141364921772725,
+        "coating_defect_index": 0.39088384537634513,
+        "capillary_number": 3.9215686274509802,
+        "coated_solids_rate_kg_m_h": 21.482609311308163
+      }
+    },
+    {
+      "iteration": 15,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 5.0,
+        "web_tension_n": 100.0
+      },
+      "predicted_objective": 21.30924819,
+      "predicted_feasibility_probability": 1e-12,
+      "support": 0.6140089472,
+      "true_feasible": false,
+      "true_outputs": {
+        "wet_thickness_um": 142.27080180824862,
+        "wet_solvent_g_m2": 68.86883175766937,
+        "wet_solids_g_m2": 68.86883175766937,
+        "solids_fraction": 0.5,
+        "thickness_cv_fraction": 0.04597809961565028,
+        "coating_defect_index": 0.2962552739477737,
+        "capillary_number": 3.9215686274509802,
+        "coated_solids_rate_kg_m_h": 20.660649527300812
+      }
+    }
+  ]
+}

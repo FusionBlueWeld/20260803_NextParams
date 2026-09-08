@@ -1,0 +1,93 @@
+{
+  "status": "pass",
+  "trial": "trial_validated_individual_chain_r001",
+  "bundles": {
+    "coating": "v004\\trials\\trial_individual_stage_production2_coating_s0\\output\\stage_bundles\\stage_bundle_run_0016",
+    "drying": "v004\\trials\\trial_individual_stage_production2_drying_s0\\output\\stage_bundles\\stage_bundle_run_0016",
+    "curing": "v004\\trials\\trial_curing_dense512_curing_s0\\output\\stage_bundles\\stage_bundle_run_0016"
+  },
+  "candidate_count": 19683,
+  "predicted_feasible_count": 882,
+  "deterministic_selected": {
+    "rank": 1,
+    "predicted_feasible": true,
+    "predicted_quality_margin": 0.4385766218394338,
+    "minimum_stage_support": 0.833371646798921,
+    "good_product_probability": "NOT_EVALUATED",
+    "coating_gap_um": 210.0,
+    "line_speed_m_min": 18.0,
+    "web_tension_n": 60.0,
+    "air_temperature_c": 90.0,
+    "air_speed_m_s": 3.25,
+    "residence_time_min": 13.0,
+    "oven_temperature_c": 140.0,
+    "hold_time_min": 60.0,
+    "nip_pressure_mpa": 0.325,
+    "final_bond_strength_mpa_mean": 46.03445189886188,
+    "final_cure_fraction_mean": 0.9207766645119828,
+    "final_degradation_fraction_mean": 0.024685185398318613,
+    "final_final_residual_solvent_pct_mean": 0.14976300579410795,
+    "final_final_thickness_um_mean": 61.8640480577943,
+    "final_final_internal_stress_mpa_mean": 0.571302379809642,
+    "final_final_defect_index_mean": 0.09595620457891962,
+    "final_dimensional_change_um_mean": 3.1812097097582255,
+    "final_blister_index_mean": 0.0080885952803709,
+    "final_terminal_film_temperature_c_mean": 140.01737938090477,
+    "final_curing_energy_kj_m2_mean": 3868.533489663218
+  },
+  "deterministic_oracle": {
+    "feasible": true,
+    "quality_margin": 0.42769774963796103,
+    "conditions": {
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 18.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 3.25,
+      "residence_time_min": 13.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.325
+    }
+  },
+  "robust_selected": {
+    "robust_rank": 1,
+    "deterministic_candidate_index": 9223,
+    "predicted_good_probability": 1.0,
+    "mc95_low": 0.9962625959599825,
+    "mc95_high": 1.0,
+    "valid_chain_fraction": 1.0,
+    "deterministic_quality_margin": 0.4373577269494864,
+    "coating_gap_um": 210.0,
+    "line_speed_m_min": 18.0,
+    "web_tension_n": 60.0,
+    "air_temperature_c": 90.0,
+    "air_speed_m_s": 5.5,
+    "residence_time_min": 13.0,
+    "oven_temperature_c": 140.0,
+    "hold_time_min": 60.0,
+    "nip_pressure_mpa": 0.325
+  },
+  "robust_center_oracle": {
+    "feasible": true,
+    "quality_margin": 0.4245393075283194,
+    "conditions": {
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 18.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 5.5,
+      "residence_time_min": 13.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.325
+    }
+  },
+  "individual_best_chain_oracle_margin": -0.26785048478109935,
+  "deterministic_margin_improvement_over_individual": 0.6955482344190604,
+  "probability_status": "UNCALIBRATED_PROCESS_VARIATION_ESTIMATE",
+  "commands": {
+    "prepare_stdout": "pipeline.jsonを確認しました。工程数=3\n",
+    "run_stdout": "trial_validated_individual_chain_r001の全体条件を19,683候補から評価しました。\n予測適合候補: 882件\n個別Best連結からの仕様余裕改善: 0.642668\n出力: C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\r001\\trials\\trial_validated_individual_chain_r001\\output\\system_recommendations.csv\n工程ばらつき込み未校正予測良品率: 100.000%\n確率最適化出力: C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\r001\\trials\\trial_validated_individual_chain_r001\\output\\robust_recommendations.csv\n"
+  }
+}

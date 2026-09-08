@@ -1,0 +1,475 @@
+{
+  "status": "pass",
+  "stage": "curing",
+  "seed": 1,
+  "trial": "trial_curing_dense512_curing_s1",
+  "training_samples_broad": 512,
+  "initial_current_context_samples": 5,
+  "completed_iterations": 15,
+  "heldout_samples": 1024,
+  "current_incoming_context": {
+    "incoming_dry_thickness_um": 63.68789302994501,
+    "incoming_residual_solvent_pct": 2.4692804379246076,
+    "incoming_internal_stress_mpa": 0.5778532757313246,
+    "incoming_drying_defect_index": 0.13365896420283252,
+    "incoming_thickness_cv_fraction": 0.03686330061614284
+  },
+  "oracle_grid_best_controls": {
+    "oven_temperature_c": 135.0,
+    "hold_time_min": 65.0,
+    "nip_pressure_mpa": 0.325
+  },
+  "selected_controls": {
+    "oven_temperature_c": 135.0,
+    "hold_time_min": 65.0,
+    "nip_pressure_mpa": 0.325
+  },
+  "selected_true_feasible": true,
+  "normalized_regret": 0.0,
+  "optimum_found": true,
+  "recommendation_feasible_rate": 0.5333333333333333,
+  "recommendation_probability_brier": 0.024725053153821046,
+  "heldout_probability_brier_uncalibrated": 0.004050696518265014,
+  "heldout_feasibility_accuracy": 0.9931640625,
+  "prediction_errors": {
+    "bond_strength_mpa": {
+      "rmse": 1.0147611091210733,
+      "normalized_rmse": 0.02598418265326866
+    },
+    "cure_fraction": {
+      "rmse": 0.019912051743300536,
+      "normalized_rmse": 0.019920021936324216
+    },
+    "degradation_fraction": {
+      "rmse": 0.0016996826766292783,
+      "normalized_rmse": 0.009148861913983087
+    },
+    "final_residual_solvent_pct": {
+      "rmse": 1.5943931571301098,
+      "normalized_rmse": 0.02313700756224701
+    },
+    "final_thickness_um": {
+      "rmse": 2.859454804882824,
+      "normalized_rmse": 0.009711543360741178
+    },
+    "final_internal_stress_mpa": {
+      "rmse": 0.10982847646201133,
+      "normalized_rmse": 0.013245657166136428
+    },
+    "final_defect_index": {
+      "rmse": 0.060618761995639585,
+      "normalized_rmse": 0.06078049573288651
+    },
+    "dimensional_change_um": {
+      "rmse": 0.7495119851245166,
+      "normalized_rmse": 0.013069038252912564
+    },
+    "blister_index": {
+      "rmse": 0.08818714044669866,
+      "normalized_rmse": 0.08818783615563687
+    },
+    "terminal_film_temperature_c": {
+      "rmse": 2.557550564314669,
+      "normalized_rmse": 0.01774058785402892
+    },
+    "curing_energy_kj_m2": {
+      "rmse": 40.42548231038206,
+      "normalized_rmse": 0.00775270264600345
+    }
+  },
+  "maximum_heldout_normalized_rmse": 0.08818783615563687,
+  "support": {
+    "selected": 0.9762871901514653,
+    "heldout_min": 0.06240199314528005,
+    "heldout_median": 0.5291623065109963,
+    "heldout_max": 0.9097308012458231,
+    "heldout_supported_fraction": 0.560546875
+  },
+  "probability_status": "UNCALIBRATED_MODEL_PREDICTIVE_ESTIMATE",
+  "acceptance_checks": {
+    "normalized_regret_le_0_01": true,
+    "selected_condition_is_true_feasible": true,
+    "heldout_probability_brier_le_0_1": true,
+    "maximum_heldout_nrmse_le_0_1": true,
+    "heldout_feasibility_accuracy_ge_0_9": true,
+    "selected_support_ge_0_5": true
+  },
+  "bundle": "v004\\trials\\trial_curing_dense512_curing_s1\\output\\stage_bundles\\stage_bundle_run_0016",
+  "history": [
+    {
+      "iteration": 1,
+      "controls": {
+        "oven_temperature_c": 135.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.05
+      },
+      "predicted_objective": 37.7845034,
+      "predicted_feasibility_probability": 0.9517100094,
+      "support": 0.3948352192,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 44.0238201235505,
+        "cure_fraction": 0.9066495881895014,
+        "degradation_fraction": 0.018855073563729518,
+        "final_residual_solvent_pct": 9.129342519815159e-06,
+        "final_thickness_um": 62.32487657645125,
+        "final_internal_stress_mpa": 0.5603546053739731,
+        "final_defect_index": 0.09821320595853097,
+        "dimensional_change_um": 2.5427801425432555,
+        "blister_index": 0.015118868710436745,
+        "terminal_film_temperature_c": 134.99999999693293,
+        "curing_energy_kj_m2": 4063.9581081081074
+      }
+    },
+    {
+      "iteration": 2,
+      "controls": {
+        "oven_temperature_c": 135.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "predicted_objective": 39.03088936,
+      "predicted_feasibility_probability": 0.9327011862,
+      "support": 0.3304649121,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 46.492111821311745,
+        "cure_fraction": 0.9066495881895014,
+        "degradation_fraction": 0.018855073563729518,
+        "final_residual_solvent_pct": 9.129342519815159e-06,
+        "final_thickness_um": 62.09824371052888,
+        "final_internal_stress_mpa": 0.5603546053739731,
+        "final_defect_index": 0.09855453249733558,
+        "dimensional_change_um": 2.7694130084656314,
+        "blister_index": 0.015118868710436745,
+        "terminal_film_temperature_c": 134.99999999693293,
+        "curing_energy_kj_m2": 4096.133108108107
+      }
+    },
+    {
+      "iteration": 3,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.05
+      },
+      "predicted_objective": 32.2392249,
+      "predicted_feasibility_probability": 0.9973581209,
+      "support": 0.2023301335,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 33.443705120598295,
+        "cure_fraction": 0.9991480596134655,
+        "degradation_fraction": 0.09566327451117546,
+        "final_residual_solvent_pct": 4.4514184150773185e-08,
+        "final_thickness_um": 62.19527385587463,
+        "final_internal_stress_mpa": 1.1719139109518817,
+        "final_defect_index": 0.14956571530687787,
+        "dimensional_change_um": 2.806925910347016,
+        "blister_index": 0.030969208787763134,
+        "terminal_film_temperature_c": 179.99967859768475,
+        "curing_energy_kj_m2": 3082.2040540540543
+      }
+    },
+    {
+      "iteration": 4,
+      "controls": {
+        "oven_temperature_c": 135.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.6
+      },
+      "predicted_objective": 39.92660271,
+      "predicted_feasibility_probability": 0.8891106621,
+      "support": 0.3675632575,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 46.12740043535092,
+        "cure_fraction": 0.9066495881895014,
+        "degradation_fraction": 0.018855073563729518,
+        "final_residual_solvent_pct": 9.129342519815159e-06,
+        "final_thickness_um": 62.0490604368572,
+        "final_internal_stress_mpa": 0.5603546053739731,
+        "final_defect_index": 0.1085529197434282,
+        "dimensional_change_um": 2.8185962821373116,
+        "blister_index": 0.015118868710436745,
+        "terminal_film_temperature_c": 134.99999999693293,
+        "curing_energy_kj_m2": 4128.308108108107
+      }
+    },
+    {
+      "iteration": 5,
+      "controls": {
+        "oven_temperature_c": 135.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "predicted_objective": 35.17713936,
+      "predicted_feasibility_probability": 5.501678171e-08,
+      "support": 0.5156125151,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 39.15942186685306,
+        "cure_fraction": 0.6886035770583477,
+        "degradation_fraction": 0.009203867311576238,
+        "final_residual_solvent_pct": 0.004552197071973634,
+        "final_thickness_um": 62.403755313244474,
+        "final_internal_stress_mpa": 0.8434809898574829,
+        "final_defect_index": 0.09332821084328044,
+        "dimensional_change_um": 2.5261892103364056,
+        "blister_index": 0.014830404261915316,
+        "terminal_film_temperature_c": 134.99977190803435,
+        "curing_energy_kj_m2": 2205.610135135135
+      }
+    },
+    {
+      "iteration": 6,
+      "controls": {
+        "oven_temperature_c": 135.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.6
+      },
+      "predicted_objective": 34.71160439,
+      "predicted_feasibility_probability": 1.390634014e-07,
+      "support": 0.3824823108,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 38.859244284181074,
+        "cure_fraction": 0.6886035770583477,
+        "degradation_fraction": 0.009203867311576238,
+        "final_residual_solvent_pct": 0.004552197071973634,
+        "final_thickness_um": 62.354572039572794,
+        "final_internal_stress_mpa": 0.8434809898574829,
+        "final_defect_index": 0.10332659808937308,
+        "dimensional_change_um": 2.575372484008086,
+        "blister_index": 0.014830404261915316,
+        "terminal_film_temperature_c": 134.99977190803435,
+        "curing_energy_kj_m2": 2222.935135135135
+      }
+    },
+    {
+      "iteration": 7,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "predicted_objective": 32.94591971,
+      "predicted_feasibility_probability": 0.9207647994,
+      "support": 0.3469756089,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 35.24265526757456,
+        "cure_fraction": 0.9991480596134655,
+        "degradation_fraction": 0.09566327451117546,
+        "final_residual_solvent_pct": 4.4514184150773185e-08,
+        "final_thickness_um": 61.96864098995225,
+        "final_internal_stress_mpa": 1.1719139109518817,
+        "final_defect_index": 0.14990704184568246,
+        "dimensional_change_um": 3.033558776269399,
+        "blister_index": 0.030969208787763134,
+        "terminal_film_temperature_c": 179.99967859768475,
+        "curing_energy_kj_m2": 3099.529054054054
+      }
+    },
+    {
+      "iteration": 8,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.6
+      },
+      "predicted_objective": 32.48409845,
+      "predicted_feasibility_probability": 0.8345276873,
+      "support": 0.4165554755,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 34.97679548687098,
+        "cure_fraction": 0.9991480596134655,
+        "degradation_fraction": 0.09566327451117546,
+        "final_residual_solvent_pct": 4.4514184150773185e-08,
+        "final_thickness_um": 61.919457716280576,
+        "final_internal_stress_mpa": 1.1719139109518817,
+        "final_defect_index": 0.1599054290917751,
+        "dimensional_change_um": 3.0827420499410723,
+        "blister_index": 0.030969208787763134,
+        "terminal_film_temperature_c": 179.99967859768475,
+        "curing_energy_kj_m2": 3116.8540540540544
+      }
+    },
+    {
+      "iteration": 9,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "predicted_objective": 29.5498895,
+      "predicted_feasibility_probability": 0.6762326155,
+      "support": 0.3833350376,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 27.135083014139127,
+        "cure_fraction": 0.9999994755804583,
+        "degradation_fraction": 0.18812336087258355,
+        "final_residual_solvent_pct": 8.175489259163865e-16,
+        "final_thickness_um": 61.9674480423936,
+        "final_internal_stress_mpa": 0.8202195844232775,
+        "final_defect_index": 0.1983594409889092,
+        "dimensional_change_um": 2.957378971991756,
+        "blister_index": 0.03148747855900554,
+        "terminal_film_temperature_c": 179.99999999567822,
+        "curing_energy_kj_m2": 5756.268243243243
+      }
+    },
+    {
+      "iteration": 10,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.05
+      },
+      "predicted_objective": 28.6287495,
+      "predicted_feasibility_probability": 0.5382352369,
+      "support": 0.4588670703,
+      "true_feasible": true,
+      "true_outputs": {
+        "bond_strength_mpa": 25.818403517866127,
+        "cure_fraction": 0.9999994755804583,
+        "degradation_fraction": 0.18812336087258355,
+        "final_residual_solvent_pct": 8.175489259163865e-16,
+        "final_thickness_um": 62.194080908315975,
+        "final_internal_stress_mpa": 0.8202195844232775,
+        "final_defect_index": 0.19801811445010462,
+        "dimensional_change_um": 2.73074610606938,
+        "blister_index": 0.03148747855900554,
+        "terminal_film_temperature_c": 179.99999999567822,
+        "curing_energy_kj_m2": 5724.093243243244
+      }
+    },
+    {
+      "iteration": 11,
+      "controls": {
+        "oven_temperature_c": 90.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.05
+      },
+      "predicted_objective": 25.89553447,
+      "predicted_feasibility_probability": 8.800348854e-13,
+      "support": 0.1756775978,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 20.70106092778048,
+        "cure_fraction": 0.2210388062202591,
+        "degradation_fraction": 0.0009656655009163285,
+        "final_residual_solvent_pct": 0.08221305972825795,
+        "final_thickness_um": 63.2855089115804,
+        "final_internal_stress_mpa": 0.3671977847114066,
+        "final_defect_index": 0.07825451125226755,
+        "dimensional_change_um": 1.539653306868343,
+        "blister_index": 0.000318587441547071,
+        "terminal_film_temperature_c": 89.99999999818763,
+        "curing_energy_kj_m2": 2403.822972972973
+      }
+    },
+    {
+      "iteration": 12,
+      "controls": {
+        "oven_temperature_c": 90.0,
+        "hold_time_min": 65.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "predicted_objective": 23.54837681,
+      "predicted_feasibility_probability": 9.057587285e-13,
+      "support": 0.4017545336,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 21.69474677081217,
+        "cure_fraction": 0.2210388062202591,
+        "degradation_fraction": 0.0009656655009163285,
+        "final_residual_solvent_pct": 0.08221305972825795,
+        "final_thickness_um": 63.058876045658025,
+        "final_internal_stress_mpa": 0.3671977847114066,
+        "final_defect_index": 0.07859583779107215,
+        "dimensional_change_um": 1.7662861727907189,
+        "blister_index": 0.000318587441547071,
+        "terminal_film_temperature_c": 89.99999999818763,
+        "curing_energy_kj_m2": 2435.997972972973
+      }
+    },
+    {
+      "iteration": 13,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 5.0,
+        "nip_pressure_mpa": 0.05
+      },
+      "predicted_objective": 20.50453009,
+      "predicted_feasibility_probability": 5.312578138e-13,
+      "support": 0.1536095074,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 14.959733913929568,
+        "cure_fraction": 0.14128051903335265,
+        "degradation_fraction": 0.0013742019214900598,
+        "final_residual_solvent_pct": 1.173287596904825,
+        "final_thickness_um": 63.39726093135785,
+        "final_internal_stress_mpa": 0.790538501311385,
+        "final_defect_index": 0.09140686673310988,
+        "dimensional_change_um": 1.52103624474289,
+        "blister_index": 0.01829069375008039,
+        "terminal_film_temperature_c": 156.09800396638263,
+        "curing_energy_kj_m2": 440.31486486486483
+      }
+    },
+    {
+      "iteration": 14,
+      "controls": {
+        "oven_temperature_c": 90.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.05
+      },
+      "predicted_objective": 16.44583054,
+      "predicted_feasibility_probability": 8.127995051e-13,
+      "support": 0.2862789926,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 14.671907127835382,
+        "cure_fraction": 0.11712802932102946,
+        "degradation_fraction": 0.0004758547881231833,
+        "final_residual_solvent_pct": 0.4360864642757248,
+        "final_thickness_um": 63.43110179734437,
+        "final_internal_stress_mpa": 0.44961541177356507,
+        "final_defect_index": 0.07799523431112988,
+        "dimensional_change_um": 1.41219229905805,
+        "blister_index": 0.00031223276031757514,
+        "terminal_film_temperature_c": 89.99986521838392,
+        "curing_energy_kj_m2": 1294.3662162162163
+      }
+    },
+    {
+      "iteration": 15,
+      "controls": {
+        "oven_temperature_c": 180.0,
+        "hold_time_min": 5.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "predicted_objective": 17.48315539,
+      "predicted_feasibility_probability": 4.366786424e-13,
+      "support": 0.3773668209,
+      "true_feasible": false,
+      "true_outputs": {
+        "bond_strength_mpa": 15.59010702839223,
+        "cure_fraction": 0.14128051903335265,
+        "degradation_fraction": 0.0013742019214900598,
+        "final_residual_solvent_pct": 1.173287596904825,
+        "final_thickness_um": 63.17062806543547,
+        "final_internal_stress_mpa": 0.790538501311385,
+        "final_defect_index": 0.09174819327191448,
+        "dimensional_change_um": 1.747669110665266,
+        "blister_index": 0.01829069375008039,
+        "terminal_film_temperature_c": 156.09800396638263,
+        "curing_energy_kj_m2": 442.78986486486485
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "functional_coating",
+  "name": "機能性コーティング複合工程",
+  "model_version": "1.0.0",
+  "stages": ["coating", "drying", "curing"],
+  "connections": [
+    {"from": "coating.wet_thickness_um", "to": "drying.incoming_wet_thickness_um"},
+    {"from": "coating.solids_fraction", "to": "drying.incoming_solids_fraction"},
+    {"from": "coating.thickness_cv_fraction", "to": "drying.incoming_thickness_cv_fraction"},
+    {"from": "coating.coating_defect_index", "to": "drying.incoming_coating_defect_index"},
+    {"from": "drying.dry_thickness_um", "to": "curing.incoming_dry_thickness_um"},
+    {"from": "drying.residual_solvent_pct", "to": "curing.incoming_residual_solvent_pct"},
+    {"from": "drying.internal_stress_mpa", "to": "curing.incoming_internal_stress_mpa"},
+    {"from": "drying.drying_defect_index", "to": "curing.incoming_drying_defect_index"},
+    {"from": "drying.dry_thickness_cv_fraction", "to": "curing.incoming_thickness_cv_fraction"}
+  ],
+  "final_specifications": [
+    {"name": "bond_strength_mpa", "direction": "greater_equal", "target": 32.0},
+    {"name": "cure_fraction", "direction": "greater_equal", "target": 0.80},
+    {"name": "degradation_fraction", "direction": "less_equal", "target": 0.20},
+    {"name": "final_residual_solvent_pct", "direction": "less_equal", "target": 2.0},
+    {"name": "final_defect_index", "direction": "less_equal", "target": 0.25},
+    {"name": "dimensional_change_um", "direction": "less_equal", "target": 6.0},
+    {"name": "final_thickness_um", "direction": "between", "target": [55.0, 85.0]}
+  ],
+  "reference_grid": {
+    "levels_per_control": 3,
+    "control_count": 9,
+    "candidate_count": 19683
+  }
+}

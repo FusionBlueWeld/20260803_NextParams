@@ -1,232 +1,250 @@
-# v003：予測空間と次条件探索のUI
+# ParamOptimizer v003
 
-## 1. このバージョンの役割
+v003は、技能者の経験則を「説明文」ではなくニューラルネット（NN）の損失へ直接入れ、次の実験条件へ反映する版です。複雑な物理式より先に、現場で言語化しやすい単純な知識、実験可能範囲、終了判断を扱います。v000〜v002には依存せず、既存版も変更しません。
 
-`v003` は、`v002` までに作成した計算機能を、データ分析や機械学習を専門としない利用者が視覚的に操作できるようにします。
+## バージョン上の位置付け
 
-CLI機能は残し、UIを追加します。
+v003では、当初検討していた具体的な物理式によるアンカーを、技能者が入力できる
+知識アンカーへ一般化しました。知識制約を学習したNNを基準とし、残差GPが実測データで
+補正します。データ支持が弱い領域では残差補正が弱まり、知識付きNNへ戻ります。
 
-```text
-CLI
-  → 計算、検証、自動処理、詳細確認
+したがってv003は「明示的な物理方程式を内蔵する版」ではありませんが、予測の戻り先を
+技能者知見で形作るアンカーの枠組みは実装済みです。以前の「v004で物理式アンカーを
+新設する」案は現在のロードマップから外し、必要性が明確になった場合に改めて検討します。
 
-UI
-  → 予測空間、信頼度、推薦条件の理解
+v003は単一工程・単一trial内で完結し、複数工程を接続する共通インターフェースは
+持ちません。後続の暫定構想は、[v004](../v004/README.md)でr接続用のstage bundleを
+公開し、[r001](../r001/README.md)が複数工程を接続する分担です。v004/r001はまだ
+未実装・未FIXであり、今後の検証により変更する可能性があります。
+
+## TL;DR（人・LLM向け索引）
+
+- 実行入口: リポジトリ直下の `main.py`。必ず `--version v003` を指定
+- 問題定義: `trials/<trial>/problem.csv`
+- 実験値: `trials/<trial>/data/experiments.csv`
+- NN知識: `trials/<trial>/knowledge_constraints.csv`
+- 禁止/優先領域: `trials/<trial>/search_regions.csv`
+- 終了設定: `trials/<trial>/stop_settings.csv`
+- 推薦: `trials/<trial>/output/recommendations.csv`
+- 全候補予測: `trials/<trial>/output/response_spaces/*.csv`
+- 知識違反診断: `trials/<trial>/output/knowledge_diagnostics.csv`
+- 終了判定と履歴: `trials/<trial>/output/stopping_status.json`
+- NN損失の実装: `src/knowledge_loss.py` → `src/hybrid/nn_component.py`
+- 全体統合: `src/hybrid/model.py`、推薦: `src/hybrid/optimizer.py`
+- 禁止/優先領域: `src/policies/`、終了判定: `src/stopping/`
+
+## v003で扱う知識
+
+知識制約は次の4系統だけです。
+
+| `type` | 意味 | 必須列 |
+|---|---|---|
+| `lower_bound` | 出力が指定値以上。`value=0`で「0以上」 | `target`, `value` |
+| `monotonic_increasing` | 指定入力を増やすと対象出力は減らない | `target`, `wrt` |
+| `monotonic_decreasing` | 指定入力を増やすと対象出力は増えない | `target`, `wrt` |
+| `low_sensitivity` | 指定入力を1刻み変えた際の出力変化が許容値以内 | `target`, `wrt`, `tolerance` |
+
+「変化しない」は `low_sensitivity` の `tolerance=0` で表せます。単調性と影響小は常に `target × wrt` の組で保持します。例えば `AA` が `P1` に対して単調増加でも、未指定の `P2` や `P3` へ同じ規則を推測適用しません。
+
+### knowledge_constraints.csv
+
+```csv
+rule_id,type,target,wrt,value,tolerance,strength,enabled,note
+K001,lower_bound,AA,,0,,3,true,AAは0以上
+K002,monotonic_increasing,AA,P1,,,3,true,P1に対してAAは単調増加
+K003,monotonic_decreasing,AA,P2,,,2,true,P2に対してAAは単調減少
+K004,low_sensitivity,AA,P3,,0.5,2,true,P3を1刻み変えてもAAの変化は0.5以内
 ```
 
-UIは独自の計算ロジックを持たず、CLIと同じ `src/` の機能と `model_bundle.json` を使用します。
+`target` は `problem.csv` の出力列、`wrt` は入力列です。空行や独自ヘッダーは使わず、不要な規則は `enabled=false` にします。
 
-## 2. v002から追加する機能
+`lower_bound` の `wrt` は空欄にしてください。`tolerance` は0以上です。
+単調性と影響小は、候補軸の隣接点を比較します。例えば範囲0～1・刻み0.6の
+候補 `0, 0.6, 1` では、最後の短い区間 `0.6→1` も学習・診断の対象です。
 
-### 2.1 メイン画面
+## 知識強度
 
-次の2つの予測空間を並べて表示します。
+`strength` は1〜5です。出力の標準偏差で損失を無次元化してから、次の重みを掛けます。
 
-- トルク強度 `T`
-- セパレータ熱影響 `S`
+| strength | 意味 | NN損失の重み | 動作 |
+|---:|---|---:|---|
+| 1 | 参考 | 0.1 | データを優先しやすい |
+| 2 | 弱い知見 | 0.3 | 緩やかに誘導 |
+| 3 | 標準 | 1.0 | 通常の知識制約 |
+| 4 | 強い知見 | 3.0 | 知識を強く優先 |
+| 5 | 必須 | 10.0 | 学習後も違反があれば推薦を公開しない |
 
-3D軸は次のとおりです。
+実測値は知識と矛盾しても書き換えません。NN、最終Hybrid予測、実測値を別々に診断し、矛盾を `knowledge_diagnostics.csv` に残します。strength 5は最適化だけに頼らず、全候補グリッドのゲート検査を通過した場合だけ推薦を出力します。
 
-```text
-X軸: p1
-Y軸: p2
-Z軸: t
-色:  TまたはSの予測値
-透明度: データ支持度または予測信頼度
+必須ルールのモデル検査は、検査点が0件でも不合格になります。実測診断では、
+比較できる隣接ペアが存在しない場合を `points=0` の未検証として記録します。
+実測ペアがないこと自体では停止せず、NNとHybridの全候補検査を必須にします。
+
+## 使用禁止範囲と好ましい範囲
+
+範囲知識はNNの形を変える規則ではないため、`search_regions.csv` で推薦層へ適用します。
+
+```csv
+region_id,kind,parameter,lower,upper,lower_inclusive,upper_inclusive,strength,enabled,note
+R001,forbidden,P1,2000,,false,true,5,true,P1>2000は実験しない
+R002,preferred,P2,0,2,true,true,3,true,P2は0～2が好ましい
 ```
 
-### 2.2 断面操作
+- `forbidden`: モデル学習には過去の実測値を残すが、新しい候補、実測最良値、改善期待値の比較基準、目標達成の判定からは除外
+- `preferred`: 基本推薦スコアへ有界な倍率を掛ける。強度1〜5で `1.05, 1.10, 1.25, 1.50, 2.00` 倍
+- 複数のpreferredが重なる場合は乗算し、最終倍率を2倍で上限化
+- 同じ `region_id` の複数行はAND条件。異なるパラメータを組み合わせた領域も表現可能
+- `lower_inclusive` / `upper_inclusive` で境界を含むか指定
+- forbiddenは安全/実験可否の指定なのでstrengthにかかわらず絶対条件。通常はstrength 5を記録
 
-照射時間 `t` などを固定し、パラメータ空間の断面を表示します。
+処理順は「禁止候補の除外 → 基本獲得スコア計算 → preferred倍率 → 上位選択」です。preferredが低価値候補を無制限に押し上げたり、forbiddenを復活させたりはしません。
 
-- `t` スライダー
-- 学習段階スライダー
-- 実測点の表示・非表示
-- 信頼度透過の有効・無効
-- 式なし／物理式ありの切り替え
-
-### 2.3 表示レイヤー
-
-単に予測値を表示するだけでなく、次のレイヤーを切り替えられるようにします。
-
-- 予測平均
-- 予測標準偏差
-- `T` 制約達成確率
-- Expected Improvement
-- 総合推薦スコア
-- データ支持度
-- 補間／外挿分類
-
-### 2.4 次条件推薦
-
-推薦条件を表と3D空間の両方へ表示します。
-
-表には次を表示します。
-
-- 順位
-- `p1`, `p2`, `t`
-- `T`, `S` の予測平均・標準偏差
-- `T` 制約達成確率
-- 信頼区間
-- Expected Improvement
-- 補間／外挿判定
-- 推薦理由
-
-探索条件には「次に測る候補」であり、「安全が保証された量産条件」ではないことを表示します。
-
-### 2.5 モード比較
-
-次の比較を画面上で行えるようにします。
-
-- GPとNN
-- 式なしと物理式あり
-- 学習データが少ない段階と多い段階
-- 前回推薦と今回推薦
-
-モデル間の差が大きい領域を視覚的に確認できるようにします。
-
-### 2.6 設定画面
-
-設定画面から次を変更できるようにします。
-
-- `T` の下限
-- `S` の目的と上限
-- 探索範囲と刻み
-- 推薦数
-- 信頼水準
-- 外挿許可／禁止
-- GP設定
-- NN構造と学習設定
-- 物理アンカー設定
-- 乱数シード
-
-設定値には説明、単位、許容範囲を表示します。
-
-### 2.7 再学習
-
-ローカルサーバー経由で、設定保存と再学習を実行します。
-
-- 二重実行を防止
-- 進捗を表示
-- 成功・失敗を表示
-- エラーログを保存
-- 学習中は既存の正常成果物を維持
-- 完了後に新しい成果物へ安全に置換
-
-### 2.8 ローカル運用
-
-- `127.0.0.1` のみにバインド
-- 外部へデータを送信しない
-- Plotlyなどの表示ライブラリをローカル同梱
-- 一定時間操作がなければ自動停止
-- 多重起動を防止
-- 明示的な停止方法を用意
-
-## 3. 処理フロー
+## モデルと推薦ロジック
 
 ```text
-main.py
-  ↓
-データ読込・検証
-  ↓
-GP、NN、物理アンカーを学習
-  ↓
-予測空間、評価、推薦を生成
-  ↓
-output/model_bundle.json
-  ├─ CLIで結果表示
-  └─ UIが同じ成果物を読み込む
-
-設定変更
-  ↓
-ローカルAPI
-  ↓
-設定検査
-  ↓
-バックグラウンド再学習
-  ↓
-成果物を安全に更新
-  ↓
-UIを再読込
+problem.csv + experiments.csv + knowledge_constraints.csv
+        │
+        ├─ 実測値を同一条件ごとに平均し、測定ノイズを推定
+        ├─ 全候補から再現可能な知識評価点/隣接ペアを生成
+        │
+        ▼
+NN損失 = データMSE + L2 + Σ(strength重み × 知識違反²)
+        │
+        ├─ d_loss/d_predictionをNNへ逆伝播
+        ▼
+残差GPを学習: 実測値 − NN予測
+        │
+        ▼
+Hybrid平均 = NN予測 + GPデータ支持度 × 残差GP平均
+Hybrid標準偏差 = 残差GP標準偏差
+        │
+        ├─ forbidden候補を除外
+        ├─ 制約達成確率 × Expected Improvement
+        ├─ preferred倍率
+        └─ 重複を避ける分散選択
+        ▼
+recommendations.csv + response_spaces/*.csv + 各種診断
 ```
 
-## 4. CLIの維持
+GPはNNの残差だけを学習します。測定点近傍ではデータでNNを補正し、未観測域では補正平均を弱めて知識付きNNへ戻します。一方、標準偏差は支持度で0へ潰さず、未観測域の探索可能性を残します。
 
-UI追加後も、次のCLI操作を維持します。
+現在のNNは追加依存を避けたNumPy実装です。知識損失は `calculate_rule_loss()` が損失と `d_loss/d_prediction` を返す境界に分離されています。将来PyTorch等へ移行し、物理式を追加する場合も、この境界へ新しい項を接続できます。
+
+## 終了判定
+
+終了は「即時停止」と「収束による停止推奨」を分離します。
+
+### STOP_REQUIRED（いずれか1つ）
+
+1. `max_additional_experiments` に到達
+2. forbiddenを除く全候補を実測済み
+3. 許可領域で制約を満たす実測目的値が `problem.csv` の `target` に到達
+
+この3条件は学習前に判定し、該当時は新しいモデル学習と推薦を行いません。
+残り追加実験予算が `--n` より少ない場合は、残予算に合わせて推薦件数を減らします。
+追加実験数の起点は最初のrunの実験行数で、停止設定を変更しても保持します。
+
+学習後の必須知識検査が不合格の場合も `STOP_REQUIRED` を記録し、推薦を公開しません。
+この場合はCLIがエラー終了し、停止理由と知識診断に不合格ルールを残します。
+
+### STOP_RECOMMENDED（次の4条件をすべて満たす）
+
+1. 許可候補のGPデータ支持度カバー率が十分
+2. 直近の制約適合済み実測ベストがほとんど改善していない
+3. 正規化した最上位推薦スコアが小さく、変動も小さい
+4. 全許可グリッド上の予測最適条件が大きく動かない
+
+履歴不足なら必ず `CONTINUE` です。4は「未測定候補からの次推薦」ではなく、毎runの全グリッド予測最適点を比較します。測定済み点が候補から消えるだけで停止判定が揺れるのを避けるためです。`STOP_RECOMMENDED` は判断材料であり、自動的な安全保証ではありません。
+
+収束判定では、同じ実験データの再実行を1つの状態として扱います。CSVの行順だけの
+変更も新しい実験には数えません。問題・知識・探索領域・停止設定の変更、既存実験の
+訂正や削除があれば、その時点から収束履歴を取り直します。過去のrun記録は保持します。
+入力内容の識別情報がない旧形式の履歴も保存しつつ、更新後の収束根拠には使いません。
+
+既定値は `stop_settings.csv` に説明付きで生成されます。主要値は `min_history=5`、`patience=3`、支持度閾値/カバー率ともに`0.8`、目的値改善許容`0.001`、正規化スコア上限`0.05`、条件移動距離`0.05`です。目的値の単位や候補刻みに応じてtrialごとに調整してください。
+
+## 実行手順
+
+リポジトリ直下で実行します。
 
 ```powershell
-python main.py
-python main.py --data <CSV>
-python main.py --predict <p1> <p2> <t>
-python main.py --retrain
-python main.py --serve
+python main.py --version v003 --new trial_003
 ```
 
-CLIとUIで異なる計算結果にならないよう、計算処理はすべて共通の `src/` を使用します。
+生成された `problem.csv`、`knowledge_constraints.csv`、`search_regions.csv`、`stop_settings.csv` を編集後、実験CSVを準備します。
 
-## 5. 出力
-
-`v002` の出力に、UI用成果物と運用ログを追加します。
-
-```text
-output/
-├─ model_bundle.json
-├─ ui_data.json
-├─ training_status.json
-├─ training.log
-└─ run_metadata.json
+```powershell
+python main.py --version v003 --prepare trial_003
 ```
 
-`model_bundle.json` には次を含めます。
+`v003/trials/trial_003/data/experiments.csv` に実測値を入力し、推薦を実行します。
 
-- 入力データ
-- 正規化設定
-- GP設定と計算情報
-- NN構造と重み
-- 物理アンカー設定
-- 予測空間
-- 学習段階
-- 推薦条件
-- モデル評価
-- 警告
+```powershell
+python main.py --version v003 --run trial_003 --n 3
+```
 
-## 6. ファイルの役割
+推薦条件を実験し、同じ `experiments.csv` へ結果を追記して再実行します。各runの予測空間と停止履歴は上書きせず蓄積します。
 
-`v002` のファイルに次を追加します。
+## 出力
 
-| ファイル | 役割 |
+| 出力 | 内容 |
 |---|---|
-| `src/bundle_exporter.py` | UI用成果物の生成 |
-| `src/server.py` | ローカルWebサーバーと再学習API |
-| `src/ui/index.html` | メイン画面 |
-| `src/ui/app.js` | 予測空間と推薦の表示 |
-| `src/ui/styles.css` | メイン画面のスタイル |
-| `src/ui/config.html` | 設定画面 |
-| `src/ui/config.js` | 設定読込、保存、再学習 |
+| `recommendations.csv` | 条件、NN/Hybrid予測、標準偏差、制約確率、基本/優先補正後スコア、根拠 |
+| `recommendations_history/*.csv` | 再実行前に保存した過去の推薦 |
+| `response_spaces/hybrid_response_space_run_*.csv` | 全候補のNN/Hybrid予測、標準偏差、GP支持度、実験可否、preferred倍率 |
+| `knowledge_diagnostics.csv` | `nn` / `hybrid` / `observed` ごとの違反率、平均/最大違反、損失 |
+| `stopping_status.json` | `CONTINUE` / `STOP_RECOMMENDED` / `STOP_REQUIRED`、判定指標、run履歴 |
 
-## 7. UI上で必ず表示する注意
+予測は実測値ではありません。特に弱い知識ルールは「傾向を促す」もので、違反率が必ず0になるとは限りません。
 
-- 予測値は実測値ではない
-- 推薦は次実験候補である
-- 信頼度は正解確率そのものではない
-- 外挿領域では不確かさが大きい
-- 物理アンカーは仮説である
-- 最終条件は実測と工程判断で決定する
+`--run` の開始時に、前回の推薦CSVを `recommendations_history/` へ移します。
+今回の入力検査・知識診断・解空間と停止状態の保存が完了してから、新しい
+`recommendations.csv` を公開します。停止やエラーの場合は現行の推薦CSVを残しません。
+前回の結果は履歴から確認できます。
 
-## 8. 完成条件
+## 検証
 
-- `v002` の全CLI機能を維持する
-- CLIとUIが同じ成果物を使用する
-- T・Sの予測空間を表示できる
-- 予測平均と不確かさを切り替えられる
-- 推薦条件と根拠を表示できる
-- 補間／外挿領域を識別できる
-- 式なし／物理式ありを比較できる
-- 設定変更から再学習できる
-- 学習失敗時に以前の正常成果物を壊さない
-- ローカル環境だけで完結する
-- 機械学習の専門知識がなくてもREADMEから操作できる
+標準ライブラリのunittestで製品コードを検査します。
 
-## 9. 現在の状態
+今回の確定検証値と考察は [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md) に保存しています。
 
-設計のみ完了しています。コード、HTML、JavaScript、CSSは未実装です。
+```powershell
+python -m unittest discover -s v003/tests -p "test_*.py" -v
+python -m unittest validation/test_v003_validation.py -v
+```
+
+`validation/` のoracleを実験装置の代わりに呼び、15回の推薦・仮想実験とPNG作成を行えます。
+
+```powershell
+python validation/v003_validation.py --mode laser --optimizer-root v003 `
+  --trial trial_laser_welding_v003_validation --iterations 15 --recommendations 1
+
+python validation/v003_validation.py --mode synthetic --optimizer-root v003 `
+  --synthetic-trial trial_synthetic_constraints_v003
+```
+
+レーザー検証は収束履歴、oracle上の真値との全候補誤差、適合判定、最終予測空間をJSON/Markdown/PNGへ保存します。合成検証は「非負」「P1に対する単調増加」「P2の影響小」を独立に検査します。
+
+## モジュール配置
+
+| パス | 責務 |
+|---|---|
+| `src/cli.py` | new/prepare/runのオーケストレーション |
+| `src/knowledge.py` | 知識CSV、制約点、NN/Hybrid/実測診断 |
+| `src/knowledge_loss.py` | ルール別損失と予測値勾配 |
+| `src/hybrid/nn_component.py` | NumPy NNと知識損失の逆伝播 |
+| `src/hybrid/gp_component.py` | RBF残差GP |
+| `src/hybrid/model.py` | 知識付きNN、残差GP、支持度の統合 |
+| `src/hybrid/optimizer.py` | EI、制約確率、探索方針、推薦選択 |
+| `src/policies/regions.py` | forbidden/preferred領域 |
+| `src/stopping/` | 設定、停止判定、指標、履歴出力 |
+| `validation/v003_validation.py` | oracle仮想実験と数値レポート |
+| `validation/plot_v003_validation.py` | 収束・スコア・予測断面・支持度のPNG |
+
+## 既知の限界
+
+- 離散グリッド探索であり、候補数上限があります。
+- ルールは指定範囲の全域に適用され、条件付き知識（例: P2が一定範囲のときだけ単調）は未実装です。
+- strength 5で実測と知識が矛盾すると、安全側として推薦が止まります。入力ミスか、知識の適用範囲/強度を見直してください。
+- 物理式、等式制約、論理式パーサーはv003の対象外です。
+- 推薦は量産条件や設備安全を保証しません。禁止範囲と実測確認を併用してください。

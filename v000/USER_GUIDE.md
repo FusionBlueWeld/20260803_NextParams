@@ -54,7 +54,7 @@ recommendations.csvを確認して実験する
 PowerShellを開き、`v000`フォルダへ移動します。
 
 ```powershell
-cd C:\Users\tsuts\Desktop\PythonDev_std\2026031_ParamOptimizer2\v000
+cd C:\Users\tsuts\Desktop\PythonDev_std\20260803_NextParams\v000
 ```
 
 現在位置を確認します。
@@ -66,7 +66,7 @@ Get-Location
 末尾が次のようになっていれば正しい場所です。
 
 ```text
-2026031_ParamOptimizer2\v000
+20260803_NextParams\v000
 ```
 
 初回だけ、必要なライブラリをインストールします。
@@ -396,7 +396,7 @@ ExcelでCSVを開いたままの場合は閉じてから、もう一度コマン
 ## 最短コマンド一覧
 
 ```powershell
-cd C:\Users\tsuts\Desktop\PythonDev_std\2026031_ParamOptimizer2\v000
+cd C:\Users\tsuts\Desktop\PythonDev_std\20260803_NextParams\v000
 
 # 1. trial作成
 python main.py --new trial_000
@@ -410,4 +410,3 @@ python main.py --run trial_000 --n 9
 # 4. 実験結果をexperiments.csvへ追記後、再推薦
 python main.py --run trial_000 --n 9
 ```
-

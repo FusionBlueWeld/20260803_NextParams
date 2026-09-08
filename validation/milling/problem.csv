@@ -1,0 +1,12 @@
+column,display_name,unit,role,direction,lower,upper,step,target
+spindle_speed_rpm,主軸回転数,rpm,parameter,,1800,7200,1800,
+feed_per_tooth_mm,一刃当たり送り,mm/tooth,parameter,,0.040,0.160,0.040,
+axial_depth_mm,軸方向切込み,mm,parameter,,0.50,3.50,1.00,
+radial_engagement_mm,半径方向切削幅,mm,parameter,,5,20,5,
+cutter_diameter_mm,カッタ径,mm,parameter,,30,60,10,
+tooth_count,刃数,tooth,parameter,,2,8,2,
+nose_radius_mm,ノーズ半径,mm,parameter,,0.40,1.60,0.40,
+tool_wear_mm,工具摩耗量,mm,parameter,,0.00,0.30,0.10,
+material_removal_rate_cm3_min,材料除去率,cm3/min,objective,maximize,,,,
+roughness_ra_um,算術平均粗さ,um,constraint,less_equal,,,,7.50
+spindle_power_kw,主軸動力,kW,constraint,less_equal,,,,14.00

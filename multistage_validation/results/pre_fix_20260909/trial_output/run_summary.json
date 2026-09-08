@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "candidate_count": 19683,
+  "predicted_feasible_count": 215,
+  "best_predicted_quality_margin": 0.34829770938387994,
+  "probability_status": "UNCALIBRATED_PROCESS_VARIATION_ESTIMATE",
+  "probability_reason": "設定した独立正規工程ばらつきを平均予測モデルへ伝播。Wilson区間はMonte Carlo誤差だけで、モデル誤差は含まない。",
+  "individual_best_chain": {
+    "status": "AVAILABLE",
+    "controls": {
+      "coating_gap_um": 280.0,
+      "line_speed_m_min": 28.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 3.25,
+      "residence_time_min": 13.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.325
+    },
+    "local_objectives": {
+      "coating": {
+        "name": "coated_solids_rate_kg_m_h",
+        "direction": "maximize",
+        "value": 181.451291081821
+      },
+      "drying": {
+        "name": "drying_energy_kj_m2",
+        "direction": "minimize",
+        "value": 154.6151837836995
+      },
+      "curing": {
+        "name": "bond_strength_mpa",
+        "direction": "maximize",
+        "value": 40.329034985614456
+      }
+    },
+    "predicted_feasible": false,
+    "predicted_quality_margin": -0.2040915955980542
+  },
+  "quality_margin_improvement_over_individual_chain": 0.5523893049819342,
+  "connected_window": {
+    "enabled_for_selection": true,
+    "interval_method": "standardized_residual_quantile",
+    "support_threshold": 0.5,
+    "confidence_z": 1.645,
+    "enforce_local_constraints": true,
+    "feasible_count": 215,
+    "selected_margin": 0.05173458416176005,
+    "selected_process_margin": 0.05173458416176005,
+    "selected_bottleneck": "connection.curing.incoming_residual_solvent_pct:lower"
+  },
+  "selected": {
+    "rank": 1,
+    "predicted_feasible": true,
+    "predicted_quality_margin": 0.34829770938387994,
+    "connected_window_margin": 0.05173458416176005,
+    "connected_process_margin": 0.05173458416176005,
+    "connected_window_bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+    "minimum_stage_support": 0.833371646798921,
+    "good_product_probability": "NOT_EVALUATED",
+    "coating_gap_um": 210.0,
+    "line_speed_m_min": 18.0,
+    "web_tension_n": 60.0,
+    "air_temperature_c": 90.0,
+    "air_speed_m_s": 5.5,
+    "residence_time_min": 8.0,
+    "oven_temperature_c": 140.0,
+    "hold_time_min": 60.0,
+    "nip_pressure_mpa": 0.1,
+    "final_bond_strength_mpa_mean": 43.14552670028416,
+    "final_cure_fraction_mean": 0.9227686064117954,
+    "final_degradation_fraction_mean": 0.024480691041955126,
+    "final_final_residual_solvent_pct_mean": 0.43937157751918715,
+    "final_final_thickness_um_mean": 64.35378112752761,
+    "final_final_internal_stress_mpa_mean": 0.5893010365996432,
+    "final_final_defect_index_mean": 0.11736476614550105,
+    "final_dimensional_change_um_mean": 3.117363599763899,
+    "final_blister_index_mean": 0.020765257921506394,
+    "final_terminal_film_temperature_c_mean": 139.4056698697123,
+    "final_curing_energy_kj_m2_mean": 3870.5626853067447
+  },
+  "process_variation": {
+    "distribution": "independent_clipped_normal",
+    "samples": 1024,
+    "seed": 20260910,
+    "candidate_limit": 128,
+    "selection_metric": "mc95_low_then_probability_then_deterministic_margin",
+    "selected": {
+      "robust_rank": 1,
+      "deterministic_candidate_index": 9196,
+      "predicted_good_probability": 1.0,
+      "mc95_low": 0.9962625959599825,
+      "mc95_high": 1.0,
+      "valid_chain_fraction": 1.0,
+      "deterministic_quality_margin": 0.3984824147474124,
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 18.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 5.5,
+      "residence_time_min": 8.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.325
+    }
+  },
+  "window_center_selection": {
+    "status": "EVALUATED",
+    "selection_metric": "symmetric_headroom_rho_then_connected_margin_then_support",
+    "evaluated_candidates": 96,
+    "eligible_candidates": 215,
+    "required_variations": {
+      "coating_gap_um": 4.0,
+      "line_speed_m_min": 0.35,
+      "web_tension_n": 3.0,
+      "air_temperature_c": 2.0,
+      "air_speed_m_s": 0.12,
+      "residence_time_min": 0.25,
+      "oven_temperature_c": 2.0,
+      "hold_time_min": 0.5,
+      "nip_pressure_mpa": 0.015
+    },
+    "selected": {
+      "candidate_index": 9195,
+      "symmetric_headroom_rho": 2.5,
+      "connected_window_margin": 0.05173458416176005,
+      "minimum_support": 0.833371646798921,
+      "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+      "scan_points_per_axis": 41,
+      "normalized_headrooms": {
+        "coating_gap_um": 3.375,
+        "line_speed_m_min": 26.42857142857143,
+        "web_tension_n": 6.666666666666667,
+        "air_temperature_c": 2.5,
+        "air_speed_m_s": 4.166666666666667,
+        "residence_time_min": 4.200000000000003,
+        "oven_temperature_c": 4.75,
+        "hold_time_min": 10.0,
+        "nip_pressure_mpa": 3.3333333333333335
+      },
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 18.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 5.5,
+      "residence_time_min": 8.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.1
+    },
+    "baseline_connected_margin_selection": {
+      "candidate_index": 11308,
+      "symmetric_headroom_rho": 0.75,
+      "connected_window_margin": 0.07424335787275453,
+      "minimum_support": 0.9167998517894959,
+      "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+      "scan_points_per_axis": 41,
+      "normalized_headrooms": {
+        "coating_gap_um": 3.375,
+        "line_speed_m_min": 5.714285714285714,
+        "web_tension_n": 5.666666666666667,
+        "air_temperature_c": 0.75,
+        "air_speed_m_s": 10.312499999999998,
+        "residence_time_min": 2.8000000000000007,
+        "oven_temperature_c": 2.5,
+        "hold_time_min": 24.0,
+        "nip_pressure_mpa": 18.333333333333332
+      },
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 28.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 3.25,
+      "residence_time_min": 8.0,
+      "oven_temperature_c": 175.0,
+      "hold_time_min": 35.0,
+      "nip_pressure_mpa": 0.325
+    },
+    "rho_improvement_over_baseline": 1.75,
+    "claim": "budgeted_diverse_candidate_comparison_not_global_optimum"
+  },
+  "simultaneous_window": {
+    "status": "EVALUATED",
+    "rho": 2.5,
+    "random_uniform_boxes": [
+      {
+        "radius_scale": 0.5,
+        "clipped_fraction": 0.0,
+        "count": 4096,
+        "predicted_pass_count": 4096,
+        "predicted_pass_fraction": 1.0
+      },
+      {
+        "radius_scale": 1.0,
+        "clipped_fraction": 0.0,
+        "count": 4096,
+        "predicted_pass_count": 3815,
+        "predicted_pass_fraction": 0.931396484375
+      },
+      {
+        "radius_scale": 1.5,
+        "clipped_fraction": 0.056640625,
+        "count": 4096,
+        "predicted_pass_count": 2999,
+        "predicted_pass_fraction": 0.732177734375
+      }
+    ],
+    "rho_box_vertices": {
+      "count": 512,
+      "predicted_pass_count": 338,
+      "predicted_pass_fraction": 0.66015625
+    },
+    "pairwise_sections": [
+      {
+        "controls": [
+          "air_temperature_c",
+          "nip_pressure_mpa"
+        ],
+        "count": 961,
+        "predicted_pass_count": 961,
+        "predicted_pass_fraction": 1.0
+      },
+      {
+        "controls": [
+          "air_temperature_c",
+          "coating_gap_um"
+        ],
+        "count": 961,
+        "predicted_pass_count": 920,
+        "predicted_pass_fraction": 0.9573361082206036
+      },
+      {
+        "controls": [
+          "air_temperature_c",
+          "air_speed_m_s"
+        ],
+        "count": 961,
+        "predicted_pass_count": 961,
+        "predicted_pass_fraction": 1.0
+      }
+    ],
+    "claim": "finite_sample_joint_evaluation_not_exact_volume"
+  }
+}

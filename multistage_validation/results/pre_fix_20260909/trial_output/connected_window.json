@@ -1,0 +1,1136 @@
+{
+  "definition": "One-control-at-a-time connected feasible interval; interactions require joint scans.",
+  "center": {
+    "coating_gap_um": 210.0,
+    "line_speed_m_min": 18.0,
+    "web_tension_n": 60.0,
+    "air_temperature_c": 90.0,
+    "air_speed_m_s": 5.5,
+    "residence_time_min": 8.0,
+    "oven_temperature_c": 140.0,
+    "hold_time_min": 60.0,
+    "nip_pressure_mpa": 0.1
+  },
+  "center_process_margin": 0.051734584161759946,
+  "center_trusted_margin": 0.051734584161759946,
+  "center_minimum_support": 0.8333716467989212,
+  "center_bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+  "controls": {
+    "coating_gap_um": {
+      "model_input_bounds": [
+        120.0,
+        300.0
+      ],
+      "mean_only_window": [
+        183.0,
+        237.0
+      ],
+      "buffered_process_window": [
+        195.75,
+        236.25
+      ],
+      "process_window": [
+        195.75,
+        236.25
+      ],
+      "trusted_window": [
+        195.75,
+        236.25
+      ],
+      "mean_only_all_intervals": [
+        [
+          183.0,
+          237.0
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          195.75,
+          236.25
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          195.75,
+          236.25
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 183.0,
+            "bottleneck": "final.final_thickness_um:lower",
+            "margin": 0.0019656482519612457,
+            "minimum_support": 0.809031049944243,
+            "stage_support": {
+              "coating": 0.809031049944243,
+              "drying": 0.8925747930282891,
+              "curing": 0.9000289326557008
+            },
+            "output_mean": 55.02948472377942,
+            "output_std": 4.7946889242760795
+          },
+          "upper": {
+            "control_value": 237.0,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.010550155385729454,
+            "minimum_support": 0.8571493966357825,
+            "stage_support": {
+              "coating": 0.8571493966357825,
+              "drying": 0.8846979945924328,
+              "curing": 0.8915426338524511
+            },
+            "output_mean": 4.947249223071353,
+            "output_std": 0.9555608324950037
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 195.75,
+            "bottleneck": "final.final_thickness_um:lower",
+            "margin": 0.004345405346220825,
+            "minimum_support": 0.8172860896110224,
+            "stage_support": {
+              "coating": 0.8172860896110224,
+              "drying": 0.914334483106376,
+              "curing": 0.9067064458006351
+            },
+            "output_mean": 59.26935346501298,
+            "output_std": 4.789877817426121
+          },
+          "upper": {
+            "control_value": 236.25,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.003691921944181331,
+            "minimum_support": 0.8565926659940335,
+            "stage_support": {
+              "coating": 0.8565926659940335,
+              "drying": 0.8864788727332829,
+              "curing": 0.8924366878707916
+            },
+            "output_mean": 4.884671284201055,
+            "output_std": 0.9551947116938059
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 195.75,
+            "bottleneck": "final.final_thickness_um:lower",
+            "margin": 0.004345405346220825,
+            "minimum_support": 0.8172860896110224,
+            "stage_support": {
+              "coating": 0.8172860896110224,
+              "drying": 0.914334483106376,
+              "curing": 0.9067064458006351
+            },
+            "output_mean": 59.26935346501298,
+            "output_std": 4.789877817426121
+          },
+          "upper": {
+            "control_value": 236.25,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.003691921944181331,
+            "minimum_support": 0.8565926659940335,
+            "stage_support": {
+              "coating": 0.8565926659940335,
+              "drying": 0.8864788727332829,
+              "curing": 0.8924366878707916
+            },
+            "output_mean": 4.884671284201055,
+            "output_std": 0.9551947116938059
+          }
+        }
+      },
+      "scan_evaluation_points": 241,
+      "lower_headroom": 14.25,
+      "upper_headroom": 26.25,
+      "nearest_normalized_headroom": 0.07916666666666666
+    },
+    "line_speed_m_min": {
+      "model_input_bounds": [
+        5.0,
+        30.0
+      ],
+      "mean_only_window": [
+        8.229166666666668,
+        30.0
+      ],
+      "buffered_process_window": [
+        8.4375,
+        30.0
+      ],
+      "process_window": [
+        8.4375,
+        30.0
+      ],
+      "trusted_window": [
+        8.4375,
+        30.0
+      ],
+      "mean_only_all_intervals": [
+        [
+          8.229166666666668,
+          30.0
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          8.4375,
+          30.0
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          8.4375,
+          30.0
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 8.229166666666668,
+            "bottleneck": "local.coating.coating_defect_index:upper",
+            "margin": 0.0010665566303503793,
+            "minimum_support": 0.8339918201985563,
+            "stage_support": {
+              "coating": 0.8768139647205113,
+              "drying": 0.8339918201985563,
+              "curing": 0.8699681369149643
+            },
+            "output_mean": 0.2497333608424124,
+            "output_std": 0.004595346102888191
+          },
+          "upper": {
+            "control_value": 30.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.09612691082687876,
+            "minimum_support": 0.8642502900165752,
+            "stage_support": {
+              "coating": 0.9178663810305383,
+              "drying": 0.8642502900165752,
+              "curing": 0.8775217302659862
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 8.4375,
+            "bottleneck": "local.coating.coating_defect_index:upper",
+            "margin": 0.006724082831549016,
+            "minimum_support": 0.8403877376895046,
+            "stage_support": {
+              "coating": 0.872304930454072,
+              "drying": 0.8403877376895046,
+              "curing": 0.8733466376436488
+            },
+            "output_mean": 0.24426283478517627,
+            "output_std": 0.0045972944611102325
+          },
+          "upper": {
+            "control_value": 30.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.06436017912885694,
+            "minimum_support": 0.8642502900165752,
+            "stage_support": {
+              "coating": 0.9178663810305383,
+              "drying": 0.8642502900165752,
+              "curing": 0.8775217302659862
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 8.4375,
+            "bottleneck": "local.coating.coating_defect_index:upper",
+            "margin": 0.006724082831549016,
+            "minimum_support": 0.8403877376895046,
+            "stage_support": {
+              "coating": 0.872304930454072,
+              "drying": 0.8403877376895046,
+              "curing": 0.8733466376436488
+            },
+            "output_mean": 0.24426283478517627,
+            "output_std": 0.0045972944611102325
+          },
+          "upper": {
+            "control_value": 30.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.06436017912885694,
+            "minimum_support": 0.8642502900165752,
+            "stage_support": {
+              "coating": 0.9178663810305383,
+              "drying": 0.8642502900165752,
+              "curing": 0.8775217302659862
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 242,
+      "lower_headroom": 9.5625,
+      "upper_headroom": 12.0,
+      "nearest_normalized_headroom": 0.3825
+    },
+    "web_tension_n": {
+      "model_input_bounds": [
+        40.0,
+        160.0
+      ],
+      "mean_only_window": [
+        40.0,
+        160.0
+      ],
+      "buffered_process_window": [
+        40.0,
+        160.0
+      ],
+      "process_window": [
+        40.0,
+        160.0
+      ],
+      "trusted_window": [
+        40.0,
+        160.0
+      ],
+      "mean_only_all_intervals": [
+        [
+          40.0,
+          160.0
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          40.0,
+          160.0
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          40.0,
+          160.0
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 40.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.09033564802026807,
+            "minimum_support": 0.7342288078853038,
+            "stage_support": {
+              "coating": 0.7342288078853038,
+              "drying": 0.8839586269151812,
+              "curing": 0.8884973029598698
+            }
+          },
+          "upper": {
+            "control_value": 160.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.06245198573537093,
+            "minimum_support": 0.7568647015055976,
+            "stage_support": {
+              "coating": 0.7568647015055976,
+              "drying": 0.8865949249494443,
+              "curing": 0.8901825982933905
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 40.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.058690118344034786,
+            "minimum_support": 0.7342288078853038,
+            "stage_support": {
+              "coating": 0.7342288078853038,
+              "drying": 0.8839586269151812,
+              "curing": 0.8884973029598698
+            }
+          },
+          "upper": {
+            "control_value": 160.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.030772859053803607,
+            "minimum_support": 0.7568647015055976,
+            "stage_support": {
+              "coating": 0.7568647015055976,
+              "drying": 0.8865949249494443,
+              "curing": 0.8901825982933905
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 40.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.058690118344034786,
+            "minimum_support": 0.7342288078853038,
+            "stage_support": {
+              "coating": 0.7342288078853038,
+              "drying": 0.8839586269151812,
+              "curing": 0.8884973029598698
+            }
+          },
+          "upper": {
+            "control_value": 160.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.030772859053803607,
+            "minimum_support": 0.7568647015055976,
+            "stage_support": {
+              "coating": 0.7568647015055976,
+              "drying": 0.8865949249494443,
+              "curing": 0.8901825982933905
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 241,
+      "lower_headroom": 20.0,
+      "upper_headroom": 100.0,
+      "nearest_normalized_headroom": 0.16666666666666666
+    },
+    "air_temperature_c": {
+      "model_input_bounds": [
+        50.0,
+        120.0
+      ],
+      "mean_only_window": [
+        84.41666666666667,
+        103.375
+      ],
+      "buffered_process_window": [
+        84.70833333333334,
+        96.66666666666667
+      ],
+      "process_window": [
+        84.70833333333334,
+        96.66666666666667
+      ],
+      "trusted_window": [
+        84.70833333333334,
+        96.66666666666667
+      ],
+      "mean_only_all_intervals": [
+        [
+          84.41666666666667,
+          103.375
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          84.70833333333334,
+          96.66666666666667
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          84.70833333333334,
+          96.66666666666667
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 84.41666666666667,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.008636963255531071,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9419009004895066,
+              "curing": 0.9024297173837178
+            },
+            "output_mean": 4.956815183722345,
+            "output_std": 0.9421678588814407
+          },
+          "upper": {
+            "control_value": 103.375,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.0002707314088418043,
+            "minimum_support": 0.7160749612150936,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.7160749612150936,
+              "curing": 0.8885809157463088
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 84.70833333333334,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.013759497026690326,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9421076244968163,
+              "curing": 0.9031214739159673
+            },
+            "output_mean": 4.8356410459299255,
+            "output_std": 0.9423005276462225
+          },
+          "upper": {
+            "control_value": 96.66666666666667,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.0007421314402843533,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8359311099831673,
+              "curing": 0.9023644812414526
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 84.70833333333334,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.013759497026690326,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9421076244968163,
+              "curing": 0.9031214739159673
+            },
+            "output_mean": 4.8356410459299255,
+            "output_std": 0.9423005276462225
+          },
+          "upper": {
+            "control_value": 96.66666666666667,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.0007421314402843533,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8359311099831673,
+              "curing": 0.9023644812414526
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 242,
+      "lower_headroom": 5.291666666666657,
+      "upper_headroom": 6.666666666666671,
+      "nearest_normalized_headroom": 0.07559523809523797
+    },
+    "air_speed_m_s": {
+      "model_input_bounds": [
+        0.5,
+        6.0
+      ],
+      "mean_only_window": [
+        1.5999999999999999,
+        6.0
+      ],
+      "buffered_process_window": [
+        1.66875,
+        6.0
+      ],
+      "process_window": [
+        1.66875,
+        6.0
+      ],
+      "trusted_window": [
+        1.66875,
+        6.0
+      ],
+      "mean_only_all_intervals": [
+        [
+          1.5999999999999999,
+          6.0
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          1.66875,
+          6.0
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          1.66875,
+          6.0
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 1.5999999999999999,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.0019929549986164473,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8822625891947082,
+              "curing": 0.8978555161671474
+            },
+            "output_mean": 4.990035225006918,
+            "output_std": 0.9537660186750366
+          },
+          "upper": {
+            "control_value": 6.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.08400178935642935,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9380413144509088,
+              "curing": 0.908927616088418
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 1.66875,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.005228991299097707,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8800771226065675,
+              "curing": 0.8985615665137405
+            },
+            "output_mean": 4.877161103542102,
+            "output_std": 0.9534674556666675
+          },
+          "upper": {
+            "control_value": 6.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.05220729934198942,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9380413144509088,
+              "curing": 0.908927616088418
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 1.66875,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.005228991299097707,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8800771226065675,
+              "curing": 0.8985615665137405
+            },
+            "output_mean": 4.877161103542102,
+            "output_std": 0.9534674556666675
+          },
+          "upper": {
+            "control_value": 6.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.05220729934198942,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9380413144509088,
+              "curing": 0.908927616088418
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 242,
+      "lower_headroom": 3.83125,
+      "upper_headroom": 0.5,
+      "nearest_normalized_headroom": 0.09090909090909091
+    },
+    "residence_time_min": {
+      "model_input_bounds": [
+        1.0,
+        15.0
+      ],
+      "mean_only_window": [
+        6.658333333333333,
+        15.0
+      ],
+      "buffered_process_window": [
+        6.716666666666667,
+        10.916666666666666
+      ],
+      "process_window": [
+        6.716666666666667,
+        10.916666666666666
+      ],
+      "trusted_window": [
+        6.716666666666667,
+        10.916666666666666
+      ],
+      "mean_only_all_intervals": [
+        [
+          6.658333333333333,
+          15.0
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          6.716666666666667,
+          10.916666666666666
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          6.716666666666667,
+          10.916666666666666
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 6.658333333333333,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.009454925167445616,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8946386137698503,
+              "curing": 0.8997416790606273
+            },
+            "output_mean": 4.952725374162772,
+            "output_std": 0.9549108891933096
+          },
+          "upper": {
+            "control_value": 15.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.009681460123246213,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9095167818754403,
+              "curing": 0.9031282384424567
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 6.716666666666667,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.014222997905717882,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8965774929983463,
+              "curing": 0.9005963265720216
+            },
+            "output_mean": 4.832079436713295,
+            "output_std": 0.9545682401749752
+          },
+          "upper": {
+            "control_value": 10.916666666666666,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.0004174878587870864,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8505788634222138,
+              "curing": 0.9065649473512045
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 6.716666666666667,
+            "bottleneck": "local.drying.residual_solvent_pct:upper",
+            "margin": 0.014222997905717882,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8965774929983463,
+              "curing": 0.9005963265720216
+            },
+            "output_mean": 4.832079436713295,
+            "output_std": 0.9545682401749752
+          },
+          "upper": {
+            "control_value": 10.916666666666666,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.0004174878587870864,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.8505788634222138,
+              "curing": 0.9065649473512045
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 241,
+      "lower_headroom": 1.2833333333333332,
+      "upper_headroom": 2.916666666666666,
+      "nearest_normalized_headroom": 0.09166666666666666
+    },
+    "oven_temperature_c": {
+      "model_input_bounds": [
+        90.0,
+        180.0
+      ],
+      "mean_only_window": [
+        127.5,
+        169.5
+      ],
+      "buffered_process_window": [
+        129.375,
+        168.0
+      ],
+      "process_window": [
+        129.375,
+        168.0
+      ],
+      "trusted_window": [
+        129.375,
+        168.0
+      ],
+      "mean_only_all_intervals": [
+        [
+          127.5,
+          169.5
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          129.375,
+          168.0
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          129.375,
+          168.0
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 127.5,
+            "bottleneck": "local.curing.cure_fraction:lower",
+            "margin": 0.0009286892814143466,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.8962898769391934
+            },
+            "output_mean": 0.8007429514251315,
+            "output_std": 0.02105382064343823
+          },
+          "upper": {
+            "control_value": 169.5,
+            "bottleneck": "final.bond_strength_mpa:lower",
+            "margin": 0.005866142607123814,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.8815734261683883
+            },
+            "output_mean": 32.18771656342796,
+            "output_std": 0.5367059810699226
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 129.375,
+            "bottleneck": "local.curing.cure_fraction:lower",
+            "margin": 0.0038263848717338955,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9049792144695965
+            },
+            "output_mean": 0.8237709364664197,
+            "output_std": 0.02100966387398974
+          },
+          "upper": {
+            "control_value": 168.0,
+            "bottleneck": "final.bond_strength_mpa:lower",
+            "margin": 0.003577871527850718,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.8721112904006703
+            },
+            "output_mean": 33.00716536352333,
+            "output_std": 0.5426629662136251
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 129.375,
+            "bottleneck": "local.curing.cure_fraction:lower",
+            "margin": 0.0038263848717338955,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9049792144695965
+            },
+            "output_mean": 0.8237709364664197,
+            "output_std": 0.02100966387398974
+          },
+          "upper": {
+            "control_value": 168.0,
+            "bottleneck": "final.bond_strength_mpa:lower",
+            "margin": 0.003577871527850718,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.8721112904006703
+            },
+            "output_mean": 33.00716536352333,
+            "output_std": 0.5426629662136251
+          }
+        }
+      },
+      "scan_evaluation_points": 242,
+      "lower_headroom": 10.625,
+      "upper_headroom": 28.0,
+      "nearest_normalized_headroom": 0.11805555555555555
+    },
+    "hold_time_min": {
+      "model_input_bounds": [
+        5.0,
+        65.0
+      ],
+      "mean_only_window": [
+        37.75,
+        65.0
+      ],
+      "buffered_process_window": [
+        40.0,
+        65.0
+      ],
+      "process_window": [
+        40.0,
+        65.0
+      ],
+      "trusted_window": [
+        40.0,
+        65.0
+      ],
+      "mean_only_all_intervals": [
+        [
+          37.75,
+          65.0
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          40.0,
+          65.0
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          40.0,
+          65.0
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 37.75,
+            "bottleneck": "local.curing.cure_fraction:lower",
+            "margin": 0.0014187995305214862,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9274402530651554
+            },
+            "output_mean": 0.8011350396244172,
+            "output_std": 0.020798903694137415
+          },
+          "upper": {
+            "control_value": 65.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.08316950697019274,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9320685194671676
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 40.0,
+            "bottleneck": "local.curing.cure_fraction:lower",
+            "margin": 0.0024358335086077654,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9120315661389374
+            },
+            "output_mean": 0.8225306294719301,
+            "output_std": 0.020879946737278974
+          },
+          "upper": {
+            "control_value": 65.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.05173458416176005,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9320685194671676
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 40.0,
+            "bottleneck": "local.curing.cure_fraction:lower",
+            "margin": 0.0024358335086077654,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9120315661389374
+            },
+            "output_mean": 0.8225306294719301,
+            "output_std": 0.020879946737278974
+          },
+          "upper": {
+            "control_value": 65.0,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.05173458416176005,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9320685194671676
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 241,
+      "lower_headroom": 20.0,
+      "upper_headroom": 5.0,
+      "nearest_normalized_headroom": 0.08333333333333333
+    },
+    "nip_pressure_mpa": {
+      "model_input_bounds": [
+        0.05,
+        0.6
+      ],
+      "mean_only_window": [
+        0.05,
+        0.6
+      ],
+      "buffered_process_window": [
+        0.05,
+        0.6
+      ],
+      "process_window": [
+        0.05,
+        0.6
+      ],
+      "trusted_window": [
+        0.05,
+        0.6
+      ],
+      "mean_only_all_intervals": [
+        [
+          0.05,
+          0.6
+        ]
+      ],
+      "buffered_all_intervals": [
+        [
+          0.05,
+          0.6
+        ]
+      ],
+      "trusted_all_intervals": [
+        [
+          0.05,
+          0.6
+        ]
+      ],
+      "boundary_diagnostics": {
+        "mean_only": {
+          "lower": {
+            "control_value": 0.05,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.08316950697019274,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9347581275473875
+            }
+          },
+          "upper": {
+            "control_value": 0.6,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.08316950697019272,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9373588455943836
+            }
+          }
+        },
+        "buffered": {
+          "lower": {
+            "control_value": 0.05,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.05173458416176005,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9347581275473875
+            }
+          },
+          "upper": {
+            "control_value": 0.6,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.051734584161760036,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9373588455943836
+            }
+          }
+        },
+        "trusted": {
+          "lower": {
+            "control_value": 0.05,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.05173458416176005,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9347581275473875
+            }
+          },
+          "upper": {
+            "control_value": 0.6,
+            "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower",
+            "margin": 0.051734584161760036,
+            "minimum_support": 0.833371646798921,
+            "stage_support": {
+              "coating": 0.833371646798921,
+              "drying": 0.9216677437780213,
+              "curing": 0.9373588455943836
+            }
+          }
+        }
+      },
+      "scan_evaluation_points": 242,
+      "lower_headroom": 0.05,
+      "upper_headroom": 0.5,
+      "nearest_normalized_headroom": 0.09090909090909093
+    }
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "status": "pass",
+  "scope": "Independent deterministic oracle evaluation; no real-world calibration claim.",
+  "selected_predicted_rho": 2.5,
+  "baseline_predicted_rho": 0.75,
+  "selected_oracle": {
+    "rho": 2.7916666666666643,
+    "ratios": {
+      "coating_gap_um": 6.375,
+      "line_speed_m_min": 30.892857142857146,
+      "web_tension_n": 6.666666666666667,
+      "air_temperature_c": 2.7916666666666643,
+      "air_speed_m_s": 4.166666666666667,
+      "residence_time_min": 5.133333333333333,
+      "oven_temperature_c": 5.6875,
+      "hold_time_min": 10.0,
+      "nip_pressure_mpa": 3.3333333333333335
+    },
+    "windows": {
+      "coating_gap_um": [
+        184.5,
+        238.5
+      ],
+      "line_speed_m_min": [
+        7.1875,
+        30.0
+      ],
+      "web_tension_n": [
+        40.0,
+        160.0
+      ],
+      "air_temperature_c": [
+        84.41666666666667,
+        120.0
+      ],
+      "air_speed_m_s": [
+        1.11875,
+        6.0
+      ],
+      "residence_time_min": [
+        6.716666666666667,
+        15.0
+      ],
+      "oven_temperature_c": [
+        128.625,
+        171.75
+      ],
+      "hold_time_min": [
+        38.5,
+        65.0
+      ],
+      "nip_pressure_mpa": [
+        0.05,
+        0.6
+      ]
+    }
+  },
+  "baseline_oracle": {
+    "rho": 1.9166666666666643,
+    "ratios": {
+      "coating_gap_um": 4.5,
+      "line_speed_m_min": 5.714285714285714,
+      "web_tension_n": 6.166666666666667,
+      "air_temperature_c": 1.9166666666666643,
+      "air_speed_m_s": 16.23263888888889,
+      "residence_time_min": 3.5,
+      "oven_temperature_c": 2.5,
+      "hold_time_min": 30.5,
+      "nip_pressure_mpa": 18.333333333333332
+    },
+    "windows": {
+      "coating_gap_um": [
+        180.75,
+        228.0
+      ],
+      "line_speed_m_min": [
+        7.1875,
+        30.0
+      ],
+      "web_tension_n": [
+        41.5,
+        158.5
+      ],
+      "air_temperature_c": [
+        86.16666666666667,
+        120.0
+      ],
+      "air_speed_m_s": [
+        1.3020833333333333,
+        6.0
+      ],
+      "residence_time_min": [
+        7.125,
+        15.0
+      ],
+      "oven_temperature_c": [
+        142.875,
+        180.0
+      ],
+      "hold_time_min": [
+        14.75,
+        50.25
+      ],
+      "nip_pressure_mpa": [
+        0.05,
+        0.6
+      ]
+    }
+  },
+  "oracle_rho_improvement": 0.875,
+  "top_center_oracle_comparison": [
+    {
+      "window_rank": 1,
+      "predicted_rho": 2.5,
+      "oracle_rho": 2.7916666666666643,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 60.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.1
+      }
+    },
+    {
+      "window_rank": 2,
+      "predicted_rho": 2.25,
+      "oracle_rho": 2.7916666666666643,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 60.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.325
+      }
+    },
+    {
+      "window_rank": 3,
+      "predicted_rho": 2.25,
+      "oracle_rho": 2.7916666666666643,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 60.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.55
+      }
+    },
+    {
+      "window_rank": 4,
+      "predicted_rho": 2.25,
+      "oracle_rho": 2.5,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 60.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 175.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.1
+      }
+    },
+    {
+      "window_rank": 5,
+      "predicted_rho": 2.25,
+      "oracle_rho": 2.5,
+      "controls": {
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 60.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 175.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.325
+      }
+    },
+    {
+      "window_rank": 6,
+      "predicted_rho": 2.0,
+      "oracle_rho": 2.5,
+      "controls": {
+        "coating_gap_um": 280.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 140.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 13.0,
+        "oven_temperature_c": 175.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.1
+      }
+    },
+    {
+      "window_rank": 7,
+      "predicted_rho": 1.875,
+      "oracle_rho": 3.333333333333329,
+      "controls": {
+        "coating_gap_um": 280.0,
+        "line_speed_m_min": 8.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 13.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.55
+      }
+    },
+    {
+      "window_rank": 8,
+      "predicted_rho": 1.875,
+      "oracle_rho": 2.5,
+      "controls": {
+        "coating_gap_um": 280.0,
+        "line_speed_m_min": 8.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 13.0,
+        "oven_temperature_c": 175.0,
+        "hold_time_min": 35.0,
+        "nip_pressure_mpa": 0.1
+      }
+    }
+  ],
+  "joint_random_boxes": [
+    {
+      "radius_scale": 0.5,
+      "count": 4096,
+      "predicted_pass_count": 4096,
+      "oracle_pass_count": 4096,
+      "true_positive": 4096,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 0
+    },
+    {
+      "radius_scale": 1.0,
+      "count": 4096,
+      "predicted_pass_count": 3815,
+      "oracle_pass_count": 3903,
+      "true_positive": 3815,
+      "false_positive": 0,
+      "false_negative": 88,
+      "true_negative": 193
+    },
+    {
+      "radius_scale": 1.5,
+      "count": 4096,
+      "predicted_pass_count": 2999,
+      "oracle_pass_count": 3529,
+      "true_positive": 2999,
+      "false_positive": 0,
+      "false_negative": 530,
+      "true_negative": 567
+    }
+  ],
+  "joint_vertices": {
+    "count": 512,
+    "predicted_pass_count": 338,
+    "oracle_pass_count": 440,
+    "true_positive": 338,
+    "false_positive": 0,
+    "false_negative": 102,
+    "true_negative": 72
+  },
+  "pairwise_sections": [
+    {
+      "controls": [
+        "air_temperature_c",
+        "nip_pressure_mpa"
+      ],
+      "count": 961,
+      "predicted_pass_count": 961,
+      "oracle_pass_count": 961,
+      "true_positive": 961,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 0
+    },
+    {
+      "controls": [
+        "air_temperature_c",
+        "coating_gap_um"
+      ],
+      "count": 961,
+      "predicted_pass_count": 920,
+      "oracle_pass_count": 937,
+      "true_positive": 920,
+      "false_positive": 0,
+      "false_negative": 17,
+      "true_negative": 24
+    },
+    {
+      "controls": [
+        "air_temperature_c",
+        "air_speed_m_s"
+      ],
+      "count": 961,
+      "predicted_pass_count": 961,
+      "oracle_pass_count": 961,
+      "true_positive": 961,
+      "false_positive": 0,
+      "false_negative": 0,
+      "true_negative": 0
+    }
+  ],
+  "limitations": [
+    "One-axis oracle rho is a cross-sectional metric.",
+    "Joint results cover only the recorded finite samples."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "electroplating",
+  "name": "銅電解めっき",
+  "model_version": "2.0.0",
+  "high_dimension": true,
+  "initial_design_size": 64,
+  "description": "ファラデー則を中核に、銅濃度・撹拌・電極間隔・duty・pHまで結合した8入力の高次元銅電解めっき合成シミュレータ。",
+  "reference_datasets": [
+    "dataset_01: オームの法則データ（電圧・抵抗・電流の電気的関係）",
+    "dataset_12: 流量センサー（流れ・粘性・密度による物質移動の類似構造）",
+    "C:/Users/tsuts/Documents/Codex/20260623_ml_dataset_generation/src/dataset_generators.py"
+  ],
+  "features": [
+    "current_density_a_dm2",
+    "bath_temperature_c",
+    "plating_time_min",
+    "copper_concentration_mol_l",
+    "agitation_speed_m_s",
+    "electrode_gap_cm",
+    "duty_cycle",
+    "bath_ph",
+    "thickness_error_um",
+    "roughness_ra_um",
+    "current_efficiency",
+    "deposit_thickness_um",
+    "cell_voltage_v"
+  ]
+}

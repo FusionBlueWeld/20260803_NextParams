@@ -1,0 +1,417 @@
+{
+  "status": "pass",
+  "acceptance": {
+    "checks": {
+      "center_oracle_feasible": true,
+      "center_predicted_feasible": true,
+      "all_axes_evaluated": true,
+      "no_false_allowances": true,
+      "no_empty_windows": true,
+      "mean_recovery_at_least_0_60": true,
+      "boundary_overshoot_within_grid_step": true
+    },
+    "mean_true_window_recovery_grid_fraction": 0.8095692159046912,
+    "status": "pass"
+  },
+  "scope": "Deterministic fully observed oracle; no real-world probability calibration is used.",
+  "center": {
+    "coating_gap_um": 210.0,
+    "line_speed_m_min": 18.0,
+    "web_tension_n": 60.0,
+    "air_temperature_c": 90.0,
+    "air_speed_m_s": 5.5,
+    "residence_time_min": 8.0,
+    "oven_temperature_c": 140.0,
+    "hold_time_min": 60.0,
+    "nip_pressure_mpa": 0.1
+  },
+  "center_oracle_feasible": true,
+  "center_oracle_detail": {
+    "valid_connection": true,
+    "failed": [],
+    "quality_margin": 0.3611401070249205
+  },
+  "learned_center": {
+    "process_margin": 0.051734584161759946,
+    "trusted_margin": 0.051734584161759946,
+    "minimum_support": 0.8333716467989212,
+    "bottleneck": "connection.curing.incoming_residual_solvent_pct:lower"
+  },
+  "maximum_absolute_normalized_boundary_error": 0.33333333333333326,
+  "mean_absolute_normalized_boundary_error": 0.05162037037037037,
+  "maximum_unsafe_normalized_overshoot": 0.0,
+  "mean_oracle_window_coverage_fraction": 0.8071872945259759,
+  "aggregate_grid_classification": {
+    "true_positive": 1260,
+    "false_positive": 0,
+    "false_negative": 223,
+    "true_negative": 691
+  },
+  "empty_window_count": 0,
+  "evaluation_unavailable_count": 98,
+  "shrinkage_decomposition": [
+    {
+      "control": "coating_gap_um",
+      "mean_only_grid_fraction": 0.3029045643153527,
+      "buffered_grid_fraction": 0.22821576763485477,
+      "trusted_grid_fraction": 0.22821576763485477,
+      "buffer_loss_fraction": 0.2465753424657534,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "line_speed_m_min",
+      "mean_only_grid_fraction": 0.871900826446281,
+      "buffered_grid_fraction": 0.8636363636363636,
+      "trusted_grid_fraction": 0.8636363636363636,
+      "buffer_loss_fraction": 0.009478672985781991,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "web_tension_n",
+      "mean_only_grid_fraction": 1.0,
+      "buffered_grid_fraction": 1.0,
+      "trusted_grid_fraction": 1.0,
+      "buffer_loss_fraction": 0.0,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "air_temperature_c",
+      "mean_only_grid_fraction": 0.2768595041322314,
+      "buffered_grid_fraction": 0.17768595041322313,
+      "trusted_grid_fraction": 0.17768595041322313,
+      "buffer_loss_fraction": 0.3582089552238806,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "air_speed_m_s",
+      "mean_only_grid_fraction": 0.8016528925619835,
+      "buffered_grid_fraction": 0.7892561983471075,
+      "trusted_grid_fraction": 0.7892561983471075,
+      "buffer_loss_fraction": 0.015463917525773196,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "residence_time_min",
+      "mean_only_grid_fraction": 0.5975103734439834,
+      "buffered_grid_fraction": 0.3029045643153527,
+      "trusted_grid_fraction": 0.3029045643153527,
+      "buffer_loss_fraction": 0.4930555555555556,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "oven_temperature_c",
+      "mean_only_grid_fraction": 0.47107438016528924,
+      "buffered_grid_fraction": 0.43388429752066116,
+      "trusted_grid_fraction": 0.43388429752066116,
+      "buffer_loss_fraction": 0.07894736842105263,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "hold_time_min",
+      "mean_only_grid_fraction": 0.45643153526970953,
+      "buffered_grid_fraction": 0.4190871369294606,
+      "trusted_grid_fraction": 0.4190871369294606,
+      "buffer_loss_fraction": 0.08181818181818182,
+      "support_loss_fraction": 0.0
+    },
+    {
+      "control": "nip_pressure_mpa",
+      "mean_only_grid_fraction": 1.0,
+      "buffered_grid_fraction": 1.0,
+      "trusted_grid_fraction": 1.0,
+      "buffer_loss_fraction": 0.0,
+      "support_loss_fraction": 0.0
+    }
+  ],
+  "axis_profiles": {
+    "coating_gap_um": {
+      "oracle_process_window": [
+        184.5,
+        238.5
+      ],
+      "learned_process_window": [
+        195.75,
+        236.25
+      ],
+      "learned_trusted_window": [
+        195.75,
+        236.25
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.0625,
+        "upper": -0.0125
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.75,
+      "true_window_recovery_grid_fraction": 0.7534246575342466,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 55,
+        "false_positive": 0,
+        "false_negative": 18,
+        "true_negative": 168
+      },
+      "oracle_feasible_grid_fraction": 0.3029045643153527
+    },
+    "line_speed_m_min": {
+      "oracle_process_window": [
+        7.1875,
+        30.0
+      ],
+      "learned_process_window": [
+        8.4375,
+        30.0
+      ],
+      "learned_trusted_window": [
+        8.4375,
+        30.0
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.05,
+        "upper": 0.0
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.9452054794520548,
+      "true_window_recovery_grid_fraction": 0.9457013574660633,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 209,
+        "false_positive": 0,
+        "false_negative": 12,
+        "true_negative": 21
+      },
+      "oracle_feasible_grid_fraction": 0.9132231404958677
+    },
+    "web_tension_n": {
+      "oracle_process_window": [
+        40.0,
+        160.0
+      ],
+      "learned_process_window": [
+        40.0,
+        160.0
+      ],
+      "learned_trusted_window": [
+        40.0,
+        160.0
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 1.0,
+      "true_window_recovery_grid_fraction": 1.0,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 241,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 0
+      },
+      "oracle_feasible_grid_fraction": 1.0
+    },
+    "air_temperature_c": {
+      "oracle_process_window": [
+        84.41666666666667,
+        120.0
+      ],
+      "learned_process_window": [
+        84.70833333333334,
+        96.66666666666667
+      ],
+      "learned_trusted_window": [
+        84.70833333333334,
+        96.66666666666667
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.004166666666666734,
+        "upper": -0.33333333333333326
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.33606557377049173,
+      "true_window_recovery_grid_fraction": 0.3467741935483871,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 43,
+        "false_positive": 0,
+        "false_negative": 81,
+        "true_negative": 118
+      },
+      "oracle_feasible_grid_fraction": 0.512396694214876
+    },
+    "air_speed_m_s": {
+      "oracle_process_window": [
+        1.11875,
+        6.0
+      ],
+      "learned_process_window": [
+        1.66875,
+        6.0
+      ],
+      "learned_trusted_window": [
+        1.66875,
+        6.0
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.1,
+        "upper": 0.0
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.8873239436619719,
+      "true_window_recovery_grid_fraction": 0.8883720930232558,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 191,
+        "false_positive": 0,
+        "false_negative": 24,
+        "true_negative": 27
+      },
+      "oracle_feasible_grid_fraction": 0.8884297520661157
+    },
+    "residence_time_min": {
+      "oracle_process_window": [
+        6.716666666666667,
+        15.0
+      ],
+      "learned_process_window": [
+        6.716666666666667,
+        10.916666666666666
+      ],
+      "learned_trusted_window": [
+        6.716666666666667,
+        10.916666666666666
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.0,
+        "upper": -0.2916666666666667
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.5070422535211266,
+      "true_window_recovery_grid_fraction": 0.5104895104895105,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 73,
+        "false_positive": 0,
+        "false_negative": 70,
+        "true_negative": 98
+      },
+      "oracle_feasible_grid_fraction": 0.5933609958506224
+    },
+    "oven_temperature_c": {
+      "oracle_process_window": [
+        128.625,
+        171.75
+      ],
+      "learned_process_window": [
+        129.375,
+        168.0
+      ],
+      "learned_trusted_window": [
+        129.375,
+        168.0
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.008333333333333333,
+        "upper": -0.041666666666666664
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.8956521739130435,
+      "true_window_recovery_grid_fraction": 0.8974358974358975,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 105,
+        "false_positive": 0,
+        "false_negative": 12,
+        "true_negative": 125
+      },
+      "oracle_feasible_grid_fraction": 0.4834710743801653
+    },
+    "hold_time_min": {
+      "oracle_process_window": [
+        38.5,
+        65.0
+      ],
+      "learned_process_window": [
+        40.0,
+        65.0
+      ],
+      "learned_trusted_window": [
+        40.0,
+        65.0
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.025,
+        "upper": 0.0
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 0.9433962264150944,
+      "true_window_recovery_grid_fraction": 0.9439252336448598,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 101,
+        "false_positive": 0,
+        "false_negative": 6,
+        "true_negative": 134
+      },
+      "oracle_feasible_grid_fraction": 0.44398340248962653
+    },
+    "nip_pressure_mpa": {
+      "oracle_process_window": [
+        0.05,
+        0.6
+      ],
+      "learned_process_window": [
+        0.05,
+        0.6
+      ],
+      "learned_trusted_window": [
+        0.05,
+        0.6
+      ],
+      "normalized_boundary_error": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "unsafe_normalized_overshoot": {
+        "lower": 0.0,
+        "upper": 0.0
+      },
+      "oracle_window_coverage_fraction": 1.0,
+      "true_window_recovery_grid_fraction": 1.0,
+      "false_allowance_grid_fraction": 0.0,
+      "classification": {
+        "true_positive": 242,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 0
+      },
+      "oracle_feasible_grid_fraction": 1.0
+    }
+  },
+  "limitation": "Intervals vary one control at a time. They are cross-sections of the 9-D window, not an axis-independent box."
+}

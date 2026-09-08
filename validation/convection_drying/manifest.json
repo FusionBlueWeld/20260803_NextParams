@@ -1,0 +1,19 @@
+{
+  "id": "convection_drying",
+  "name": "塗膜の熱風乾燥",
+  "model_version": "1.0.0",
+  "description": "熱風による水系塗膜乾燥を、熱移動・内部拡散・外部物質移動の直列抵抗とエネルギー収支で表す決定論的な検証用合成モデル。",
+  "reference_datasets": [
+    "dataset_07: 一次遅れ温度応答（温度履歴・lag構造）",
+    "dataset_12: 流量センサー（流速・流体抵抗構造）",
+    "dataset_28: 熱・流体・機械の連成モデル（熱・流体連成）"
+  ],
+  "features": [
+    "NumPy-only deterministic evaluation",
+    "broadcastable scalar, vector, and multidimensional inputs",
+    "internal diffusion and external mass-transfer resistance in series",
+    "saturating air-speed benefit",
+    "positive dimensional heating, evaporation, and fan energy",
+    "bounded surface/core drying-imbalance defect surrogate"
+  ]
+}

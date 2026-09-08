@@ -1,0 +1,9 @@
+{
+  "scope": "Known limitation regression; full control domain at fixed material state, not a release safety guarantee",
+  "seed": 20260930,
+  "samples": 8192,
+  "true_positive": 80,
+  "false_positive": 2,
+  "false_negative": 406,
+  "true_negative": 7704
+}

@@ -1,0 +1,32 @@
+{
+  "id": "drying",
+  "name": "熱風乾燥",
+  "model_version": "1.0.0",
+  "description": "塗工膜の加熱・内部拡散・外部物質移動を表す決定論的な物理縮約モデル。係数は検証用仮定であり実機校正値ではない。",
+  "local_objective": {"name": "drying_energy_kj_m2", "direction": "minimize"},
+  "local_constraints": [
+    {"name": "residual_solvent_pct", "direction": "less_equal", "target": 5.0},
+    {"name": "drying_defect_index", "direction": "less_equal", "target": 0.30}
+  ],
+  "controls": [
+    {"name": "air_temperature_c", "unit": "degC", "range": [50.0, 120.0], "description": "乾燥空気温度"},
+    {"name": "air_speed_m_s", "unit": "m/s", "range": [0.5, 6.0], "description": "膜面風速"},
+    {"name": "residence_time_min", "unit": "min", "range": [1.0, 15.0], "description": "乾燥炉滞留時間"}
+  ],
+  "incoming_state": [
+    {"name": "incoming_wet_thickness_um", "unit": "um", "range": [60.0, 270.0], "description": "塗工工程からの湿潤膜厚"},
+    {"name": "incoming_solids_fraction", "unit": "fraction", "range": [0.35, 0.65], "description": "塗工液固形分率"},
+    {"name": "incoming_thickness_cv_fraction", "unit": "fraction", "range": [0.0, 0.35], "description": "塗工工程からの膜厚変動係数"},
+    {"name": "incoming_coating_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "塗工工程からの欠陥指数"}
+  ],
+  "outputs": [
+    {"name": "dry_thickness_um", "unit": "um", "range": [15.0, 310.0], "description": "乾燥後膜厚"},
+    {"name": "residual_solvent_pct", "unit": "%", "range": [0.0, 70.0], "description": "乾燥後残留溶剤率"},
+    {"name": "internal_stress_mpa", "unit": "MPa", "range": [0.0, 8.0], "description": "乾燥後内部応力"},
+    {"name": "drying_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "乾燥欠陥指数"},
+    {"name": "dry_thickness_cv_fraction", "unit": "fraction", "range": [0.0, 0.40], "description": "乾燥後膜厚変動係数"},
+    {"name": "terminal_film_temperature_c", "unit": "degC", "range": [25.0, 120.0], "description": "乾燥終了時膜温度"},
+    {"name": "skinning_index", "unit": "0-1", "range": [0.0, 1.0], "description": "表面先行乾燥指数"},
+    {"name": "drying_energy_kj_m2", "unit": "kJ/m2", "range": [0.0, 20000.0], "description": "乾燥工程エネルギー"}
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "model": "functional_coating",
+  "grid": {
+    "levels_per_control": 3,
+    "control_count": 9,
+    "candidate_count": 19683,
+    "feasible_count": 1341,
+    "infeasible_count": 18342
+  },
+  "individual_best_chain": {
+    "conditions": {
+      "material_viscosity_pa_s": 1.6,
+      "material_solids_fraction": 0.5,
+      "material_bubble_fraction": 0.005,
+      "coating_gap_um": 280.0,
+      "line_speed_m_min": 28.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 1.0,
+      "residence_time_min": 13.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.325
+    },
+    "local_objectives": {
+      "coating": {
+        "objective": "maximize coated_solids_rate_kg_m_h",
+        "value": 179.77969871145694
+      },
+      "drying": {
+        "objective": "minimize drying_energy_kj_m2",
+        "value": 148.48911302823439
+      },
+      "curing": {
+        "objective": "maximize bond_strength_mpa",
+        "value": 40.007587389496194
+      }
+    },
+    "final": {
+      "bond_strength_mpa": 40.007587389496194,
+      "cure_fraction": 0.9174475682067332,
+      "degradation_fraction": 0.02101050783582867,
+      "final_residual_solvent_pct": 0.0028065671443990464,
+      "final_thickness_um": 89.01775727171649,
+      "final_internal_stress_mpa": 0.9213188656660941,
+      "final_defect_index": 0.16904953784006976,
+      "dimensional_change_um": 4.8798647685799725,
+      "blister_index": 0.06026760781504339,
+      "terminal_film_temperature_c": 139.99978537645916,
+      "curing_energy_kj_m2": 3951.316216216216,
+      "total_thermal_energy_kj_m2": 4099.80532924445,
+      "line_throughput_m2_h": 1680.0,
+      "quality_margin": -0.26785048478109935,
+      "feasible": false
+    },
+    "robustness": {
+      "samples": 512,
+      "seed": 0,
+      "yield_probability": 0.078125,
+      "mean_quality_margin": -0.2779656746534941,
+      "p05_quality_margin": -0.605743627180908,
+      "mean_bond_strength_mpa": 39.76847378756862,
+      "stage_freeze_yield_improvement": {
+        "material_and_coating": -0.078125,
+        "drying": -0.02734375,
+        "curing": 0.00390625
+      }
+    }
+  },
+  "global_max_quality_margin": {
+    "conditions": {
+      "material_viscosity_pa_s": 1.6,
+      "material_solids_fraction": 0.5,
+      "material_bubble_fraction": 0.005,
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 18.0,
+      "web_tension_n": 100.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 5.5,
+      "residence_time_min": 8.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.325
+    },
+    "final": {
+      "bond_strength_mpa": 46.284994710317285,
+      "cure_fraction": 0.9331275325467621,
+      "degradation_fraction": 0.023022126213684234,
+      "final_residual_solvent_pct": 5.409654323746346e-06,
+      "final_thickness_um": 62.06114457179556,
+      "final_internal_stress_mpa": 0.620494477861112,
+      "final_defect_index": 0.10227292887820344,
+      "dimensional_change_um": 2.81974291914612,
+      "blister_index": 0.017273770103341468,
+      "terminal_film_temperature_c": 139.9999999792065,
+      "curing_energy_kj_m2": 3951.316216216216,
+      "total_thermal_energy_kj_m2": 4066.861870902946,
+      "line_throughput_m2_h": 1080.0,
+      "quality_margin": 0.44640608469741516,
+      "feasible": true
+    },
+    "robustness": {
+      "samples": 512,
+      "seed": 0,
+      "yield_probability": 1.0,
+      "mean_quality_margin": 0.3965847480716279,
+      "p05_quality_margin": 0.24740910086472606,
+      "mean_bond_strength_mpa": 46.11617622991115,
+      "stage_freeze_yield_improvement": {
+        "material_and_coating": 0.0,
+        "drying": 0.0,
+        "curing": 0.0
+      }
+    }
+  },
+  "global_min_energy_feasible": {
+    "conditions": {
+      "material_viscosity_pa_s": 1.6,
+      "material_solids_fraction": 0.5,
+      "material_bubble_fraction": 0.005,
+      "coating_gap_um": 210.0,
+      "line_speed_m_min": 8.0,
+      "web_tension_n": 140.0,
+      "air_temperature_c": 65.0,
+      "air_speed_m_s": 1.0,
+      "residence_time_min": 13.0,
+      "oven_temperature_c": 175.0,
+      "hold_time_min": 35.0,
+      "nip_pressure_mpa": 0.1
+    },
+    "final": {
+      "bond_strength_mpa": 33.34566829856801,
+      "cure_fraction": 0.9972956155844368,
+      "degradation_fraction": 0.07626493454867753,
+      "final_residual_solvent_pct": 5.409127992708868e-07,
+      "final_thickness_um": 61.24135154811747,
+      "final_internal_stress_mpa": 1.0886178785305518,
+      "final_defect_index": 0.20687258977336098,
+      "dimensional_change_um": 3.353039520739215,
+      "blister_index": 0.08534712630875481,
+      "terminal_film_temperature_c": 174.9997579306837,
+      "curing_energy_kj_m2": 2986.0297297297298,
+      "total_thermal_energy_kj_m2": 3070.639264183367,
+      "line_throughput_m2_h": 480.0,
+      "quality_margin": 0.042052134330250235,
+      "feasible": true
+    }
+  },
+  "global_max_throughput_feasible": {
+    "conditions": {
+      "material_viscosity_pa_s": 1.6,
+      "material_solids_fraction": 0.5,
+      "material_bubble_fraction": 0.005,
+      "coating_gap_um": 140.0,
+      "line_speed_m_min": 28.0,
+      "web_tension_n": 60.0,
+      "air_temperature_c": 90.0,
+      "air_speed_m_s": 1.0,
+      "residence_time_min": 3.0,
+      "oven_temperature_c": 140.0,
+      "hold_time_min": 60.0,
+      "nip_pressure_mpa": 0.1
+    },
+    "final": {
+      "bond_strength_mpa": 36.12167536941662,
+      "cure_fraction": 0.9349893525907155,
+      "degradation_fraction": 0.02329146077682447,
+      "final_residual_solvent_pct": 8.208901792365513e-06,
+      "final_thickness_um": 57.64410819962161,
+      "final_internal_stress_mpa": 0.7992245965662392,
+      "final_defect_index": 0.23577720715863887,
+      "dimensional_change_um": 3.1015391731360804,
+      "blister_index": 0.11432280178857855,
+      "terminal_film_temperature_c": 139.999999997967,
+      "curing_energy_kj_m2": 3927.0162162162164,
+      "total_thermal_energy_kj_m2": 3989.7471242214106,
+      "line_throughput_m2_h": 1680.0,
+      "quality_margin": 0.056891171365444526,
+      "feasible": true
+    }
+  },
+  "known_source_drift_scenarios": {
+    "reference": {
+      "source_stages": [],
+      "description": "Coordinated in-spec reference condition.",
+      "conditions": {
+        "material_viscosity_pa_s": 1.6,
+        "material_solids_fraction": 0.5,
+        "material_bubble_fraction": 0.005,
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "final": {
+        "bond_strength_mpa": 46.284994710317285,
+        "cure_fraction": 0.9331275325467621,
+        "degradation_fraction": 0.023022126213684234,
+        "final_residual_solvent_pct": 5.409654323746346e-06,
+        "final_thickness_um": 62.06114457179556,
+        "final_internal_stress_mpa": 0.620494477861112,
+        "final_defect_index": 0.10227292887820344,
+        "dimensional_change_um": 2.81974291914612,
+        "blister_index": 0.017273770103341468,
+        "terminal_film_temperature_c": 139.9999999792065,
+        "curing_energy_kj_m2": 3951.316216216216,
+        "total_thermal_energy_kj_m2": 4066.861870902946,
+        "line_throughput_m2_h": 1080.0,
+        "quality_margin": 0.44640608469741516,
+        "feasible": true
+      }
+    },
+    "coating_gap_positive_bias": {
+      "source_stages": [
+        "coating"
+      ],
+      "description": "Gap bias produces an over-thick film that remains outside final thickness specification.",
+      "conditions": {
+        "material_viscosity_pa_s": 1.6,
+        "material_solids_fraction": 0.5,
+        "material_bubble_fraction": 0.005,
+        "coating_gap_um": 280.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "final": {
+        "bond_strength_mpa": 37.53313455697487,
+        "cure_fraction": 0.9156907649697407,
+        "degradation_fraction": 0.020809185914622736,
+        "final_residual_solvent_pct": 0.007978781402493073,
+        "final_thickness_um": 91.27815710120967,
+        "final_internal_stress_mpa": 1.0181026334469054,
+        "final_defect_index": 0.20296459000945313,
+        "dimensional_change_um": 4.206509303889234,
+        "blister_index": 0.13306006196264003,
+        "terminal_film_temperature_c": 139.99963833835398,
+        "curing_energy_kj_m2": 3951.316216216216,
+        "total_thermal_energy_kj_m2": 4095.2109115900244,
+        "line_throughput_m2_h": 1080.0,
+        "quality_margin": -0.41854380674731145,
+        "feasible": false
+      }
+    },
+    "dryer_residence_loss": {
+      "source_stages": [
+        "drying"
+      ],
+      "description": "Lost dryer residence raises skinning/defect and leaves an over-thick solvent-bearing film.",
+      "conditions": {
+        "material_viscosity_pa_s": 1.6,
+        "material_solids_fraction": 0.5,
+        "material_bubble_fraction": 0.005,
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 3.0,
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "final": {
+        "bond_strength_mpa": 29.744339523014883,
+        "cure_fraction": 0.9199313245501803,
+        "degradation_fraction": 0.021302497551460433,
+        "final_residual_solvent_pct": 0.009165635199880796,
+        "final_thickness_um": 85.63346876457224,
+        "final_internal_stress_mpa": 1.2530031410519513,
+        "final_defect_index": 0.3667079296039561,
+        "dimensional_change_um": 4.186789461223621,
+        "blister_index": 0.2969214930162042,
+        "terminal_film_temperature_c": 139.99990718290363,
+        "curing_energy_kj_m2": 3951.316216216216,
+        "total_thermal_energy_kj_m2": 4041.0678700845324,
+        "line_throughput_m2_h": 1080.0,
+        "quality_margin": -0.4668317184158244,
+        "feasible": false
+      }
+    },
+    "curing_temperature_loss": {
+      "source_stages": [
+        "curing"
+      ],
+      "description": "Low cure temperature leaves conversion and bond strength below specification.",
+      "conditions": {
+        "material_viscosity_pa_s": 1.6,
+        "material_solids_fraction": 0.5,
+        "material_bubble_fraction": 0.005,
+        "coating_gap_um": 210.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 90.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 105.0,
+        "hold_time_min": 60.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "final": {
+        "bond_strength_mpa": 30.3281036030751,
+        "cure_fraction": 0.40173061961008966,
+        "degradation_fraction": 0.0025775201849129897,
+        "final_residual_solvent_pct": 0.016897351103906062,
+        "final_thickness_um": 62.80570266624174,
+        "final_internal_stress_mpa": 0.437892466959429,
+        "final_defect_index": 0.08060680538652126,
+        "dimensional_change_um": 2.0350123823015656,
+        "blister_index": 0.0019474807190065716,
+        "terminal_film_temperature_c": 104.99999998553496,
+        "curing_energy_kj_m2": 2759.424324324324,
+        "total_thermal_energy_kj_m2": 2874.969979011054,
+        "line_throughput_m2_h": 1080.0,
+        "quality_margin": -1.9913469019495518,
+        "feasible": false
+      }
+    },
+    "distributed_small_drifts": {
+      "source_stages": [
+        "coating",
+        "drying",
+        "curing"
+      ],
+      "description": "Individually modest shifts accumulate into an under-cured final product.",
+      "conditions": {
+        "material_viscosity_pa_s": 1.6,
+        "material_solids_fraction": 0.5,
+        "material_bubble_fraction": 0.005,
+        "coating_gap_um": 230.0,
+        "line_speed_m_min": 18.0,
+        "web_tension_n": 100.0,
+        "air_temperature_c": 80.0,
+        "air_speed_m_s": 5.5,
+        "residence_time_min": 8.0,
+        "oven_temperature_c": 130.0,
+        "hold_time_min": 50.0,
+        "nip_pressure_mpa": 0.325
+      },
+      "final": {
+        "bond_strength_mpa": 38.80408996737641,
+        "cure_fraction": 0.7414492842029097,
+        "degradation_fraction": 0.009938790412174988,
+        "final_residual_solvent_pct": 0.021440166865776353,
+        "final_thickness_um": 75.74544044991418,
+        "final_internal_stress_mpa": 0.8120645444326923,
+        "final_defect_index": 0.13777919008131487,
+        "dimensional_change_um": 3.177817447955725,
+        "blister_index": 0.06917421836386471,
+        "terminal_film_temperature_c": 129.99992864387343,
+        "curing_energy_kj_m2": 3008.9797297297296,
+        "total_thermal_energy_kj_m2": 3123.765171417124,
+        "line_throughput_m2_h": 1080.0,
+        "quality_margin": -0.29275357898545185,
+        "feasible": false
+      }
+    }
+  },
+  "provenance_sha256_lf": {
+    "__init__.py": "963bb225b3963a4fa0b101f9e25e1d575185e24aaaab071060225223731edce8",
+    "__main__.py": "554f8b7213c6212748e01b23467b7539aa7b14827dc2bfa4ba0982369a4b69fb",
+    "common.py": "9de851ac05d58e2c592cd675ef686442fef13243ead6fa71da687861f208c0a1",
+    "functional_coating/__init__.py": "7685dd6fe23f3e91a408ae9cb9f200e1e2f33eab10c729d35b75311911bad328",
+    "functional_coating/benchmark.py": "2f9008e34f282bb2562d96e1ad409348ead2df157acd12e45b3033036bc717bc",
+    "functional_coating/coating/__init__.py": "6f35c1130ba9ad01bfffd99c6aaaacd1c78172abc2f104fc0a5af0b0f3cb3d32",
+    "functional_coating/coating/manifest.json": "33a629fb0e933777439c10e7dcca29078d847ed2827a4afd30759dbf1d1f2550",
+    "functional_coating/coating/physics_model.py": "ea5bbd48340840a9769a4852064bf4f9ef3e45eeda7ad359ad991c22e4fb79bd",
+    "functional_coating/curing/__init__.py": "0ee54621b0f24e7b49609aa8326edc8717b4d5a57bf19ab6d732cf247b8460ec",
+    "functional_coating/curing/manifest.json": "76f34fd0658e29625a7f97e4dc1094a2a978da4df974f504c09b43f655c9cdb7",
+    "functional_coating/curing/physics_model.py": "2fff36c3b076e704d1b1685044b8fbb3389d01dc8079aff8676f9f530db99453",
+    "functional_coating/drying/__init__.py": "c18a56dbc29958ed088914d02373579fff581d2cc3f2d8c46025c14e84cb9fe1",
+    "functional_coating/drying/manifest.json": "b8f9f1a06f80f24183781dfbd9883da9b6dc3eb7ec0c339afe8f85724e192ad5",
+    "functional_coating/drying/physics_model.py": "ca067ae7eae53a9b45762201c39be63b4c1f61e03dd29acd1a1601fe9141a5d0",
+    "functional_coating/fault_scenarios.py": "1c12faea8c4c9532982e04c619878bf2d80062b0dad7e8455438d9764381a81e",
+    "functional_coating/pipeline.py": "c9d915e30911e31852c1d94fc01730e138e3125809eb6aef4ad38395058b20ca",
+    "functional_coating/process_manifest.json": "60b7132aa744e1f13fdf3153c7a2991fc6485435209a12fb29164df6bbd1ba2e",
+    "functional_coating/robustness.py": "7f04f7576febb7eedce034307830daa11a9c6b5413ecee024f811a81b27a211c",
+    "run.py": "322dfd0ee154e0870352229dca0cb4348d12cbcd8b15bdd1846c24e07801192d",
+    "stages.py": "fe43799965b0ea8cfd46053b183e41c1789a3058a8d369eb6fa8cb49479c0af5"
+  }
+}

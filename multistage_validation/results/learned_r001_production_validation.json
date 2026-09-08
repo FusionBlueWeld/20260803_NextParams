@@ -1,0 +1,56 @@
+{
+  "status": "complete",
+  "samples_per_stage": 128,
+  "seed": 31,
+  "bundles": {
+    "coating": "v004\\trials\\trial_learned_chain_production_coating\\output\\stage_bundles\\stage_bundle_run_0001",
+    "drying": "v004\\trials\\trial_learned_chain_production_drying\\output\\stage_bundles\\stage_bundle_run_0001",
+    "curing": "v004\\trials\\trial_learned_chain_production_curing\\output\\stage_bundles\\stage_bundle_run_0001"
+  },
+  "candidate_count": 19683,
+  "predicted_feasible_count": 102,
+  "selected_conditions": {
+    "coating_gap_um": 210.0,
+    "line_speed_m_min": 8.0,
+    "web_tension_n": 100.0,
+    "air_temperature_c": 90.0,
+    "air_speed_m_s": 5.5,
+    "residence_time_min": 13.0,
+    "oven_temperature_c": 140.0,
+    "hold_time_min": 60.0,
+    "nip_pressure_mpa": 0.1
+  },
+  "selected_predicted_feasible": true,
+  "selected_true_feasible": true,
+  "selected_predicted_margin": 0.1646209316641557,
+  "selected_true_margin": 0.06488649182914277,
+  "oracle_individual_best_chain_margin": -0.26785048478109935,
+  "true_margin_improvement_over_individual_chain": 0.33273697661024215,
+  "maximum_selected_final_output_absolute_error": 50.33584896041157,
+  "selected_final_output_absolute_errors": {
+    "bond_strength_mpa": 1.580131945688393,
+    "cure_fraction": 0.016459716966914062,
+    "degradation_fraction": 0.000696713074278911,
+    "final_residual_solvent_pct": 1.6707581090401045,
+    "final_thickness_um": 2.2888504634914284,
+    "final_internal_stress_mpa": 0.11270600828701643,
+    "final_defect_index": 0.0927428042286825,
+    "dimensional_change_um": 1.277942142934923,
+    "blister_index": 0.12837006213891466,
+    "terminal_film_temperature_c": 0.5758077503648167,
+    "curing_energy_kj_m2": 50.33584896041157
+  },
+  "probability_status": "NOT_EVALUATED",
+  "commands": [
+    {
+      "version": "r001",
+      "args": [
+        "--run",
+        "trial_learned_chain_production_r001",
+        "--n",
+        "10"
+      ],
+      "returncode": 0
+    }
+  ]
+}

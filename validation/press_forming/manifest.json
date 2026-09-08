@@ -1,0 +1,20 @@
+{
+  "id": "press_forming",
+  "name": "プレス打抜き",
+  "model_version": "1.0.0",
+  "description": "板厚・材料強度・工具摩耗を固定したプレス打抜きの決定論的な物理構造合成モデル。クリアランス、速度、ブランクホルダー力からバリ、最大荷重、平面度誤差を返す。",
+  "reference_datasets": [
+    "dataset_17: press_wave",
+    "dataset_17: dataset_17",
+    "dataset_29: burr_height_mm and press_wave with tool wear",
+    "C:/Users/tsuts/Documents/Codex/20260623_ml_dataset_generation/src/dataset_generators.py"
+  ],
+  "features": [
+    "NumPy-only deterministic evaluation",
+    "Broadcasting for scalar, vector, and multidimensional inputs",
+    "Perimeter-times-thickness-times-shear-strength base load",
+    "Clearance fracture-mismatch burr model",
+    "Rate and blank-holder empirical corrections",
+    "Fixed moderate tool wear rather than an optimization variable"
+  ]
+}

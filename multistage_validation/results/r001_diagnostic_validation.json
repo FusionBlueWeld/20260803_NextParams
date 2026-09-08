@@ -1,0 +1,1047 @@
+{
+  "status": "pass",
+  "interpretation": {
+    "local_constraint_probability": "Conditional model diagnostic, not a root-cause probability.",
+    "reference_reset_gain": "Counterfactual repair evidence using the expected recipe; known labels are hidden until scoring.",
+    "uncertainty_limit": "Stage bundles have marginal predictive standard deviations but no joint sampling or inter-stage error correlation, so a calibrated end-to-end failure probability is not claimed."
+  },
+  "end_to_end_holdout": {
+    "holdout_count": 4096,
+    "physical_connection_acceptance_fraction": 1.0,
+    "learned_chain_valid_fraction": 0.8515625,
+    "minimum_support_quantiles": {
+      "0.0": 0.0,
+      "0.1": 0.0,
+      "0.5": 0.4375607049035857,
+      "0.9": 0.6396194775675434,
+      "1.0": 0.8358684053972407
+    },
+    "per_stage": {
+      "coating": {
+        "teacher_forced": {
+          "wet_thickness_um": {
+            "rmse": 0.873788269216132,
+            "nrmse": 0.005335735544490566,
+            "valid_fraction": 1.0
+          },
+          "wet_solvent_g_m2": {
+            "rmse": 0.6033818928967019,
+            "nrmse": 0.005707228325128375,
+            "valid_fraction": 1.0
+          },
+          "wet_solids_g_m2": {
+            "rmse": 0.7249860957198477,
+            "nrmse": 0.005663764138000669,
+            "valid_fraction": 1.0
+          },
+          "solids_fraction": {
+            "rmse": 0.0020815695246385554,
+            "nrmse": 0.006940970413956699,
+            "valid_fraction": 1.0
+          },
+          "thickness_cv_fraction": {
+            "rmse": 0.001125468252428984,
+            "nrmse": 0.014627487269516381,
+            "valid_fraction": 1.0
+          },
+          "coating_defect_index": {
+            "rmse": 0.008581704896787183,
+            "nrmse": 0.018457336766589356,
+            "valid_fraction": 1.0
+          },
+          "capillary_number": {
+            "rmse": 0.3703674105891623,
+            "nrmse": 0.008973383761698643,
+            "valid_fraction": 1.0
+          },
+          "coated_solids_rate_kg_m_h": {
+            "rmse": 1.7469324545605045,
+            "nrmse": 0.0067039607330773845,
+            "valid_fraction": 1.0
+          }
+        },
+        "free_running": {
+          "wet_thickness_um": {
+            "rmse": 0.873788269216132,
+            "nrmse": 0.005335735544490566,
+            "valid_fraction": 1.0
+          },
+          "wet_solvent_g_m2": {
+            "rmse": 0.6033818928967019,
+            "nrmse": 0.005707228325128375,
+            "valid_fraction": 1.0
+          },
+          "wet_solids_g_m2": {
+            "rmse": 0.7249860957198477,
+            "nrmse": 0.005663764138000669,
+            "valid_fraction": 1.0
+          },
+          "solids_fraction": {
+            "rmse": 0.0020815695246385554,
+            "nrmse": 0.006940970413956699,
+            "valid_fraction": 1.0
+          },
+          "thickness_cv_fraction": {
+            "rmse": 0.001125468252428984,
+            "nrmse": 0.014627487269516381,
+            "valid_fraction": 1.0
+          },
+          "coating_defect_index": {
+            "rmse": 0.008581704896787183,
+            "nrmse": 0.018457336766589356,
+            "valid_fraction": 1.0
+          },
+          "capillary_number": {
+            "rmse": 0.3703674105891623,
+            "nrmse": 0.008973383761698643,
+            "valid_fraction": 1.0
+          },
+          "coated_solids_rate_kg_m_h": {
+            "rmse": 1.7469324545605045,
+            "nrmse": 0.0067039607330773845,
+            "valid_fraction": 1.0
+          }
+        },
+        "max_teacher_forced_nrmse": 0.018457336766589356,
+        "max_free_running_nrmse": 0.018457336766589356
+      },
+      "drying": {
+        "teacher_forced": {
+          "dry_thickness_um": {
+            "rmse": 2.9422606825407622,
+            "nrmse": 0.014737223123148244,
+            "valid_fraction": 1.0
+          },
+          "residual_solvent_pct": {
+            "rmse": 1.2730047548078292,
+            "nrmse": 0.02070873181150297,
+            "valid_fraction": 1.0
+          },
+          "internal_stress_mpa": {
+            "rmse": 0.06799686952937557,
+            "nrmse": 0.03137668606730499,
+            "valid_fraction": 1.0
+          },
+          "drying_defect_index": {
+            "rmse": 0.011223982336133588,
+            "nrmse": 0.02181242032021525,
+            "valid_fraction": 1.0
+          },
+          "dry_thickness_cv_fraction": {
+            "rmse": 0.0027921045619914943,
+            "nrmse": 0.02770963174295312,
+            "valid_fraction": 1.0
+          },
+          "terminal_film_temperature_c": {
+            "rmse": 0.4485891704065284,
+            "nrmse": 0.0064070355562068255,
+            "valid_fraction": 1.0
+          },
+          "skinning_index": {
+            "rmse": 0.021014329260502493,
+            "nrmse": 0.033465684897550176,
+            "valid_fraction": 1.0
+          },
+          "drying_energy_kj_m2": {
+            "rmse": 2.535985551436623,
+            "nrmse": 0.0137713485951965,
+            "valid_fraction": 1.0
+          }
+        },
+        "free_running": {
+          "dry_thickness_um": {
+            "rmse": 3.0081308615485933,
+            "nrmse": 0.015067154298506183,
+            "valid_fraction": 0.998046875
+          },
+          "residual_solvent_pct": {
+            "rmse": 1.27909083280632,
+            "nrmse": 0.020807737692336195,
+            "valid_fraction": 0.998046875
+          },
+          "internal_stress_mpa": {
+            "rmse": 0.06808682612821809,
+            "nrmse": 0.03141819591887757,
+            "valid_fraction": 0.998046875
+          },
+          "drying_defect_index": {
+            "rmse": 0.012233314320812698,
+            "nrmse": 0.023773932093231975,
+            "valid_fraction": 0.998046875
+          },
+          "dry_thickness_cv_fraction": {
+            "rmse": 0.0031702436927546116,
+            "nrmse": 0.03146239093531402,
+            "valid_fraction": 0.998046875
+          },
+          "terminal_film_temperature_c": {
+            "rmse": 0.44719838052135796,
+            "nrmse": 0.006387171411387135,
+            "valid_fraction": 0.998046875
+          },
+          "skinning_index": {
+            "rmse": 0.021037430664717804,
+            "nrmse": 0.03350247428561852,
+            "valid_fraction": 0.998046875
+          },
+          "drying_energy_kj_m2": {
+            "rmse": 2.572654682182541,
+            "nrmse": 0.01397047566904706,
+            "valid_fraction": 0.998046875
+          }
+        },
+        "max_teacher_forced_nrmse": 0.033465684897550176,
+        "max_free_running_nrmse": 0.03350247428561852
+      },
+      "curing": {
+        "teacher_forced": {
+          "bond_strength_mpa": {
+            "rmse": 1.9002124275916195,
+            "nrmse": 0.0449273243040937,
+            "valid_fraction": 1.0
+          },
+          "cure_fraction": {
+            "rmse": 0.03581427080364987,
+            "nrmse": 0.03584252903686573,
+            "valid_fraction": 1.0
+          },
+          "degradation_fraction": {
+            "rmse": 0.0035371231620495262,
+            "nrmse": 0.01887804103375252,
+            "valid_fraction": 1.0
+          },
+          "final_residual_solvent_pct": {
+            "rmse": 1.356308405253163,
+            "nrmse": 0.022481121029461867,
+            "valid_fraction": 1.0
+          },
+          "final_thickness_um": {
+            "rmse": 2.153590742666755,
+            "nrmse": 0.010859682166755437,
+            "valid_fraction": 1.0
+          },
+          "final_internal_stress_mpa": {
+            "rmse": 0.10143363927577186,
+            "nrmse": 0.027696946404727373,
+            "valid_fraction": 1.0
+          },
+          "final_defect_index": {
+            "rmse": 0.03569259595930013,
+            "nrmse": 0.037574389676240987,
+            "valid_fraction": 1.0
+          },
+          "dimensional_change_um": {
+            "rmse": 0.5167037875526084,
+            "nrmse": 0.041561922472629215,
+            "valid_fraction": 1.0
+          },
+          "blister_index": {
+            "rmse": 0.04766095894287679,
+            "nrmse": 0.047660958942877654,
+            "valid_fraction": 1.0
+          },
+          "terminal_film_temperature_c": {
+            "rmse": 2.5976213563083905,
+            "nrmse": 0.019902365830954706,
+            "valid_fraction": 1.0
+          },
+          "curing_energy_kj_m2": {
+            "rmse": 54.7645629642518,
+            "nrmse": 0.009894941872290992,
+            "valid_fraction": 1.0
+          }
+        },
+        "free_running": {
+          "bond_strength_mpa": {
+            "rmse": 1.9686812176833934,
+            "nrmse": 0.046546153595227645,
+            "valid_fraction": 0.8515625
+          },
+          "cure_fraction": {
+            "rmse": 0.037007154775797135,
+            "nrmse": 0.0370363542202321,
+            "valid_fraction": 0.8515625
+          },
+          "degradation_fraction": {
+            "rmse": 0.0034089934922876507,
+            "nrmse": 0.018194197963384482,
+            "valid_fraction": 0.8515625
+          },
+          "final_residual_solvent_pct": {
+            "rmse": 1.4202699720484115,
+            "nrmse": 0.02354129858110772,
+            "valid_fraction": 0.8515625
+          },
+          "final_thickness_um": {
+            "rmse": 3.7618250812938827,
+            "nrmse": 0.01896935380544675,
+            "valid_fraction": 0.8515625
+          },
+          "final_internal_stress_mpa": {
+            "rmse": 0.11743140367970419,
+            "nrmse": 0.032065213445669524,
+            "valid_fraction": 0.8515625
+          },
+          "final_defect_index": {
+            "rmse": 0.04166470881949383,
+            "nrmse": 0.043861365721785193,
+            "valid_fraction": 0.8515625
+          },
+          "dimensional_change_um": {
+            "rmse": 0.5603524436300437,
+            "nrmse": 0.0450728742086664,
+            "valid_fraction": 0.8515625
+          },
+          "blister_index": {
+            "rmse": 0.05281966886877288,
+            "nrmse": 0.052819668868773845,
+            "valid_fraction": 0.8515625
+          },
+          "terminal_film_temperature_c": {
+            "rmse": 2.645713702913532,
+            "nrmse": 0.02027083811560086,
+            "valid_fraction": 0.8515625
+          },
+          "curing_energy_kj_m2": {
+            "rmse": 49.711667915724604,
+            "nrmse": 0.00898197735498807,
+            "valid_fraction": 0.8515625
+          }
+        },
+        "max_teacher_forced_nrmse": 0.047660958942877654,
+        "max_free_running_nrmse": 0.052819668868773845
+      }
+    },
+    "final_feasibility_accuracy": 0.9776376146788991,
+    "classification": {
+      "accuracy": 0.9776376146788991,
+      "precision": 0.9040404040404041,
+      "recall": 0.7521008403361344,
+      "specificity": 0.9941538461538462,
+      "balanced_accuracy": 0.8731273432449903
+    },
+    "confusion": {
+      "true_positive": 179,
+      "true_negative": 3231,
+      "false_positive": 19,
+      "false_negative": 59
+    },
+    "support_bands": {
+      "support_ge_0_8": {
+        "count": 5,
+        "accuracy": 0.6,
+        "margin_mae": 0.06499531558316234
+      },
+      "support_0_5_to_0_8": {
+        "count": 1514,
+        "accuracy": 0.964332892998679,
+        "margin_mae": 0.19087819886381774
+      },
+      "support_lt_0_5": {
+        "count": 1969,
+        "accuracy": 0.9888268156424581,
+        "margin_mae": 0.2767307975233108
+      }
+    },
+    "true_margin_bands": {
+      "near_boundary_abs_margin_lt_0_1": {
+        "count": 172,
+        "accuracy": 0.6453488372093024,
+        "margin_mae": 0.10392939341670093
+      },
+      "clear_margin_abs_ge_0_1": {
+        "count": 3316,
+        "accuracy": 0.9948733413751508,
+        "margin_mae": 0.2461766146904289
+      },
+      "clear_margin_abs_ge_0_2": {
+        "count": 3141,
+        "accuracy": 0.9993632601082458,
+        "margin_mae": 0.2541932179032715
+      }
+    },
+    "release_policy_support_ge_0_5": {
+      "0.0": {
+        "released_count": 123,
+        "oracle_good_fraction": 0.8861788617886179,
+        "false_release_count": 14
+      },
+      "0.05": {
+        "released_count": 96,
+        "oracle_good_fraction": 0.96875,
+        "false_release_count": 3
+      },
+      "0.1": {
+        "released_count": 71,
+        "oracle_good_fraction": 0.9859154929577465,
+        "false_release_count": 1
+      },
+      "0.2": {
+        "released_count": 21,
+        "oracle_good_fraction": 1.0,
+        "false_release_count": 0
+      }
+    },
+    "upstream_error_amplification_max_nrmse": 0.0051587099258961905
+  },
+  "fault_cases": {
+    "coating_gap_positive_bias": {
+      "oracle_current": {
+        "feasible": false,
+        "margin": -0.41854380674731145,
+        "failed_specs": [
+          "final_thickness_um"
+        ]
+      },
+      "predicted_current": {
+        "margin": -0.46408385269208074,
+        "feasible": false,
+        "support": 0.767410475772739,
+        "valid": true
+      },
+      "local_constraint_risk": {
+        "coating": {
+          "minimum_constraint_satisfaction": 1.0,
+          "constraints": [
+            {
+              "name": "thickness_cv_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "coating_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "drying": {
+          "minimum_constraint_satisfaction": 0.0004811276881102611,
+          "constraints": [
+            {
+              "name": "residual_solvent_pct",
+              "satisfaction_probability": 0.0004811276881102611
+            },
+            {
+              "name": "drying_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "curing": {
+          "minimum_constraint_satisfaction": 0.7838698165884634,
+          "constraints": [
+            {
+              "name": "cure_fraction",
+              "satisfaction_probability": 0.9999999988099444
+            },
+            {
+              "name": "degradation_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "final_residual_solvent_pct",
+              "satisfaction_probability": 0.7838698165884634
+            },
+            {
+              "name": "final_defect_index",
+              "satisfaction_probability": 0.9868086880793561
+            }
+          ]
+        }
+      },
+      "diagnostic_ranking_by_reference_reset_gain": [
+        {
+          "stage": "coating",
+          "predicted_margin_gain": 0.8980069301877667
+        },
+        {
+          "stage": "drying",
+          "predicted_margin_gain": 0.0
+        },
+        {
+          "stage": "curing",
+          "predicted_margin_gain": 0.0
+        }
+      ],
+      "diagnostic_score_only": {
+        "known_sources": [
+          "coating"
+        ],
+        "positive_gain_stages": [
+          "coating"
+        ],
+        "source_recall": 1.0
+      },
+      "stage_only_recovery": {
+        "coating": {
+          "candidate_count": 27,
+          "predicted_margin": 0.4339230774956857,
+          "predicted_feasible": true,
+          "minimum_support": 0.782145292727396,
+          "adjustments": {
+            "coating_gap_um": 210.0
+          },
+          "oracle_margin": 0.44640608469741516,
+          "oracle_feasible": true
+        },
+        "drying": {
+          "candidate_count": 27,
+          "predicted_margin": 0.20597605487888207,
+          "predicted_feasible": true,
+          "minimum_support": 0.6304800779073427,
+          "adjustments": {
+            "air_temperature_c": 115.0,
+            "air_speed_m_s": 1.0
+          },
+          "oracle_margin": 0.2628558932486451,
+          "oracle_feasible": true
+        },
+        "curing": {
+          "candidate_count": 27,
+          "predicted_margin": -0.21361116853603904,
+          "predicted_feasible": false,
+          "minimum_support": 0.7674104757727394,
+          "adjustments": {
+            "oven_temperature_c": 175.0,
+            "hold_time_min": 35.0
+          },
+          "oracle_margin": -0.4079903706280959,
+          "oracle_feasible": false
+        }
+      },
+      "minimal_change_all_stage_recovery": {
+        "candidate_count": 19683,
+        "predicted_margin": 0.1891578882343585,
+        "predicted_feasible": true,
+        "minimum_support": 0.6717515811357243,
+        "adjustments": {
+          "residence_time_min": 13.0
+        },
+        "oracle_margin": 0.1964211344642223,
+        "oracle_feasible": true
+      },
+      "best_margin_all_stage_recovery": {
+        "candidate_count": 19683,
+        "predicted_margin": 0.4385766218394338,
+        "predicted_feasible": true,
+        "minimum_support": 0.833371646798921,
+        "adjustments": {
+          "coating_gap_um": 210.0,
+          "web_tension_n": 60.0,
+          "air_speed_m_s": 3.25,
+          "residence_time_min": 13.0
+        },
+        "oracle_margin": 0.42769774963796103,
+        "oracle_feasible": true
+      },
+      "compensation_with_faulty_controls_locked": {
+        "candidate_count": 6561,
+        "predicted_margin": 0.1891578882343585,
+        "predicted_feasible": true,
+        "minimum_support": 0.6717515811357243,
+        "adjustments": {
+          "residence_time_min": 13.0
+        },
+        "oracle_margin": 0.1964211344642223,
+        "oracle_feasible": true
+      }
+    },
+    "dryer_residence_loss": {
+      "oracle_current": {
+        "feasible": false,
+        "margin": -0.4668317184158244,
+        "failed_specs": [
+          "bond_strength_mpa",
+          "final_defect_index",
+          "final_thickness_um"
+        ]
+      },
+      "predicted_current": {
+        "margin": -0.7753183663398004,
+        "feasible": false,
+        "support": 0.6595792869432981,
+        "valid": true
+      },
+      "local_constraint_risk": {
+        "coating": {
+          "minimum_constraint_satisfaction": 1.0,
+          "constraints": [
+            {
+              "name": "thickness_cv_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "coating_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "drying": {
+          "minimum_constraint_satisfaction": 0.0,
+          "constraints": [
+            {
+              "name": "residual_solvent_pct",
+              "satisfaction_probability": 0.0
+            },
+            {
+              "name": "drying_defect_index",
+              "satisfaction_probability": 0.9999989131288725
+            }
+          ]
+        },
+        "curing": {
+          "minimum_constraint_satisfaction": 1.3402645659965629e-10,
+          "constraints": [
+            {
+              "name": "cure_fraction",
+              "satisfaction_probability": 0.9999999888186206
+            },
+            {
+              "name": "degradation_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "final_residual_solvent_pct",
+              "satisfaction_probability": 0.9327758595774189
+            },
+            {
+              "name": "final_defect_index",
+              "satisfaction_probability": 1.3402645659965629e-10
+            }
+          ]
+        }
+      },
+      "diagnostic_ranking_by_reference_reset_gain": [
+        {
+          "stage": "drying",
+          "predicted_margin_gain": 1.2092414438354864
+        },
+        {
+          "stage": "coating",
+          "predicted_margin_gain": 0.0
+        },
+        {
+          "stage": "curing",
+          "predicted_margin_gain": 0.0
+        }
+      ],
+      "diagnostic_score_only": {
+        "known_sources": [
+          "drying"
+        ],
+        "positive_gain_stages": [
+          "drying"
+        ],
+        "source_recall": 1.0
+      },
+      "stage_only_recovery": {
+        "coating": {
+          "candidate_count": 27,
+          "predicted_margin": -0.09413152208961435,
+          "predicted_feasible": false,
+          "minimum_support": 0.6864502037849975,
+          "adjustments": {
+            "coating_gap_um": 140.0,
+            "line_speed_m_min": 28.0,
+            "web_tension_n": 60.0
+          },
+          "oracle_margin": -0.30700044878325533,
+          "oracle_feasible": false
+        },
+        "drying": {
+          "candidate_count": 27,
+          "predicted_margin": 0.4339230774956857,
+          "predicted_feasible": true,
+          "minimum_support": 0.782145292727396,
+          "adjustments": {
+            "residence_time_min": 8.0
+          },
+          "oracle_margin": 0.44640608469741516,
+          "oracle_feasible": true
+        },
+        "curing": {
+          "candidate_count": 27,
+          "predicted_margin": -0.6806241599120706,
+          "predicted_feasible": false,
+          "minimum_support": 0.7154272162229246,
+          "adjustments": {
+            "hold_time_min": 35.0,
+            "nip_pressure_mpa": 0.1
+          },
+          "oracle_margin": -0.41735218293926435,
+          "oracle_feasible": false
+        }
+      },
+      "minimal_change_all_stage_recovery": {
+        "candidate_count": 19683,
+        "predicted_margin": 0.4339230774956857,
+        "predicted_feasible": true,
+        "minimum_support": 0.7821452927273962,
+        "adjustments": {
+          "residence_time_min": 8.0
+        },
+        "oracle_margin": 0.44640608469741516,
+        "oracle_feasible": true
+      },
+      "best_margin_all_stage_recovery": {
+        "candidate_count": 19683,
+        "predicted_margin": 0.4385766218394338,
+        "predicted_feasible": true,
+        "minimum_support": 0.833371646798921,
+        "adjustments": {
+          "web_tension_n": 60.0,
+          "air_speed_m_s": 3.25,
+          "residence_time_min": 13.0
+        },
+        "oracle_margin": 0.42769774963796103,
+        "oracle_feasible": true
+      },
+      "compensation_with_faulty_controls_locked": {
+        "candidate_count": 6561,
+        "predicted_margin": 0.27736339248957176,
+        "predicted_feasible": true,
+        "minimum_support": 0.523007170187867,
+        "adjustments": {
+          "air_temperature_c": 115.0
+        },
+        "oracle_margin": 0.2978647426222174,
+        "oracle_feasible": true
+      }
+    },
+    "curing_temperature_loss": {
+      "oracle_current": {
+        "feasible": false,
+        "margin": -1.9913469019495518,
+        "failed_specs": [
+          "bond_strength_mpa",
+          "cure_fraction"
+        ]
+      },
+      "predicted_current": {
+        "margin": -1.9117152435161329,
+        "feasible": false,
+        "support": 0.7821452927273961,
+        "valid": true
+      },
+      "local_constraint_risk": {
+        "coating": {
+          "minimum_constraint_satisfaction": 1.0,
+          "constraints": [
+            {
+              "name": "thickness_cv_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "coating_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "drying": {
+          "minimum_constraint_satisfaction": 0.9956574480099912,
+          "constraints": [
+            {
+              "name": "residual_solvent_pct",
+              "satisfaction_probability": 0.9956574480099912
+            },
+            {
+              "name": "drying_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "curing": {
+          "minimum_constraint_satisfaction": 0.0,
+          "constraints": [
+            {
+              "name": "cure_fraction",
+              "satisfaction_probability": 0.0
+            },
+            {
+              "name": "degradation_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "final_residual_solvent_pct",
+              "satisfaction_probability": 0.9886424157720879
+            },
+            {
+              "name": "final_defect_index",
+              "satisfaction_probability": 0.9999999999999998
+            }
+          ]
+        }
+      },
+      "diagnostic_ranking_by_reference_reset_gain": [
+        {
+          "stage": "curing",
+          "predicted_margin_gain": 2.345638321011819
+        },
+        {
+          "stage": "coating",
+          "predicted_margin_gain": 0.0
+        },
+        {
+          "stage": "drying",
+          "predicted_margin_gain": 0.0
+        }
+      ],
+      "diagnostic_score_only": {
+        "known_sources": [
+          "curing"
+        ],
+        "positive_gain_stages": [
+          "curing"
+        ],
+        "source_recall": 1.0
+      },
+      "stage_only_recovery": {
+        "coating": {
+          "candidate_count": 27,
+          "predicted_margin": -1.8579969152586973,
+          "predicted_feasible": false,
+          "minimum_support": 0.8380205959538045,
+          "adjustments": {
+            "line_speed_m_min": 8.0,
+            "web_tension_n": 140.0
+          },
+          "oracle_margin": -1.971168392694707,
+          "oracle_feasible": false
+        },
+        "drying": {
+          "candidate_count": 27,
+          "predicted_margin": -1.8659469666359163,
+          "predicted_feasible": false,
+          "minimum_support": 0.782145292727396,
+          "adjustments": {
+            "air_speed_m_s": 3.25,
+            "residence_time_min": 13.0
+          },
+          "oracle_margin": -1.9844182464332207,
+          "oracle_feasible": false
+        },
+        "curing": {
+          "candidate_count": 27,
+          "predicted_margin": 0.4339230774956857,
+          "predicted_feasible": true,
+          "minimum_support": 0.782145292727396,
+          "adjustments": {
+            "oven_temperature_c": 140.0
+          },
+          "oracle_margin": 0.44640608469741516,
+          "oracle_feasible": true
+        }
+      },
+      "minimal_change_all_stage_recovery": {
+        "candidate_count": 19683,
+        "predicted_margin": 0.4339230774956857,
+        "predicted_feasible": true,
+        "minimum_support": 0.7821452927273962,
+        "adjustments": {
+          "oven_temperature_c": 140.0
+        },
+        "oracle_margin": 0.44640608469741516,
+        "oracle_feasible": true
+      },
+      "best_margin_all_stage_recovery": {
+        "candidate_count": 19683,
+        "predicted_margin": 0.4385766218394338,
+        "predicted_feasible": true,
+        "minimum_support": 0.833371646798921,
+        "adjustments": {
+          "web_tension_n": 60.0,
+          "air_speed_m_s": 3.25,
+          "residence_time_min": 13.0,
+          "oven_temperature_c": 140.0
+        },
+        "oracle_margin": 0.42769774963796103,
+        "oracle_feasible": true
+      },
+      "compensation_with_faulty_controls_locked": {
+        "candidate_count": 6561,
+        "predicted_margin": -1.6226900027637219,
+        "predicted_feasible": false,
+        "minimum_support": 0.5533729218350596,
+        "adjustments": {
+          "coating_gap_um": 140.0,
+          "line_speed_m_min": 8.0,
+          "web_tension_n": 140.0,
+          "air_speed_m_s": 1.0,
+          "nip_pressure_mpa": 0.1
+        },
+        "oracle_margin": -1.9252515264492247,
+        "oracle_feasible": false
+      }
+    },
+    "distributed_small_drifts": {
+      "oracle_current": {
+        "feasible": false,
+        "margin": -0.29275357898545185,
+        "failed_specs": [
+          "cure_fraction"
+        ]
+      },
+      "predicted_current": {
+        "margin": -0.2546811412834954,
+        "feasible": false,
+        "support": 0.7762704656988607,
+        "valid": true
+      },
+      "local_constraint_risk": {
+        "coating": {
+          "minimum_constraint_satisfaction": 1.0,
+          "constraints": [
+            {
+              "name": "thickness_cv_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "coating_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "drying": {
+          "minimum_constraint_satisfaction": 6.90588582225593e-05,
+          "constraints": [
+            {
+              "name": "residual_solvent_pct",
+              "satisfaction_probability": 6.90588582225593e-05
+            },
+            {
+              "name": "drying_defect_index",
+              "satisfaction_probability": 1.0
+            }
+          ]
+        },
+        "curing": {
+          "minimum_constraint_satisfaction": 0.007681784871318209,
+          "constraints": [
+            {
+              "name": "cure_fraction",
+              "satisfaction_probability": 0.007681784871318209
+            },
+            {
+              "name": "degradation_fraction",
+              "satisfaction_probability": 1.0
+            },
+            {
+              "name": "final_residual_solvent_pct",
+              "satisfaction_probability": 0.8572838937606051
+            },
+            {
+              "name": "final_defect_index",
+              "satisfaction_probability": 0.9999995369274701
+            }
+          ]
+        }
+      },
+      "diagnostic_ranking_by_reference_reset_gain": [
+        {
+          "stage": "curing",
+          "predicted_margin_gain": 0.5458354273303557
+        },
+        {
+          "stage": "coating",
+          "predicted_margin_gain": 0.07292744953258323
+        },
+        {
+          "stage": "drying",
+          "predicted_margin_gain": 0.07155597526195656
+        }
+      ],
+      "diagnostic_score_only": {
+        "known_sources": [
+          "coating",
+          "curing",
+          "drying"
+        ],
+        "positive_gain_stages": [
+          "coating",
+          "curing",
+          "drying"
+        ],
+        "source_recall": 1.0
+      },
+      "stage_only_recovery": {
+        "coating": {
+          "candidate_count": 36,
+          "predicted_margin": -0.14012730179210953,
+          "predicted_feasible": false,
+          "minimum_support": 0.8442720380821447,
+          "adjustments": {
+            "coating_gap_um": 210.0,
+            "line_speed_m_min": 8.0,
+            "web_tension_n": 140.0
+          },
+          "oracle_margin": -0.20077983837110513,
+          "oracle_feasible": false
+        },
+        "drying": {
+          "candidate_count": 36,
+          "predicted_margin": -0.14235122795889787,
+          "predicted_feasible": false,
+          "minimum_support": 0.7762704656988608,
+          "adjustments": {
+            "air_temperature_c": 90.0,
+            "residence_time_min": 13.0
+          },
+          "oracle_margin": -0.23728603109588742,
+          "oracle_feasible": false
+        },
+        "curing": {
+          "candidate_count": 48,
+          "predicted_margin": 0.2913011239683294,
+          "predicted_feasible": true,
+          "minimum_support": 0.7762704656988609,
+          "adjustments": {
+            "oven_temperature_c": 140.0,
+            "hold_time_min": 60.0,
+            "nip_pressure_mpa": 0.55
+          },
+          "oracle_margin": 0.3037669835127883,
+          "oracle_feasible": true
+        }
+      },
+      "minimal_change_all_stage_recovery": {
+        "candidate_count": 62208,
+        "predicted_margin": 0.2541206370155005,
+        "predicted_feasible": true,
+        "minimum_support": 0.7762704656988609,
+        "adjustments": {
+          "oven_temperature_c": 140.0
+        },
+        "oracle_margin": 0.271840932544422,
+        "oracle_feasible": true
+      },
+      "best_margin_all_stage_recovery": {
+        "candidate_count": 62208,
+        "predicted_margin": 0.4492811685049143,
+        "predicted_feasible": true,
+        "minimum_support": 0.7821452927273962,
+        "adjustments": {
+          "coating_gap_um": 210.0,
+          "air_speed_m_s": 3.25,
+          "residence_time_min": 13.0,
+          "oven_temperature_c": 140.0,
+          "hold_time_min": 60.0
+        },
+        "oracle_margin": 0.3996544157153115,
+        "oracle_feasible": true
+      },
+      "compensation_with_faulty_controls_locked": {
+        "candidate_count": 243,
+        "predicted_margin": -0.12614763762799075,
+        "predicted_feasible": false,
+        "minimum_support": 0.7836961100812243,
+        "adjustments": {
+          "line_speed_m_min": 8.0,
+          "web_tension_n": 140.0,
+          "residence_time_min": 13.0,
+          "nip_pressure_mpa": 0.1
+        },
+        "oracle_margin": -0.21097659090158816,
+        "oracle_feasible": false
+      }
+    }
+  }
+}

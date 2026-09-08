@@ -1,0 +1,73 @@
+{
+  "definition": "Finite samples inside the joint +/-rho*required_variation box; not exact 9-D volume.",
+  "rho": 2.5,
+  "required_variations": {
+    "coating_gap_um": 4.0,
+    "line_speed_m_min": 0.35,
+    "web_tension_n": 3.0,
+    "air_temperature_c": 2.0,
+    "air_speed_m_s": 0.12,
+    "residence_time_min": 0.25,
+    "oven_temperature_c": 2.0,
+    "hold_time_min": 0.5,
+    "nip_pressure_mpa": 0.015
+  },
+  "random_seed": 20260923,
+  "random_uniform_boxes": [
+    {
+      "radius_scale": 0.5,
+      "clipped_fraction": 0.0,
+      "count": 4096,
+      "predicted_pass_count": 4096,
+      "predicted_pass_fraction": 1.0
+    },
+    {
+      "radius_scale": 1.0,
+      "clipped_fraction": 0.0,
+      "count": 4096,
+      "predicted_pass_count": 3815,
+      "predicted_pass_fraction": 0.931396484375
+    },
+    {
+      "radius_scale": 1.5,
+      "clipped_fraction": 0.056640625,
+      "count": 4096,
+      "predicted_pass_count": 2999,
+      "predicted_pass_fraction": 0.732177734375
+    }
+  ],
+  "rho_box_vertices": {
+    "count": 512,
+    "predicted_pass_count": 338,
+    "predicted_pass_fraction": 0.66015625
+  },
+  "pairwise_sections": [
+    {
+      "controls": [
+        "air_temperature_c",
+        "nip_pressure_mpa"
+      ],
+      "count": 961,
+      "predicted_pass_count": 961,
+      "predicted_pass_fraction": 1.0
+    },
+    {
+      "controls": [
+        "air_temperature_c",
+        "coating_gap_um"
+      ],
+      "count": 961,
+      "predicted_pass_count": 920,
+      "predicted_pass_fraction": 0.9573361082206036
+    },
+    {
+      "controls": [
+        "air_temperature_c",
+        "air_speed_m_s"
+      ],
+      "count": 961,
+      "predicted_pass_count": 961,
+      "predicted_pass_fraction": 1.0
+    }
+  ]
+}

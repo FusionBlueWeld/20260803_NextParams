@@ -1,0 +1,76 @@
+{
+  "status": "complete",
+  "samples": 96,
+  "seed": 7,
+  "bundle": "v004\\trials\\trial_coating_v004_connected_production\\output\\stage_bundles\\stage_bundle_run_0001",
+  "bundle_stage_id": "coating",
+  "recommendation_count": 3,
+  "incoming_context_fixed": true,
+  "reload_maximum_absolute_error": 0.0,
+  "grid_prediction_errors": {
+    "wet_thickness_um": {
+      "rmse": 0.8219568753434834,
+      "normalized_rmse": 0.005271039290209368
+    },
+    "wet_solvent_g_m2": {
+      "rmse": 0.48238204814135593,
+      "normalized_rmse": 0.006390449705946593
+    },
+    "wet_solids_g_m2": {
+      "rmse": 0.46015143851585,
+      "normalized_rmse": 0.006095945394909923
+    },
+    "solids_fraction": {
+      "rmse": 0.0010561251135285045,
+      "normalized_rmse": 0.002112250227057009
+    },
+    "thickness_cv_fraction": {
+      "rmse": 0.000747167171701065,
+      "normalized_rmse": 0.020343397245846207
+    },
+    "coating_defect_index": {
+      "rmse": 0.005774956011426938,
+      "normalized_rmse": 0.03217134073515839
+    },
+    "capillary_number": {
+      "rmse": 0.15200964495349129,
+      "normalized_rmse": 0.009690614865785069
+    },
+    "coated_solids_rate_kg_m_h": {
+      "rmse": 1.290531676632405,
+      "normalized_rmse": 0.008194320239944729
+    }
+  },
+  "maximum_normalized_rmse": 0.03217134073515839,
+  "commands": [
+    {
+      "args": [
+        "--new",
+        "trial_coating_v004_connected_production"
+      ],
+      "returncode": 0,
+      "stdout": "trial_coating_v004_connected_productionを作成しました。\n\n次のファイルを編集してください。\nC:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\problem.csv\n\n編集後、次のコマンドを実行してください。\npython main.py --version v004 --prepare trial_coating_v004_connected_production\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--prepare",
+        "trial_coating_v004_connected_production"
+      ],
+      "returncode": 0,
+      "stdout": "problem.csvを確認しました。\n\n実験結果の入力ファイルを作成しました。\nC:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\data\\experiments.csv\n\n入力パラメータ:\n- coating_gap_um (coating_gap_um)\n- line_speed_m_min (line_speed_m_min)\n- web_tension_n (web_tension_n)\n- incoming_viscosity_pa_s (incoming_viscosity_pa_s)\n- incoming_solids_fraction (incoming_solids_fraction)\n- incoming_bubble_fraction (incoming_bubble_fraction)\n\n目的:\n- coated_solids_rate_kg_m_hを最大化\n\n制約:\n- thickness_cv_fraction <= 0.08\n- coating_defect_index <= 0.25\n\n探索候補数: 729件\n\n実験結果を入力後、次のコマンドを実行してください。\npython main.py --version v004 --run trial_coating_v004_connected_production\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--run",
+        "trial_coating_v004_connected_production",
+        "--n",
+        "3"
+      ],
+      "returncode": 0,
+      "stdout": "  知見診断: C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\output\\knowledge_diagnostics.csv\n  stage bundle: C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\output\\stage_bundles\\stage_bundle_run_0001\nParamOptimizer v003\n-------------------\ntrial: trial_coating_v004_connected_production\n実験データ: 96件\n固有条件: 96件\n入力パラメータ: coating_gap_um, line_speed_m_min, web_tension_n, incoming_viscosity_pa_s, incoming_solids_fraction, incoming_bubble_fraction\n目的: coated_solids_rate_kg_m_hを最大化\n制約: thickness_cv_fraction <= 0.08、coating_defect_index <= 0.25\n評価した未測定候補: 27件\n今回の推薦数: 3件\n自動分散比率: 50.0% （不確かさ=1.000, 未被覆距離=1.000）\n\n実測済みの最良条件:\n  coating_gap_um=278.93983 um, line_speed_m_min=26.245163 m/min, web_tension_n=139.59709 N, incoming_viscosity_pa_s=1.1294566 Pa·s, incoming_solids_fraction=0.54874992 fraction, incoming_bubble_fraction=0.0052055502 fraction\n  coated_solids_rate_kg_m_h=173.68303\n\nHybridによる次に試す候補:\n1位  coating_gap_um=300 um, line_speed_m_min=30 m/min, web_tension_n=100 N, incoming_viscosity_pa_s=1.6 Pa·s, incoming_solids_fraction=0.5 fraction, incoming_bubble_fraction=0.005 fraction\n      coated_solids_rate_kg_m_hHybrid予測=201.9074 ± 2.5218231 / thickness_cv_fractionHybrid予測=0.037674002 ± 0.00080544182（達成確率100.0%） / coating_defect_indexHybrid予測=0.17407623 ± 0.0050488725（達成確率100.0%）\n      GPデータ支持度=0.470\n      理由: 制約を満たす可能性が高い。目的値の改善が期待できる。実測条件から離れているため慎重な確認が必要。\n2位  coating_gap_um=300 um, line_speed_m_min=30 m/min, web_tension_n=160 N, incoming_viscosity_pa_s=1.6 Pa·s, incoming_solids_fraction=0.5 fraction, incoming_bubble_fraction=0.005 fraction\n      coated_solids_rate_kg_m_hHybrid予測=197.00987 ± 2.5221638 / thickness_cv_fractionHybrid予測=0.049806556 ± 0.00080480658（達成確率100.0%） / coating_defect_indexHybrid予測=0.24410307 ± 0.0050350064（達成確率87.9%）\n      GPデータ支持度=0.529\n      理由: 探索空間を広くカバーするための分散候補。制約を満たす可能性が高い。目的値の改善が期待できる。実測条件から離れているため慎重な確認が必要。\n3位  coating_gap_um=300 um, line_speed_m_min=30 m/min, web_tension_n=40 N, incoming_viscosity_pa_s=1.6 Pa·s, incoming_solids_fraction=0.5 fraction, incoming_bubble_fraction=0.005 fraction\n      coated_solids_rate_kg_m_hHybrid予測=198.82672 ± 2.5520492 / thickness_cv_fractionHybrid予測=0.051266935 ± 0.0008267997（達成確率100.0%） / coating_defect_indexHybrid予測=0.2520823 ± 0.0052706529（達成確率34.6%）\n      GPデータ支持度=0.200\n      理由: 探索空間を広くカバーするための分散候補。制約達成の不確かさが大きい。目的値の改善が期待できる。実測条件から離れているため慎重な確認が必要。\n\n[注意] 入力パラメータが6個あります。高次元では実測点から離れた候補が増えやすくなります。\n\n[注意] 同一条件の反復測定がありません。予測の測定ノイズには既定値を使用します。\n\n[注意] coating_gap_umの探索範囲には、実測した最小値・最大値の外側が含まれます。\n\n[注意] line_speed_m_minの探索範囲には、実測した最小値・最大値の外側が含まれます。\n\n[注意] web_tension_nの探索範囲には、実測した最小値・最大値の外側が含まれます。\n\n[注意] incoming_viscosity_pa_sの探索範囲には、実測した最小値・最大値の外側が含まれます。\n\n[注意] incoming_solids_fractionの探索範囲には、実測した最小値・最大値の外側が含まれます。\n\n[注意] incoming_bubble_fractionの探索範囲には、実測した最小値・最大値の外側が含まれます。\n\nHybrid予測値は実測値ではありません。実測による確認が必要です。\n\n推薦出力:\nC:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\output\\recommendations.csv\n\nHybrid解空間:\n  学習データ: 96行\n  固有条件: 96条件\n  NN学習エポック: 2000\n  NN標準化MSE: 0.000703983\n  予測グリッド: 27点\n  GPデータ支持度: 最小=0.100, 中央値=0.381, 最大=0.754\n  run: run_0001\n  出力: C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\output\\response_spaces\\hybrid_response_space_run_0001.csv\n  終了判定: CONTINUE (C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\v004\\trials\\trial_coating_v004_connected_production\\output\\stopping_status.json)\n\n[注意] GPデータ支持度は正解確率ではありません。Hybrid予測は統計モデル同士の融合であり、物理的妥当性を保証しません。\n",
+      "stderr": ""
+    }
+  ]
+}

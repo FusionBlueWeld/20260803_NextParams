@@ -434,7 +434,6 @@ python -m unittest discover -s tests -v
 ```powershell
 python validation\laser_welding_pseudo_experiment.py `
   --optimizer-root v001 `
-  --oracle-root "..\20260723_ParamOptimizer" `
   --trial trial_laser_welding_v001_001 `
   --iterations 15
 ```

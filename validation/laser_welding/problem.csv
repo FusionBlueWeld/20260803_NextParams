@@ -1,0 +1,6 @@
+column,display_name,unit,role,direction,lower,upper,step,target
+laser_power_w,レーザー出力,W,parameter,,100,6000,200,
+spot_diameter_um,スポット径,um,parameter,,50,300,25,
+scan_speed_mm_s,走査速度,mm/s,parameter,,10,1000,25,
+penetration_depth_mm,溶込み深さ,mm,objective,maximize,,,,
+spatter_level_0_9,スパッタレベル,level,constraint,less_equal,,,,4

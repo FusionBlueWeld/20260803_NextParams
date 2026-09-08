@@ -1,0 +1,7 @@
+column,display_name,unit,role,direction,lower,upper,step,target
+air_temperature_c,熱風温度,°C,parameter,,45,105,5,
+air_speed_m_s,熱風速度,m/s,parameter,,0.5,6,0.5,
+residence_time_min,滞留時間,min,parameter,,1,12,1,
+energy_kj_m2,面積当たりエネルギー,kJ/m²,objective,minimize,,,,
+residual_moisture_pct,残留水分率（湿量基準）,%,constraint,less_equal,,,,7
+defect_index,乾燥欠陥指数,0-1,constraint,less_equal,,,,0.28

@@ -1,0 +1,395 @@
+[
+  {
+    "simulator": "convection_drying",
+    "name": "塗膜の熱風乾燥",
+    "provenance": {
+      "id": "convection_drying",
+      "model_version": "1.0.0",
+      "sha256_lf": {
+        "__init__.py": "78d427e9b2c73e40dc3295aa84b6629c517b359a9063ce09e5e8bd18ee4e8c4a",
+        "physics_model.py": "63fb933a0fef7e9f78a13619008d55cd808ac637ac95a42025039e56adb8856c",
+        "problem.csv": "9ce69b7b4557ec64c918c20cba61cabac71f101888bd00947733eb6e3564ea70",
+        "manifest.json": "61cc4cd2637a64616c0dd8e24175a4f7065601717ff094dbd3159d616c863301"
+      }
+    },
+    "parameter_count": 3,
+    "initial_design": "corners_midpoints",
+    "candidate_count": 1872,
+    "feasible_count": 115,
+    "initial_count": 27,
+    "initial_feasible_count": 4,
+    "objective": "energy_kj_m2",
+    "direction": "minimize",
+    "grid_best": {
+      "parameters": {
+        "air_temperature_c": 95.0,
+        "air_speed_m_s": 0.5,
+        "residence_time_min": 11.0
+      },
+      "outputs": {
+        "energy_kj_m2": 57.64627544370954,
+        "residual_moisture_pct": 6.584307309986127,
+        "defect_index": 0.24861626107543794
+      }
+    },
+    "initial_best": {
+      "parameters": {
+        "air_temperature_c": 105.0,
+        "air_speed_m_s": 0.5,
+        "residence_time_min": 7.0
+      },
+      "outputs": {
+        "energy_kj_m2": 58.591889662203656,
+        "residual_moisture_pct": 6.942503582176241,
+        "defect_index": 0.27119961986986524
+      }
+    },
+    "output_ranges": {
+      "energy_kj_m2": {
+        "min": 4.139198573210651,
+        "max": 79.59731403679626
+      },
+      "residual_moisture_pct": {
+        "min": 2.110639311778756,
+        "max": 27.63395870954649
+      },
+      "defect_index": {
+        "min": 0.016344775520723567,
+        "max": 0.6691359707908007
+      }
+    }
+  },
+  {
+    "simulator": "electroplating",
+    "name": "銅電解めっき",
+    "provenance": {
+      "id": "electroplating",
+      "model_version": "2.0.0",
+      "sha256_lf": {
+        "__init__.py": "b4bc6b76f7465a77409dd135fb20818cf9b7a5183f99175f0814f864a6aa8893",
+        "physics_model.py": "e42314911cc37e2aecab8551e9e1bb46ebf4b071211959da28b1d5a8e9c829e9",
+        "problem.csv": "a2ef9292cabeaf4499c045915c1109d4f4f9afc282a5a8a34b945d80ef484ad3",
+        "manifest.json": "e232143ec4a32508c17386345aa40553598836d2029b1965a7478df400531906"
+      }
+    },
+    "parameter_count": 8,
+    "initial_design": "deterministic_maximin_grid",
+    "candidate_count": 65536,
+    "feasible_count": 52368,
+    "initial_count": 64,
+    "initial_feasible_count": 46,
+    "objective": "thickness_error_um",
+    "direction": "minimize",
+    "grid_best": {
+      "parameters": {
+        "current_density_a_dm2": 5.0,
+        "bath_temperature_c": 30.0,
+        "plating_time_min": 35.0,
+        "copper_concentration_mol_l": 0.8,
+        "agitation_speed_m_s": 0.15000000000000002,
+        "electrode_gap_cm": 0.5,
+        "duty_cycle": 0.6000000000000001,
+        "bath_ph": 2.5
+      },
+      "outputs": {
+        "thickness_error_um": 6.046170391726946e-05,
+        "roughness_ra_um": 0.24868311537655213,
+        "current_efficiency": 0.8637744370897731,
+        "deposit_thickness_um": 20.000060461703917,
+        "cell_voltage_v": 1.7452626929154262
+      }
+    },
+    "initial_best": {
+      "parameters": {
+        "current_density_a_dm2": 7.0,
+        "bath_temperature_c": 50.0,
+        "plating_time_min": 35.0,
+        "copper_concentration_mol_l": 1.6,
+        "agitation_speed_m_s": 0.35,
+        "electrode_gap_cm": 2.0,
+        "duty_cycle": 0.4,
+        "bath_ph": 3.0
+      },
+      "outputs": {
+        "thickness_error_um": 0.6323055212284423,
+        "roughness_ra_um": 0.24218052332427037,
+        "current_efficiency": 0.896210829756573,
+        "deposit_thickness_um": 19.367694478771558,
+        "cell_voltage_v": 1.967910822966389
+      }
+    },
+    "output_ranges": {
+      "thickness_error_um": {
+        "min": 6.046170391726946e-05,
+        "max": 30.353845226676377
+      },
+      "roughness_ra_um": {
+        "min": 0.15136601443471634,
+        "max": 0.9066751701686759
+      },
+      "current_efficiency": {
+        "min": 0.3560905571531483,
+        "max": 0.9839898153765299
+      },
+      "deposit_thickness_um": {
+        "min": 0.40117473521418184,
+        "max": 50.35384522667638
+      },
+      "cell_voltage_v": {
+        "min": 1.531039821226618,
+        "max": 2.985800309186496
+      }
+    }
+  },
+  {
+    "simulator": "laser_welding",
+    "name": "レーザー溶接",
+    "provenance": {
+      "id": "laser_welding",
+      "model_version": "1.0",
+      "sha256_lf": {
+        "__init__.py": "120b88edafd7f7c8d9aeb5b087661a9b5b1a9970e2d67696e487deec1ea29906",
+        "physics_model.py": "57756a56f0e12c3db5a5da87e4d76e175b931535715bffa2af7fb78480124531",
+        "plot_theme.py": "52da45cb5762a67a7de7406da44b96f446f78af10c59f8a62cbec5c27f3852f4",
+        "problem.csv": "ff6e08cfb573a09c90d1f4854452c506a7c879beeb4908afd2ee8a5b83abba45",
+        "manifest.json": "8b53915c531892981a091b13ec0870bec1a5df7860ad52df4b8b787e7893ceae"
+      }
+    },
+    "parameter_count": 3,
+    "initial_design": "corners_midpoints",
+    "candidate_count": 13981,
+    "feasible_count": 9223,
+    "initial_count": 27,
+    "initial_feasible_count": 14,
+    "objective": "penetration_depth_mm",
+    "direction": "maximize",
+    "grid_best": {
+      "parameters": {
+        "laser_power_w": 5900.0,
+        "spot_diameter_um": 300.0,
+        "scan_speed_mm_s": 60.0
+      },
+      "outputs": {
+        "penetration_depth_mm": 8.386370654563162,
+        "spatter_level_0_9": 4.0
+      }
+    },
+    "initial_best": {
+      "parameters": {
+        "laser_power_w": 6000.0,
+        "spot_diameter_um": 175.0,
+        "scan_speed_mm_s": 510.0
+      },
+      "outputs": {
+        "penetration_depth_mm": 1.6596587915477259,
+        "spatter_level_0_9": 4.0
+      }
+    },
+    "output_ranges": {
+      "penetration_depth_mm": {
+        "min": 9.069232004841929e-13,
+        "max": 11.000637647071727
+      },
+      "spatter_level_0_9": {
+        "min": 0.0,
+        "max": 9.0
+      }
+    }
+  },
+  {
+    "simulator": "milling",
+    "name": "フライス切削",
+    "provenance": {
+      "id": "milling",
+      "model_version": "2.0.0",
+      "sha256_lf": {
+        "__init__.py": "1b556bfc877e4557065f5852726c5b3e38d8b38a57f9f33728bd2855aff37449",
+        "physics_model.py": "4e433b8972855e349e338078c67d24d4e9c0246bf57c0c65d07db2eb6034663b",
+        "problem.csv": "fee57bed6741e7457f0399985c3589fefc0f7fcc09b34d7223ffeeba81aec963",
+        "manifest.json": "f1e264a6da09f5cb3f991da18aec143b492c8d5d80445ad49bed8dfc1d4a4fa5"
+      }
+    },
+    "parameter_count": 8,
+    "initial_design": "deterministic_maximin_grid",
+    "candidate_count": 65536,
+    "feasible_count": 60347,
+    "initial_count": 64,
+    "initial_feasible_count": 49,
+    "objective": "material_removal_rate_cm3_min",
+    "direction": "maximize",
+    "grid_best": {
+      "parameters": {
+        "spindle_speed_rpm": 5400.0,
+        "feed_per_tooth_mm": 0.16,
+        "axial_depth_mm": 3.5,
+        "radial_engagement_mm": 20.0,
+        "cutter_diameter_mm": 30.0,
+        "tooth_count": 6.0,
+        "nose_radius_mm": 0.8,
+        "tool_wear_mm": 0.0
+      },
+      "outputs": {
+        "material_removal_rate_cm3_min": 362.88000000000005,
+        "roughness_ra_um": 4.635992827000221,
+        "spindle_power_kw": 12.765907538658531
+      }
+    },
+    "initial_best": {
+      "parameters": {
+        "spindle_speed_rpm": 7200.0,
+        "feed_per_tooth_mm": 0.16,
+        "axial_depth_mm": 3.5,
+        "radial_engagement_mm": 5.0,
+        "cutter_diameter_mm": 30.0,
+        "tooth_count": 8.0,
+        "nose_radius_mm": 1.6,
+        "tool_wear_mm": 0.0
+      },
+      "outputs": {
+        "material_removal_rate_cm3_min": 161.28000000000003,
+        "roughness_ra_um": 2.3386176769677194,
+        "spindle_power_kw": 5.538881327459448
+      }
+    },
+    "output_ranges": {
+      "material_removal_rate_cm3_min": {
+        "min": 0.36,
+        "max": 645.1200000000001
+      },
+      "roughness_ra_um": {
+        "min": 0.2663346078713999,
+        "max": 13.49184842421449
+      },
+      "spindle_power_kw": {
+        "min": 0.012011941202879203,
+        "max": 28.51701277503874
+      }
+    }
+  },
+  {
+    "simulator": "press_forming",
+    "name": "プレス打抜き",
+    "provenance": {
+      "id": "press_forming",
+      "model_version": "1.0.0",
+      "sha256_lf": {
+        "__init__.py": "64d410100c44372761cb758335f9d05dfcc2cb210f70243e196edc666d869c42",
+        "physics_model.py": "26ef78c14b41271bae7ecfbb487c112196aa402244541aa56cda437a1c75c90a",
+        "problem.csv": "36c86379355c80f34be5e6a321168bf4a1d76ed2adaf45c49846a153241707bf",
+        "manifest.json": "e79f8b417855fd0f2cca84bef9ef57a5bc6b7633deef5948a6f6dae26a3d9c06"
+      }
+    },
+    "parameter_count": 3,
+    "initial_design": "corners_midpoints",
+    "candidate_count": 1521,
+    "feasible_count": 1407,
+    "initial_count": 27,
+    "initial_feasible_count": 18,
+    "objective": "burr_height_mm",
+    "direction": "minimize",
+    "grid_best": {
+      "parameters": {
+        "clearance_pct": 8.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.019999999999999997,
+        "peak_force_kn": 14.802280000000003,
+        "flatness_error_mm": 0.04169571444506451
+      }
+    },
+    "initial_best": {
+      "parameters": {
+        "clearance_pct": 9.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.022209599999999996,
+        "peak_force_kn": 14.902628416000006,
+        "flatness_error_mm": 0.044040542031271404
+      }
+    },
+    "output_ranges": {
+      "burr_height_mm": {
+        "min": 0.019999999999999997,
+        "max": 0.1578496
+      },
+      "peak_force_kn": {
+        "min": 13.080000000000002,
+        "max": 22.20974464000001
+      },
+      "flatness_error_mm": {
+        "min": 0.03314375,
+        "max": 0.23459999999999998
+      }
+    }
+  },
+  {
+    "simulator": "thermal_curing",
+    "name": "樹脂・接着剤の熱硬化",
+    "provenance": {
+      "id": "thermal_curing",
+      "model_version": "1.0.0",
+      "sha256_lf": {
+        "__init__.py": "108cc352660e9db6a1ad591b646ff7f19f6c8309c7a4625e1468bc8a9dba1836",
+        "physics_model.py": "cea224503559fb819dc5b5e1d176db004a1907d675fd857aa9f71afff15d1151",
+        "problem.csv": "65fb2ba3ddcd2d892ceb8f0a58056640a771d74d43b1022c12be1a7b303624f1",
+        "manifest.json": "d5f572c9a72ad8bcc9053a8462c1239d4e19374fc2b00fb68c8c740b323f2357"
+      }
+    },
+    "parameter_count": 3,
+    "initial_design": "corners_midpoints",
+    "candidate_count": 1053,
+    "feasible_count": 356,
+    "initial_count": 27,
+    "initial_feasible_count": 7,
+    "objective": "bond_strength_mpa",
+    "direction": "maximize",
+    "grid_best": {
+      "parameters": {
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 65.0,
+        "layer_thickness_mm": 0.25
+      },
+      "outputs": {
+        "bond_strength_mpa": 57.166998984073494,
+        "cure_fraction": 0.9368052492489983,
+        "degradation_fraction": 0.03534400416921439,
+        "peak_temperature_c": 139.9999999904751
+      }
+    },
+    "initial_best": {
+      "parameters": {
+        "oven_temperature_c": 140.0,
+        "hold_time_min": 65.0,
+        "layer_thickness_mm": 0.30000000000000004
+      },
+      "outputs": {
+        "bond_strength_mpa": 55.96778475146841,
+        "cure_fraction": 0.9305113604772656,
+        "degradation_fraction": 0.03403379634583673,
+        "peak_temperature_c": 139.9999975467855
+      }
+    },
+    "output_ranges": {
+      "bond_strength_mpa": {
+        "min": 4.327083221804605,
+        "max": 57.166998984073494
+      },
+      "cure_fraction": {
+        "min": 0.0008712281325163659,
+        "max": 0.9999998327529928
+      },
+      "degradation_fraction": {
+        "min": 3.334065810848709e-06,
+        "max": 0.2597228048083751
+      },
+      "peak_temperature_c": {
+        "min": 57.50840484329008,
+        "max": 180.0
+      }
+    }
+  }
+]

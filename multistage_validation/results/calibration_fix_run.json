@@ -1,0 +1,262 @@
+{
+  "schema_version": "1.1",
+  "method": "connected_free_running_empirical_residual_quantiles",
+  "selected_interval_method": "standardized_residual_quantile",
+  "best_tuning_comparison": {
+    "interval_method": "residual_quantile",
+    "alpha": 0.2,
+    "true_positive": 48,
+    "false_positive": 0,
+    "false_negative": 184,
+    "recall": 0.20689655172413793,
+    "selected_count": 48
+  },
+  "contract": {
+    "stage_order": [
+      "coating",
+      "drying",
+      "curing"
+    ],
+    "bundle_signatures": {
+      "coating": "ed68b8873ffdb6a86f05cceeb256c7a3d3bf2404d655bd3c3f779e6d5b91e1f4",
+      "drying": "2b80feff64ea734c4dc0728fddca713a8d37be10bbb27ac6c9ce101f009c6bc3",
+      "curing": "d34f7b44f443a800fa41fe919a0e026d545f94da847774bd8bfe848d4341cc2d"
+    },
+    "manifest_signatures": {
+      "coating": "99def63f589de38f7634e2be1cc9742851c3a01aae8eb70fb82458c8ab72bdb6",
+      "drying": "10ab053d69fcd7230683dc84589413ea23ec0153d42370bf385c1ca240637e41",
+      "curing": "791727adef0173064c1871aa0910e75a410f085b8397eb16eb5d33d68ab63aef"
+    },
+    "connections": [
+      {
+        "from": "drying.dry_thickness_um",
+        "to": "curing.incoming_dry_thickness_um"
+      },
+      {
+        "from": "drying.drying_defect_index",
+        "to": "curing.incoming_drying_defect_index"
+      },
+      {
+        "from": "drying.internal_stress_mpa",
+        "to": "curing.incoming_internal_stress_mpa"
+      },
+      {
+        "from": "drying.residual_solvent_pct",
+        "to": "curing.incoming_residual_solvent_pct"
+      },
+      {
+        "from": "drying.dry_thickness_cv_fraction",
+        "to": "curing.incoming_thickness_cv_fraction"
+      },
+      {
+        "from": "coating.coating_defect_index",
+        "to": "drying.incoming_coating_defect_index"
+      },
+      {
+        "from": "coating.solids_fraction",
+        "to": "drying.incoming_solids_fraction"
+      },
+      {
+        "from": "coating.thickness_cv_fraction",
+        "to": "drying.incoming_thickness_cv_fraction"
+      },
+      {
+        "from": "coating.wet_thickness_um",
+        "to": "drying.incoming_wet_thickness_um"
+      }
+    ],
+    "external_context": {
+      "coating.incoming_viscosity_pa_s": 1.6,
+      "coating.incoming_solids_fraction": 0.5,
+      "coating.incoming_bubble_fraction": 0.005
+    },
+    "final_specifications": [
+      {
+        "name": "bond_strength_mpa",
+        "direction": "greater_equal",
+        "target": 32.0,
+        "margin_scale": 32.0
+      },
+      {
+        "name": "cure_fraction",
+        "direction": "greater_equal",
+        "target": 0.8,
+        "margin_scale": 0.2
+      },
+      {
+        "name": "degradation_fraction",
+        "direction": "less_equal",
+        "target": 0.2,
+        "margin_scale": 0.2
+      },
+      {
+        "name": "final_residual_solvent_pct",
+        "direction": "less_equal",
+        "target": 2.0,
+        "margin_scale": 2.0
+      },
+      {
+        "name": "final_defect_index",
+        "direction": "less_equal",
+        "target": 0.25,
+        "margin_scale": 0.25
+      },
+      {
+        "name": "dimensional_change_um",
+        "direction": "less_equal",
+        "target": 6.0,
+        "margin_scale": 6.0
+      },
+      {
+        "name": "final_thickness_um",
+        "direction": "between",
+        "target": [
+          55.0,
+          85.0
+        ],
+        "margin_scale": 15.0
+      }
+    ],
+    "enforce_local_constraints": true,
+    "support_threshold": 0.5
+  },
+  "alpha_per_output_tail": 0.15,
+  "calibration_seed": 20260921,
+  "tuning_seed": 20260922,
+  "requested_samples_per_split": 4096,
+  "physical_connection_acceptance_fraction": 1.0,
+  "calibration_scope": {
+    "controls": "latin_hypercube_over_full_model_bounds",
+    "external_context": {
+      "coating.incoming_viscosity_pa_s": 1.6,
+      "coating.incoming_solids_fraction": 0.5,
+      "coating.incoming_bubble_fraction": 0.005
+    }
+  },
+  "supported_sample_counts": {
+    "coating": 2967,
+    "drying": 2967,
+    "curing": 2967
+  },
+  "tuning_comparisons": [
+    {
+      "interval_method": "residual_quantile",
+      "alpha": 0.05,
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 232,
+      "recall": 0.0,
+      "selected_count": 0
+    },
+    {
+      "interval_method": "standardized_residual_quantile",
+      "alpha": 0.05,
+      "true_positive": 1,
+      "false_positive": 0,
+      "false_negative": 231,
+      "recall": 0.004310344827586207,
+      "selected_count": 1
+    },
+    {
+      "interval_method": "residual_quantile",
+      "alpha": 0.075,
+      "true_positive": 1,
+      "false_positive": 0,
+      "false_negative": 231,
+      "recall": 0.004310344827586207,
+      "selected_count": 1
+    },
+    {
+      "interval_method": "standardized_residual_quantile",
+      "alpha": 0.075,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 229,
+      "recall": 0.01293103448275862,
+      "selected_count": 3
+    },
+    {
+      "interval_method": "residual_quantile",
+      "alpha": 0.1,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 227,
+      "recall": 0.021551724137931036,
+      "selected_count": 5
+    },
+    {
+      "interval_method": "standardized_residual_quantile",
+      "alpha": 0.1,
+      "true_positive": 9,
+      "false_positive": 0,
+      "false_negative": 223,
+      "recall": 0.03879310344827586,
+      "selected_count": 9
+    },
+    {
+      "interval_method": "residual_quantile",
+      "alpha": 0.125,
+      "true_positive": 10,
+      "false_positive": 0,
+      "false_negative": 222,
+      "recall": 0.04310344827586207,
+      "selected_count": 10
+    },
+    {
+      "interval_method": "standardized_residual_quantile",
+      "alpha": 0.125,
+      "true_positive": 22,
+      "false_positive": 0,
+      "false_negative": 210,
+      "recall": 0.09482758620689655,
+      "selected_count": 22
+    },
+    {
+      "interval_method": "residual_quantile",
+      "alpha": 0.15,
+      "true_positive": 29,
+      "false_positive": 0,
+      "false_negative": 203,
+      "recall": 0.125,
+      "selected_count": 29
+    },
+    {
+      "interval_method": "standardized_residual_quantile",
+      "alpha": 0.15,
+      "true_positive": 35,
+      "false_positive": 0,
+      "false_negative": 197,
+      "recall": 0.15086206896551724,
+      "selected_count": 35
+    },
+    {
+      "interval_method": "residual_quantile",
+      "alpha": 0.2,
+      "true_positive": 48,
+      "false_positive": 0,
+      "false_negative": 184,
+      "recall": 0.20689655172413793,
+      "selected_count": 48
+    },
+    {
+      "interval_method": "standardized_residual_quantile",
+      "alpha": 0.2,
+      "true_positive": 54,
+      "false_positive": 1,
+      "false_negative": 178,
+      "recall": 0.23275862068965517,
+      "selected_count": 55
+    }
+  ],
+  "selection_rule": "maximum true positives among zero-false-positive tuning candidates of the explicitly configured method",
+  "bundle_signatures": {
+    "coating": "ed68b8873ffdb6a86f05cceeb256c7a3d3bf2404d655bd3c3f779e6d5b91e1f4",
+    "drying": "2b80feff64ea734c4dc0728fddca713a8d37be10bbb27ac6c9ce101f009c6bc3",
+    "curing": "d34f7b44f443a800fa41fe919a0e026d545f94da847774bd8bfe848d4341cc2d"
+  },
+  "data_use": "calibration and tuning splits select the interval; final boundary validation uses a separate deterministic grid",
+  "limitations": [
+    "Marginal output intervals do not provide a joint probability guarantee.",
+    "Offsets are valid only for this exact bundle combination and supported calibration domain."
+  ]
+}

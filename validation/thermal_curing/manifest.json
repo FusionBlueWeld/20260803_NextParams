@@ -1,0 +1,17 @@
+{
+  "id": "thermal_curing",
+  "name": "樹脂・接着剤の熱硬化",
+  "model_version": "1.0.0",
+  "description": "一次遅れ温度応答とArrhenius硬化・高温劣化を組み合わせた決定論的な熱硬化ベンチマークモデル。",
+  "reference_datasets": [
+    "C:/Users/tsuts/Documents/Codex/20260623_ml_dataset_generation/src/dataset_generators.py:dataset_07"
+  ],
+  "features": [
+    "first-order lumped thermal lag",
+    "midpoint-integrated Arrhenius cure",
+    "bounded first-order conversion",
+    "competing high-temperature degradation",
+    "broadcasted NumPy evaluation",
+    "deterministic noise-free truth function"
+  ]
+}

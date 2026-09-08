@@ -1,0 +1,8 @@
+column,display_name,unit,role,direction,lower,upper,step,target
+oven_temperature_c,オーブン温度,°C,parameter,,100,180,10,
+hold_time_min,保持時間,min,parameter,,5,65,5,
+layer_thickness_mm,樹脂・接着剤層厚さ,mm,parameter,,0.10,0.50,0.05,
+bond_strength_mpa,接着強度,MPa,objective,maximize,,,,
+cure_fraction,硬化率,fraction,constraint,greater_equal,,,,0.80
+degradation_fraction,劣化率,fraction,constraint,less_equal,,,,0.20
+peak_temperature_c,到達ピーク温度,°C,monitor,,,,,

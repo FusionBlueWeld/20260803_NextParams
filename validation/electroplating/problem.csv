@@ -1,0 +1,14 @@
+column,display_name,unit,role,direction,lower,upper,step,target
+current_density_a_dm2,電流密度,A/dm2,parameter,,1,7,2,
+bath_temperature_c,めっき浴温度,°C,parameter,,20,50,10,
+plating_time_min,めっき時間,min,parameter,,5,35,10,
+copper_concentration_mol_l,銅濃度,mol/L,parameter,,0.4,1.6,0.4,
+agitation_speed_m_s,撹拌速度,m/s,parameter,,0.05,0.35,0.1,
+electrode_gap_cm,電極間隔,cm,parameter,,0.5,2,0.5,
+duty_cycle,デューティ比,1,parameter,,0.4,1,0.2,
+bath_ph,めっき浴pH,1,parameter,,1.5,3,0.5,
+thickness_error_um,膜厚誤差,um,objective,minimize,,,,
+roughness_ra_um,算術平均粗さ,um,constraint,less_equal,,,,0.65
+current_efficiency,電流効率,1,constraint,greater_equal,,,,0.80
+deposit_thickness_um,析出膜厚,um,monitor,,,,,
+cell_voltage_v,セル電圧,V,monitor,,,,,

@@ -6,9 +6,9 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
-import os
 from pathlib import Path
 
 
@@ -17,6 +17,9 @@ VERSION_ROOTS = {
     "v000": PROJECT_ROOT / "v000",
     "v001": PROJECT_ROOT / "v001",
     "v002": PROJECT_ROOT / "v002",
+    "v003": PROJECT_ROOT / "v003",
+    "v004": PROJECT_ROOT / "v004",
+    "r001": PROJECT_ROOT / "r001",
 }
 
 
@@ -35,12 +38,18 @@ def print_help(*, stream: object = sys.stdout) -> None:
         "利用可能なVERSION:\n"
         "  v000  Gaussian Processによる次実験条件探索\n"
         "  v001  GP探索 + NN予測空間のrun別出力\n"
-        "  v002  GP–NN統計Hybridによる探索とrun別解空間\n"
+        "  v002  GP-NN統計Hybridによる探索とrun別解空間\n"
+        "  v003  技能者知見制約付きNN + 残差GPによる探索\n"
+        "  v004  v003互換探索 + r接続用stage bundle\n"
+        "  r001  複数stage bundleの接続と全体条件調整\n"
         "\n"
         "例:\n"
         "  python main.py --version v000 --run trial_000\n"
         "  python main.py --version v001 --run trial_001 --n 9\n"
-        "  python main.py --version v002 --run trial_002 --n 9",
+        "  python main.py --version v002 --run trial_002 --n 9\n"
+        "  python main.py --version v003 --run trial_003 --n 9\n"
+        "  python main.py --version v004 --run trial_004 --n 9\n"
+        "  python main.py --version r001 --run trial_r001 --n 9",
         file=stream,
     )
 
@@ -61,7 +70,11 @@ def main(arguments: list[str] | None = None) -> int:
         print_help(stream=sys.stderr)
         return 2
     if len(arguments) < 2:
-        print("[エラー]\n--versionの後にv000、v001、v002のいずれかを指定してください。", file=sys.stderr)
+        print(
+            "[エラー]\n--versionの後に利用可能なバージョンを指定してください。"
+            "いずれかを指定してください。",
+            file=sys.stderr,
+        )
         return 2
 
     version = arguments[1]

@@ -1,0 +1,38 @@
+{
+  "id": "curing",
+  "name": "熱硬化",
+  "model_version": "1.0.0",
+  "description": "乾燥膜の加熱履歴、Arrhenius型硬化・劣化、残留溶剤脱離を表す決定論的な物理縮約モデル。係数は検証用仮定であり実機校正値ではない。",
+  "local_objective": {"name": "bond_strength_mpa", "direction": "maximize"},
+  "local_constraints": [
+    {"name": "cure_fraction", "direction": "greater_equal", "target": 0.80},
+    {"name": "degradation_fraction", "direction": "less_equal", "target": 0.20},
+    {"name": "final_residual_solvent_pct", "direction": "less_equal", "target": 2.0},
+    {"name": "final_defect_index", "direction": "less_equal", "target": 0.25}
+  ],
+  "controls": [
+    {"name": "oven_temperature_c", "unit": "degC", "range": [90.0, 180.0], "description": "硬化炉温度"},
+    {"name": "hold_time_min", "unit": "min", "range": [5.0, 65.0], "description": "硬化保持時間"},
+    {"name": "nip_pressure_mpa", "unit": "MPa", "range": [0.05, 0.60], "description": "ニップ加圧力"}
+  ],
+  "incoming_state": [
+    {"name": "incoming_dry_thickness_um", "unit": "um", "range": [15.0, 310.0], "description": "乾燥工程からの乾燥膜厚"},
+    {"name": "incoming_residual_solvent_pct", "unit": "%", "range": [0.0, 70.0], "description": "乾燥工程からの残留溶剤率"},
+    {"name": "incoming_internal_stress_mpa", "unit": "MPa", "range": [0.0, 8.0], "description": "乾燥工程からの内部応力"},
+    {"name": "incoming_drying_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "乾燥工程からの欠陥指数"},
+    {"name": "incoming_thickness_cv_fraction", "unit": "fraction", "range": [0.0, 0.40], "description": "乾燥工程からの膜厚変動係数"}
+  ],
+  "outputs": [
+    {"name": "bond_strength_mpa", "unit": "MPa", "range": [0.0, 100.0], "description": "最終接着強度"},
+    {"name": "cure_fraction", "unit": "fraction", "range": [0.0, 1.0], "description": "硬化率"},
+    {"name": "degradation_fraction", "unit": "fraction", "range": [0.0, 1.0], "description": "熱劣化率"},
+    {"name": "final_residual_solvent_pct", "unit": "%", "range": [0.0, 70.0], "description": "硬化後残留溶剤率"},
+    {"name": "final_thickness_um", "unit": "um", "range": [0.0, 310.0], "description": "最終膜厚"},
+    {"name": "final_internal_stress_mpa", "unit": "MPa", "range": [0.0, 10.0], "description": "最終内部応力"},
+    {"name": "final_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "最終欠陥指数"},
+    {"name": "dimensional_change_um", "unit": "um", "range": [0.0, 100.0], "description": "硬化による寸法変化"},
+    {"name": "blister_index", "unit": "0-1", "range": [0.0, 1.0], "description": "ブリスター指数"},
+    {"name": "terminal_film_temperature_c", "unit": "degC", "range": [25.0, 180.0], "description": "硬化終了時膜温度"},
+    {"name": "curing_energy_kj_m2", "unit": "kJ/m2", "range": [0.0, 10000.0], "description": "硬化工程エネルギー"}
+  ]
+}

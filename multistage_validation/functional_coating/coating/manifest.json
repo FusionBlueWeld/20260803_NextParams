@@ -1,0 +1,31 @@
+{
+  "id": "coating",
+  "name": "ナイフ／スロット塗工",
+  "model_version": "1.0.0",
+  "description": "移動ウェブへのポリマー液塗工を表す決定論的な物理縮約モデル。係数は検証用仮定であり実機校正値ではない。",
+  "local_objective": {"name": "coated_solids_rate_kg_m_h", "direction": "maximize"},
+  "local_constraints": [
+    {"name": "thickness_cv_fraction", "direction": "less_equal", "target": 0.08},
+    {"name": "coating_defect_index", "direction": "less_equal", "target": 0.25}
+  ],
+  "controls": [
+    {"name": "coating_gap_um", "unit": "um", "range": [120.0, 300.0], "description": "塗工ギャップ"},
+    {"name": "line_speed_m_min", "unit": "m/min", "range": [5.0, 30.0], "description": "ウェブ走行速度"},
+    {"name": "web_tension_n", "unit": "N", "range": [40.0, 160.0], "description": "ウェブ張力"}
+  ],
+  "incoming_state": [
+    {"name": "incoming_viscosity_pa_s", "unit": "Pa·s", "range": [0.8, 3.0], "description": "供給液の粘度"},
+    {"name": "incoming_solids_fraction", "unit": "fraction", "range": [0.35, 0.65], "description": "供給液の固形分率"},
+    {"name": "incoming_bubble_fraction", "unit": "fraction", "range": [0.0, 0.03], "description": "供給液の気泡体積分率"}
+  ],
+  "outputs": [
+    {"name": "wet_thickness_um", "unit": "um", "range": [0.0, 300.0], "description": "塗工直後の湿潤膜厚"},
+    {"name": "wet_solvent_g_m2", "unit": "g/m2", "range": [0.0, 300.0], "description": "面積当たり湿潤溶剤量"},
+    {"name": "wet_solids_g_m2", "unit": "g/m2", "range": [0.0, 300.0], "description": "面積当たり湿潤固形分量"},
+    {"name": "solids_fraction", "unit": "fraction", "range": [0.35, 0.65], "description": "塗工液固形分率（下流接続状態）"},
+    {"name": "thickness_cv_fraction", "unit": "fraction", "range": [0.0, 0.35], "description": "膜厚変動係数"},
+    {"name": "coating_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "塗工欠陥指数"},
+    {"name": "capillary_number", "unit": "dimensionless", "range": [0.0, 50.0], "description": "塗工時キャピラリー数"},
+    {"name": "coated_solids_rate_kg_m_h", "unit": "kg/(m·h)", "range": [0.0, 350.0], "description": "固形分塗工量のライン投入速度"}
+  ]
+}

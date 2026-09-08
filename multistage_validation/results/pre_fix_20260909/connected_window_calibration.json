@@ -1,0 +1,334 @@
+{
+  "schema_version": "1.0",
+  "method": "connected_free_running_empirical_residual_quantiles",
+  "alpha_per_output_tail": 0.15,
+  "calibration_seed": 20260921,
+  "tuning_seed": 20260922,
+  "requested_samples_per_split": 4096,
+  "physical_connection_acceptance_fraction": 1.0,
+  "calibration_scope": {
+    "controls": "latin_hypercube_over_full_model_bounds",
+    "external_context": {
+      "coating.incoming_viscosity_pa_s": 1.6,
+      "coating.incoming_solids_fraction": 0.5,
+      "coating.incoming_bubble_fraction": 0.005
+    }
+  },
+  "supported_sample_counts": {
+    "coating": 2967,
+    "drying": 2967,
+    "curing": 2967
+  },
+  "tuning_comparisons": [
+    {
+      "alpha": 0.05,
+      "true_positive": 1,
+      "false_positive": 0,
+      "false_negative": 231,
+      "recall": 0.004310344827586207,
+      "selected_count": 1
+    },
+    {
+      "alpha": 0.075,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 229,
+      "recall": 0.01293103448275862,
+      "selected_count": 3
+    },
+    {
+      "alpha": 0.1,
+      "true_positive": 9,
+      "false_positive": 0,
+      "false_negative": 223,
+      "recall": 0.03879310344827586,
+      "selected_count": 9
+    },
+    {
+      "alpha": 0.125,
+      "true_positive": 22,
+      "false_positive": 0,
+      "false_negative": 210,
+      "recall": 0.09482758620689655,
+      "selected_count": 22
+    },
+    {
+      "alpha": 0.15,
+      "true_positive": 35,
+      "false_positive": 0,
+      "false_negative": 197,
+      "recall": 0.15086206896551724,
+      "selected_count": 35
+    },
+    {
+      "alpha": 0.2,
+      "true_positive": 54,
+      "false_positive": 1,
+      "false_negative": 178,
+      "recall": 0.23275862068965517,
+      "selected_count": 55
+    }
+  ],
+  "selection_rule": "maximum true positives among zero-false-positive tuning candidates",
+  "bundle_signatures": {
+    "coating": "ed68b8873ffdb6a86f05cceeb256c7a3d3bf2404d655bd3c3f779e6d5b91e1f4",
+    "drying": "2b80feff64ea734c4dc0728fddca713a8d37be10bbb27ac6c9ce101f009c6bc3",
+    "curing": "d34f7b44f443a800fa41fe919a0e026d545f94da847774bd8bfe848d4341cc2d"
+  },
+  "offsets": {
+    "coating": {
+      "wet_thickness_um": {
+        "lower": -0.4062603463978576,
+        "upper": 0.7716162067227401,
+        "median": 0.07098747527180649,
+        "rmse": 0.5804592465106849,
+        "std_floor": 0.10958260553921229,
+        "lower_z": 0.18523028352639173,
+        "upper_z": 0.350762786712942
+      },
+      "wet_solvent_g_m2": {
+        "lower": -0.37185171512423665,
+        "upper": 0.44981918141873223,
+        "median": -0.045178815204067746,
+        "rmse": 0.3719646423175767,
+        "std_floor": 0.05889068584232537,
+        "lower_z": 0.3152887161312007,
+        "upper_z": 0.3827754928302306
+      },
+      "wet_solids_g_m2": {
+        "lower": -0.11736055595731187,
+        "upper": 0.3400021392249215,
+        "median": 0.12250574479224952,
+        "rmse": 0.287357262620909,
+        "std_floor": 0.06929446614071003,
+        "lower_z": 0.08477868283442552,
+        "upper_z": 0.24555301520017964
+      },
+      "solids_fraction": {
+        "lower": -0.00036649169382430014,
+        "upper": 0.001294986458575953,
+        "median": 0.00039993196877879944,
+        "rmse": 0.0009457207287528389,
+        "std_floor": 0.00020918938488548961,
+        "lower_z": 0.08749042031474605,
+        "upper_z": 0.30972544809010283
+      },
+      "thickness_cv_fraction": {
+        "lower": -0.0014530099413072178,
+        "upper": 0.0005583725384065361,
+        "median": -7.363263355786298e-05,
+        "rmse": 0.0011526098952209837,
+        "std_floor": 3.7609317726374926e-05,
+        "lower_z": 1.9258002795316524,
+        "upper_z": 0.7452325781659418
+      },
+      "coating_defect_index": {
+        "lower": -0.012114353181960802,
+        "upper": 0.004071865507029843,
+        "median": -0.00016701980209307687,
+        "rmse": 0.009352702952241408,
+        "std_floor": 0.0002306470462582921,
+        "lower_z": 2.609670861325841,
+        "upper_z": 0.882289472916847
+      },
+      "capillary_number": {
+        "lower": -0.019383328790910426,
+        "upper": 0.17176033570735427,
+        "median": 0.07233514010869513,
+        "rmse": 0.12186381980172273,
+        "std_floor": 0.023791264434142357,
+        "lower_z": 0.04072301209999569,
+        "upper_z": 0.36132321360006764
+      },
+      "coated_solids_rate_kg_m_h": {
+        "lower": -0.5660023868127908,
+        "upper": 1.7857399672884497,
+        "median": 0.8027968545913637,
+        "rmse": 1.230563341472842,
+        "std_floor": 0.13371524930270692,
+        "lower_z": 0.2107449471884258,
+        "upper_z": 0.6686300548162942
+      }
+    },
+    "drying": {
+      "dry_thickness_um": {
+        "lower": -3.2139468493901404,
+        "upper": 0.678058999318111,
+        "median": -0.5909857114976091,
+        "rmse": 2.423152031336835,
+        "std_floor": 0.1325019018687677,
+        "lower_z": 1.2130602728555537,
+        "upper_z": 0.2566380517913492
+      },
+      "residual_solvent_pct": {
+        "lower": -1.1670995782638869,
+        "upper": 0.10016287821595728,
+        "median": -0.4485885715279814,
+        "rmse": 0.9432084863488156,
+        "std_floor": 0.0495979621976777,
+        "lower_z": 1.1586336399300474,
+        "upper_z": 0.10141294219088041
+      },
+      "internal_stress_mpa": {
+        "lower": -0.05329340599540733,
+        "upper": 0.04253430890200316,
+        "median": -0.004456726545178147,
+        "rmse": 0.0690974243299423,
+        "std_floor": 0.0015961590728118453,
+        "lower_z": 1.6758176201434665,
+        "upper_z": 1.3320806208116729
+      },
+      "drying_defect_index": {
+        "lower": -0.011277290157129305,
+        "upper": 0.00817614017718546,
+        "median": -0.0017088617196769351,
+        "rmse": 0.012275591223644338,
+        "std_floor": 0.000525276964974515,
+        "lower_z": 1.0764265297113291,
+        "upper_z": 0.781654282851873
+      },
+      "dry_thickness_cv_fraction": {
+        "lower": -0.002359718078234839,
+        "upper": 0.002416805136310256,
+        "median": 0.00011160415706228805,
+        "rmse": 0.0024925099860920934,
+        "std_floor": 0.00038769183774044685,
+        "lower_z": 0.30257297241862374,
+        "upper_z": 0.31109762100701494
+      },
+      "terminal_film_temperature_c": {
+        "lower": -0.4066803146345279,
+        "upper": 0.43309155019311163,
+        "median": 0.08792974608031301,
+        "rmse": 0.39968740434200556,
+        "std_floor": 0.05595508276371275,
+        "lower_z": 0.36311413757082406,
+        "upper_z": 0.3872349424261301
+      },
+      "skinning_index": {
+        "lower": -0.018459033451320384,
+        "upper": 0.0067085020591099165,
+        "median": -0.0035134582958261332,
+        "rmse": 0.020674521723796208,
+        "std_floor": 0.0005021318638461549,
+        "lower_z": 1.83111475947725,
+        "upper_z": 0.6779983306733547
+      },
+      "drying_energy_kj_m2": {
+        "lower": -1.0943037626379066,
+        "upper": 2.7968086245353305,
+        "median": 0.5047268865983838,
+        "rmse": 2.1444376124154414,
+        "std_floor": 0.12623019225395074,
+        "lower_z": 0.435752574226129,
+        "upper_z": 1.111758388660652
+      }
+    },
+    "curing": {
+      "bond_strength_mpa": {
+        "lower": -1.072276827302204,
+        "upper": 2.1734233136514085,
+        "median": 0.47520150531052074,
+        "rmse": 2.0478914172455136,
+        "std_floor": 0.031788832202674595,
+        "lower_z": 1.6449869075471328,
+        "upper_z": 3.4754108317661814
+      },
+      "cure_fraction": {
+        "lower": -0.02192321758580383,
+        "upper": 0.03232373908049513,
+        "median": 0.0015392832634900655,
+        "rmse": 0.037625857870159464,
+        "std_floor": 0.0010953650268805627,
+        "lower_z": 0.9857286957680291,
+        "upper_z": 1.4939566721652988
+      },
+      "degradation_fraction": {
+        "lower": -0.0012674317238509248,
+        "upper": 0.002298901867920186,
+        "median": 0.00043850428231385734,
+        "rmse": 0.0032798950506689635,
+        "std_floor": 8.662575356838126e-05,
+        "lower_z": 0.7235707155360392,
+        "upper_z": 1.3293646798869072
+      },
+      "final_residual_solvent_pct": {
+        "lower": -0.7641744157731348,
+        "upper": 1.3614929535070335,
+        "median": 0.1131602567314301,
+        "rmse": 1.1669644187794925,
+        "std_floor": 0.05877447217213845,
+        "lower_z": 0.6494713680470525,
+        "upper_z": 1.1274044109225252
+      },
+      "final_thickness_um": {
+        "lower": -4.246869467102371,
+        "upper": 1.3260134715178253,
+        "median": -1.4348969729609422,
+        "rmse": 3.252708442654657,
+        "std_floor": 0.24114181941607093,
+        "lower_z": 0.8777201726366409,
+        "upper_z": 0.2791930404105756
+      },
+      "final_internal_stress_mpa": {
+        "lower": -0.11927746631405745,
+        "upper": 0.07779504212654342,
+        "median": -0.011046227558209054,
+        "rmse": 0.10602671934976987,
+        "std_floor": 0.005857784794134545,
+        "lower_z": 1.007583590953378,
+        "upper_z": 0.668423466354925
+      },
+      "final_defect_index": {
+        "lower": -0.04032902690182982,
+        "upper": 0.026219867670762176,
+        "median": -0.003752211068232328,
+        "rmse": 0.040013875702004785,
+        "std_floor": 0.0014236874628267221,
+        "lower_z": 1.4253870666493282,
+        "upper_z": 0.9349844805638716
+      },
+      "dimensional_change_um": {
+        "lower": -0.5783995838855587,
+        "upper": 0.44083426520375957,
+        "median": -0.08569173049657808,
+        "rmse": 0.510283244260272,
+        "std_floor": 0.03879129049671439,
+        "lower_z": 0.7450868891761345,
+        "upper_z": 0.5682213284093803
+      },
+      "blister_index": {
+        "lower": -0.05313444763446418,
+        "upper": 0.03318489810740321,
+        "median": -0.005779789355857366,
+        "rmse": 0.05071823386826084,
+        "std_floor": 0.0018344663158652488,
+        "lower_z": 1.4673593091750523,
+        "upper_z": 0.9141720589728318
+      },
+      "terminal_film_temperature_c": {
+        "lower": -1.450708413513567,
+        "upper": 2.6032131754314776,
+        "median": 0.18319192390777062,
+        "rmse": 2.4937632001796595,
+        "std_floor": 0.10981776109986235,
+        "lower_z": 0.6706903753630757,
+        "upper_z": 1.1564007942335217
+      },
+      "curing_energy_kj_m2": {
+        "lower": -44.62789806582077,
+        "upper": 47.20039990522764,
+        "median": -1.5602650371970412,
+        "rmse": 48.471755840686136,
+        "std_floor": 3.673742107228616,
+        "lower_z": 0.6009356955290027,
+        "upper_z": 0.6409629674988532
+      }
+    }
+  },
+  "data_use": "calibration and tuning splits select the interval; final boundary validation uses a separate deterministic grid",
+  "limitations": [
+    "Marginal output intervals do not provide a joint probability guarantee.",
+    "Offsets are valid only for this exact bundle combination and supported calibration domain."
+  ]
+}

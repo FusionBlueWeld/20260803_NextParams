@@ -1,0 +1,48 @@
+{
+  "status": "complete",
+  "candidate_count": 19683,
+  "selected_index": 9925,
+  "oracle_best_index": 9925,
+  "selected_is_oracle_margin_best": true,
+  "selected_margin": 0.44640608469741516,
+  "oracle_best_margin": 0.44640608469741516,
+  "maximum_final_output_absolute_error": 0.0,
+  "final_output_absolute_errors": {
+    "bond_strength_mpa": 0.0,
+    "cure_fraction": 0.0,
+    "degradation_fraction": 0.0,
+    "final_residual_solvent_pct": 0.0,
+    "final_thickness_um": 0.0,
+    "final_internal_stress_mpa": 0.0,
+    "final_defect_index": 0.0,
+    "dimensional_change_um": 0.0,
+    "blister_index": 0.0,
+    "terminal_film_temperature_c": 0.0,
+    "curing_energy_kj_m2": 0.0
+  },
+  "individual_best_chain_feasible": false,
+  "individual_best_chain_margin": -0.26785048478109935,
+  "quality_margin_improvement_over_individual_chain": 0.7142565694785146,
+  "commands": [
+    {
+      "args": [
+        "--prepare",
+        "trial_functional_coating_r001_production"
+      ],
+      "returncode": 0,
+      "stdout": "pipeline.jsonを確認しました。工程数=3\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "--run",
+        "trial_functional_coating_r001_production",
+        "--n",
+        "3"
+      ],
+      "returncode": 0,
+      "stdout": "trial_functional_coating_r001_productionの全体条件を19,683候補から評価しました。\n予測適合候補: 1,341件\n出力: C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\r001\\trials\\trial_functional_coating_r001_production\\output\\system_recommendations.csv\n良品確率: 未評価（平均予測bundleのため）\n",
+      "stderr": ""
+    }
+  ]
+}

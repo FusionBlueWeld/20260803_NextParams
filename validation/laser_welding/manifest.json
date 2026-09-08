@@ -1,0 +1,9 @@
+{
+  "id": "laser_welding",
+  "name": "レーザー溶接",
+  "model_version": "1.0",
+  "input_arguments": {"laser_power_w": "power_w", "spot_diameter_um": "spot_um", "scan_speed_mm_s": "speed_mm_s"},
+  "description": "ガウシアンビームによる溶融・キーホール遷移とスパッタ",
+  "reference_datasets": ["19_レーザー加熱温度場の簡易モデル", "既存レーザー溶接検証モデル"],
+  "features": ["モード遷移", "入力の連成", "離散品質制約", "深さの飽和"]
+}
