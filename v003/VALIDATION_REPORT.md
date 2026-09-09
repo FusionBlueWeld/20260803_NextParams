@@ -15,12 +15,12 @@ v003は、知識制約をNN損失へ反映しながら閉ループ推薦を実�
 
 ```powershell
 python -m unittest discover -s v003/tests -p "test_*.py" -v
-python -m unittest validation/test_v003_validation.py -v
+python -m unittest validation/single/tests/test_v003_validation.py -v
 
-python validation/v003_validation.py --mode synthetic --optimizer-root v003 `
+python -m validation.single.src.checks.v003_validation --mode synthetic --optimizer-root v003 `
   --synthetic-trial trial_synthetic_constraints_v003_final_policy
 
-python validation/v003_validation.py --mode laser --optimizer-root v003 `
+python -m validation.single.src.checks.v003_validation --mode laser --optimizer-root v003 `
   --trial trial_laser_welding_v003_final --iterations 15 --recommendations 1
 ```
 
@@ -114,7 +114,7 @@ PNGは次の4面を示します。
 | v001 regression | 9 | 全件成功 |
 | v002 regression | 11 | 全件成功 |
 
-生のtrial、全候補CSV、JSON、軌跡CSV、PNGは `.gitignore` 対象のローカル検証成果物です。再生成方法と処理仕様は `README.md` および `validation/` のスクリプトに残しています。
+生のtrial、全候補CSV、JSON、軌跡CSV、PNGは `.gitignore` 対象のローカル検証成果物です。再生成方法と処理仕様は `README.md` および `validation/single/` のスクリプトに残しています。
 
 ## バグ修正後の回帰検証（2026-09-06）
 

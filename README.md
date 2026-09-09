@@ -1,5 +1,9 @@
 # ParamOptimizer 段階開発設計
 
+人間による目視レビューを前提に、可読性と責務の分かりやすさを重視して整理しています。
+検証コードは [validation/](validation/README.md) の `single/` と `multistage/` にまとめています。
+完了した改善計画・FIX記録は [_old/](_old/README.md) を参照してください。
+
 > **移行メモ（2026-08-03）**
 > このリポジトリには、v000〜v004の実装済みシステムコード、r001初期実装、6工程の共通検証用物理シミュレータ、複合工程検証用物理シミュレータを収録しています。旧開発環境固有の実験データ、ローカルPythonランタイムは含めていません。
 
@@ -31,11 +35,11 @@
 
 ## 共通の擬似実験検証
 
-各バージョンをレーザー溶接・切削・プレス打抜き・熱硬化・熱風乾燥・電解めっきで比較するときは、[validation/README.md](validation/README.md)を最初に確認してください。
+各バージョンをレーザー溶接・切削・プレス打抜き・熱硬化・熱風乾燥・電解めっきで比較するときは、[validation/single/README.md](validation/single/README.md)を最初に確認してください。
 
-`validation/`には、6工程の正解関数、問題定義、単一条件評価・CSV生成・反復探索・横断比較の共通実行器を収録しています。フライス切削と銅電解めっきは8入力・65,536候補の高次元検証にも対応します。`python -m validation.run list` で一覧、`python -m validation.run suite --versions v000 v001 v002 v003 --iterations 2` で接続検証できます。工程の選定根拠は [validation/DESIGN.md](validation/DESIGN.md) にあります。
+`validation/single/`には、6工程の正解関数、問題定義、単一条件評価・CSV生成・反復探索・横断比較の共通実行器を収録しています。フライス切削と銅電解めっきは8入力・65,536候補の高次元検証にも対応します。`python -m validation.single.run list` で一覧、`python -m validation.single.run suite --versions v000 v001 v002 v003 --iterations 2` で接続検証できます。工程の選定根拠は [validation/single/DESIGN.md](validation/single/DESIGN.md) にあります。
 
-`multistage_validation/`は既存`validation/`から独立し、塗工→乾燥→熱硬化を接続した決定論的な複合工程oracleを収録します。将来のv004/r001が、個別Best連結、工程間の状態・不確実性伝播、全体条件調整、原因工程推定を正しく扱えるか検証する試験装置です。詳細は [multistage_validation/README.md](multistage_validation/README.md) を参照してください。
+`validation/multistage/`は既存`validation/single/`から独立し、塗工→乾燥→熱硬化を接続した決定論的な複合工程oracleを収録します。将来のv004/r001が、個別Best連結、工程間の状態・不確実性伝播、全体条件調整、原因工程推定を正しく扱えるか検証する試験装置です。詳細は [validation/multistage/README.md](validation/multistage/README.md) を参照してください。
 
 ## 2. バージョン構成
 
@@ -55,7 +59,7 @@ rシリーズはvシリーズの後継スナップショットではなく、複
 | `r001` | 複合工程接続（暫定） | 複数のv004 stage bundleを接続し、最終良品確率と全体条件をどう調整するか | 全体条件案、良品確率、工程別影響、追加実験候補 |
 
 > **実装ステータス（2026-09-09）: v004・r001は現行機能範囲でFIX**
-> 修正内容、再検証結果、既知の制限は[FIX記録](V004_R001_FIX_RECORD.md)を参照してください。
+> 修正内容、再検証結果、既知の制限は[FIX記録](_old/V004_R001_FIX_RECORD.md)を参照してください。
 > v004はv003互換探索と平均予測stage bundle、r001は直列・固定候補の平均予測接続まで実装済みです。工程入力ばらつきだけを流す実験評価器は、個別工程の閉ループ・予測空間合格後のbundleで独立oracle基準に合格しました。完全観測・期待レシピ既知の条件では、既知NGの工程順位付けと全工程反実仮想回復も物理oracleで検証済みです。ただしモデル誤差の同時サンプリング契約がないため、製品機能としての校正済み確率とはまだ扱いません。潜在原因推定と後戻り実験は後続範囲です。
 
 > **方針更新（2026-09-07）**

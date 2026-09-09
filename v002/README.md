@@ -334,7 +334,7 @@ python -m unittest discover -s v002\tests -v
 ## 16. レーザー溶接モデル検証
 
 ```powershell
-python validation\laser_welding_pseudo_experiment.py `
+python -m validation.single.src.checks.laser_welding_pseudo_experiment `
   --optimizer-root v002 `
   --trial trial_laser_welding_v002_validation `
   --iterations 15

@@ -27,8 +27,9 @@ Thumbs.db
 # Project-specific datasets, experiments, and generated artifacts
 data/
 **/trials/
-validation/baselines/
-validation/results/
+_old/
+validation/single/baselines/
+validation/single/results/
 **/output/*
 !**/output/.gitkeep
 

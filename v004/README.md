@@ -3,7 +3,7 @@
 > **ステータス: 現行機能範囲でFIX（2026-09-09）**
 > v003互換CLI、流入状態を固定した個別探索、schema 1.0のstage bundle、保存済み予測器の
 > 再読込を実装しています。工程ばらつき・測定誤差・出力相関を分離した確率伝播は未実装です。
-> 版固定の検証結果と制限は[FIX記録](../V004_R001_FIX_RECORD.md)を参照してください。
+> 版固定の検証結果と制限は[FIX記録](../_old/V004_R001_FIX_RECORD.md)を参照してください。
 
 ## 連結用3工程の個別閉ループ検証（2026-09-08）
 
@@ -17,7 +17,7 @@
   3/3 seedで最適点、最大NRMSE 7.55–8.82%、制約分類精度99.3–99.7%となり合格。
 
 最終9 trialの統合結果は
-[`stage_closed_loop_final_validation.json`](../multistage_validation/results/stage_closed_loop_final_validation.json)
+[`stage_closed_loop_final_validation.json`](../validation/multistage/results/stage_closed_loop_final_validation.json)
 に保存しています。`gp_support`と制約確率は別指標であり、後者は依然として
 `UNCALIBRATED_MODEL_PREDICTIVE_ESTIMATE`です。
 
@@ -128,10 +128,10 @@ trial直下の任意ファイル`stage_connection.json`で接続機能を有効�
 保存します。予測器は入力範囲と全項目を検査し、各出力の平均・標準偏差、支持度を返します。
 pickle予測器は信頼できるローカルbundleだけを読み込んでください。
 
-検証結果は[`v004_connected_production_validation.json`](../multistage_validation/results/v004_connected_production_validation.json)にあります。
+検証結果は[`v004_connected_production_validation.json`](../validation/multistage/results/v004_connected_production_validation.json)にあります。
 96件の流入状態付き塗工oracleデータで、27候補の流入値固定、全8出力の最大NRMSE 0.0322、
 保存・再読込差0を確認しました。通常案件は同一seedのv003/v004 15反復履歴が完全一致します。
-互換比較の要約は[`v003_v004_compatibility.json`](../validation/results/v004/v003_v004_compatibility.json)に保存しています。
+互換比較の要約は[`v003_v004_compatibility.json`](../validation/single/results/v004/v003_v004_compatibility.json)に保存しています。
 
 ## v004の責務
 

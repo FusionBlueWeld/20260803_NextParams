@@ -429,10 +429,10 @@ python -m unittest discover -s tests -v
 
 ## 19. レーザー溶接モデルによる共通検証
 
-プロジェクト直下の`validation/README.md`に、全バージョン共通の検証条件があります。
+プロジェクト直下の`validation/single/README.md`に、全バージョン共通の検証条件があります。
 
 ```powershell
-python validation\laser_welding_pseudo_experiment.py `
+python -m validation.single.src.checks.laser_welding_pseudo_experiment `
   --optimizer-root v001 `
   --trial trial_laser_welding_v001_001 `
   --iterations 15

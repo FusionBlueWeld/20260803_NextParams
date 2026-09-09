@@ -210,16 +210,16 @@ python main.py --version v003 --run trial_003 --n 3
 
 ```powershell
 python -m unittest discover -s v003/tests -p "test_*.py" -v
-python -m unittest validation/test_v003_validation.py -v
+python -m unittest validation/single/tests/test_v003_validation.py -v
 ```
 
-`validation/` のoracleを実験装置の代わりに呼び、15回の推薦・仮想実験とPNG作成を行えます。
+`validation/single/` のoracleを実験装置の代わりに呼び、15回の推薦・仮想実験とPNG作成を行えます。
 
 ```powershell
-python validation/v003_validation.py --mode laser --optimizer-root v003 `
+python -m validation.single.src.checks.v003_validation --mode laser --optimizer-root v003 `
   --trial trial_laser_welding_v003_validation --iterations 15 --recommendations 1
 
-python validation/v003_validation.py --mode synthetic --optimizer-root v003 `
+python -m validation.single.src.checks.v003_validation --mode synthetic --optimizer-root v003 `
   --synthetic-trial trial_synthetic_constraints_v003
 ```
 
@@ -238,8 +238,8 @@ python validation/v003_validation.py --mode synthetic --optimizer-root v003 `
 | `src/hybrid/optimizer.py` | EI、制約確率、探索方針、推薦選択 |
 | `src/policies/regions.py` | forbidden/preferred領域 |
 | `src/stopping/` | 設定、停止判定、指標、履歴出力 |
-| `validation/v003_validation.py` | oracle仮想実験と数値レポート |
-| `validation/plot_v003_validation.py` | 収束・スコア・予測断面・支持度のPNG |
+| `validation/single/src/checks/v003_validation.py` | oracle仮想実験と数値レポート |
+| `validation/single/src/checks/plot_v003_validation.py` | 収束・スコア・予測断面・支持度のPNG |
 
 ## 既知の限界
 

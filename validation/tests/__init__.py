@@ -1,1 +1,1 @@
-"""Contract and closed-loop harness tests."""
+"""検証パッケージ全体の配置と起動経路を検査します。"""

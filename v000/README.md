@@ -23,7 +23,7 @@ output/recommendations.csv
 v000では、Gaussian Processと制約付きベイズ最適化を使用します。ニューラルネット、物理アンカー、グラフィカルUIは使用しません。
 
 > **レーザー溶接モデルによる全バージョン共通検証**  
-> 検証するときは、プロジェクト直下の[validation/README.md](../validation/README.md)を読んでください。使用する論理モデル、固定条件、再実行コマンド、v000の基準結果をまとめています。
+> 検証するときは、プロジェクト直下の[validation/single/README.md](../validation/single/README.md)を読んでください。使用する論理モデル、固定条件、再実行コマンド、v000の基準結果をまとめています。
 
 このツールが出力するのは、確定した最適条件や量産条件ではありません。
 

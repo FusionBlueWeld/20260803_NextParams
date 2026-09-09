@@ -5,7 +5,7 @@
 > 同時サンプリング契約がないbundleの良品確率は、通常は推測せず`NOT_EVALUATED`と出力します。
 > 明示的な`process_variation`設定時だけ工程入力ばらつきの未校正推定を実行できますが、校正済み良品確率ではありません。
 > 平均予測接続・連結窓・窓中心選択・同時変更評価の版固定です。検証結果、校正schema 1.1への
-> 移行、既知の広域誤許容については[FIX記録](../V004_R001_FIX_RECORD.md)を参照してください。
+> 移行、既知の広域誤許容については[FIX記録](../_old/V004_R001_FIX_RECORD.md)を参照してください。
 
 ## 目的
 
@@ -87,7 +87,7 @@ headroom、境界の律速制約・予測平均・標準偏差・支持度を`ou
 全頂点、律速二変数断面を別途評価し、`simultaneous_window.json`へ保存します。有限標本の結果を
 厳密な9次元許容体積とは扱いません。
 
-連結物理検証は[`r001_production_validation.json`](../multistage_validation/results/r001_production_validation.json)に保存しています。塗工→乾燥→硬化の19,683候補で、
+連結物理検証は[`r001_production_validation.json`](../validation/multistage/results/r001_production_validation.json)に保存しています。塗工→乾燥→硬化の19,683候補で、
 全中間接続後の最終11出力が既存pipelineと誤差0、選択候補がoracleの仕様余裕最大候補と一致しました。
 個別Best連結は余裕-0.2679で不合格、全体調整は0.4464で合格し、余裕を0.7143改善しました。
 
@@ -101,7 +101,7 @@ v004 bundleのモデル誤差・出力同時分布・測定誤差は含まない
 
 最初の128点/工程のbundleでは、予測96.68%に対して独立物理oracle 70.92%、校正MAE
 0.3857、Brier score 0.2714となり不合格でした。この診断は
-[`probabilistic_r001_production_validation.json`](../multistage_validation/results/probabilistic_r001_production_validation.json)
+[`probabilistic_r001_production_validation.json`](../validation/multistage/results/probabilistic_r001_production_validation.json)
 に残しています。
 
 その後、3工程を個別に3 seed×15反復で検証し、予測空間基準に不合格だった硬化だけ広域学習点を
@@ -109,7 +109,7 @@ v004 bundleのモデル誤差・出力同時分布・測定誤差は含まない
 0.4277、個別Best連結から+0.6955となりました。工程ばらつき評価は予測100%に対して独立物理oracle
 99.976%、上位128候補のMAE 0.01936、Brier score 0.00733、全19,683候補基準の選択regret
 0.00098となり、定めたoracleベンチマーク基準に合格しました。結果は
-[`validated_individual_chain_probability_calibration.json`](../multistage_validation/results/validated_individual_chain_probability_calibration.json)
+[`validated_individual_chain_probability_calibration.json`](../validation/multistage/results/validated_individual_chain_probability_calibration.json)
 です。ただしbundle能力上はモデル誤差・出力同時分布を含まないため、表示状態は引き続き
 `UNCALIBRATED_PROCESS_VARIATION_ESTIMATE`です。
 
@@ -132,8 +132,8 @@ precision 90.40%、recall 75.21%でした。最終出力の最大NRMSEは、真�
 乾燥滞留時間故障は乾燥温度の変更で回復できましたが、硬化温度故障と4工程ドリフトは他条件で
 補償できませんでした。
 
-結果は[`r001_diagnostic_validation.json`](../multistage_validation/results/r001_diagnostic_validation.json)、
-再実行コードは[`r001_diagnostic_validation.py`](../multistage_validation/r001_diagnostic_validation.py)です。
+結果は[`r001_diagnostic_validation.json`](../validation/multistage/results/r001_diagnostic_validation.json)、
+再実行コードは[`r001_diagnostic_validation.py`](../validation/multistage/src/checks/r001_diagnostic_validation.py)です。
 工程内制約確率は「NGの発現箇所」、反実仮想改善量は「調整候補」であり、物理原因の事後確率
 ではありません。また現bundleに多出力同時サンプルと工程間モデル誤差相関がないため、校正済み
 end-to-end不良確率は未完成です。
@@ -149,8 +149,8 @@ TP 1,260、FP 0、FN 223、TN 691です。
 上位8候補のoracle再評価では予測7位にoracle `rho=3.3333`の候補もあるため、大域最適とは
 表示しません。同時変更では`rho`箱の一様乱数4,096点中、予測3,815点・oracle 3,903点が合格し、
 FP 0、FN 88でした。全512頂点は予測338点・oracle 440点が合格し、ここでもFPは0でした。
-詳細は[`connected_window_validation.json`](../multistage_validation/results/connected_window_validation.json)と
-[`window_center_joint_validation.json`](../multistage_validation/results/window_center_joint_validation.json)です。
+詳細は[`connected_window_validation.json`](../validation/multistage/results/connected_window_validation.json)と
+[`window_center_joint_validation.json`](../validation/multistage/results/window_center_joint_validation.json)です。
 
 ## r001の責務
 
@@ -281,7 +281,7 @@ r001は各工程の合格確率を単純に掛け合わせません。上流工�
 
 ## 最初の検証対象
 
-[`multistage_validation/`](../multistage_validation/README.md)の塗工→乾燥→熱硬化oracleを
+[`validation/multistage/`](../validation/multistage/README.md)の塗工→乾燥→熱硬化oracleを
 最初の対象とします。初期接続の完成条件は上記の段階実装で定めます。
 次は後続機能も含む到達目標です。
 

@@ -1,0 +1,35 @@
+{
+  "purpose": "ParamOptimizerの追加機能をレーザー溶接の擬似実験で比較検証するための固定条件",
+  "read_first": "README.md",
+  "oracle": {
+    "root": "validation/single/laser_welding",
+    "file": "physics_model.py",
+    "function": "evaluate_model",
+    "sha256": "57756A56F0E12C3DB5A5DA87E4D76E175B931535715BFFA2AF7FB78480124531",
+    "hash_normalization": "LF line endings",
+    "legacy_alias": "validation/single/oracle/physics_model.py"
+  },
+  "protocol": {
+    "objective": "maximize penetration_depth_mm",
+    "constraint": "spatter_level_0_9 <= 4",
+    "initial_experiments": 27,
+    "bayesian_iterations": 15,
+    "recommendation_used_each_iteration": 1,
+    "pseudo_noise": false,
+    "candidate_count": 13981
+  },
+  "parameter_grid": {
+    "laser_power_w": {"lower": 100, "upper": 6000, "step": 200},
+    "spot_diameter_um": {"lower": 50, "upper": 300, "step": 25},
+    "scan_speed_mm_s": {"lower": 10, "upper": 1000, "step": 25}
+  },
+  "baseline": {
+    "trial": "baselines/v000/trial_laser_welding_validation",
+    "report": "results/v000/trial_laser_welding_validation.md",
+    "history": "results/v000/trial_laser_welding_validation.json",
+    "final_optimum_ratio": 0.9660106928732793,
+    "final_rank_among_feasible_candidates": 2,
+    "feasible_candidate_count": 9223
+  },
+  "runner": "src/checks/laser_welding_pseudo_experiment.py"
+}
