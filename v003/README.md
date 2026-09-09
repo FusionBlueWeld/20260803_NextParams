@@ -2,6 +2,77 @@
 
 v003は、技能者の経験則を「説明文」ではなくニューラルネット（NN）の損失へ直接入れ、次の実験条件へ反映する版です。複雑な物理式より先に、現場で言語化しやすい単純な知識、実験可能範囲、終了判断を扱います。v000〜v002には依存せず、既存版も変更しません。
 
+## 目視レビューの入口
+
+部内で共有しているv002の粒度を基準に、v004と同じ名前・責務のファイルへ整理しています。
+入口・入力設定・実行手順・計算・出力を分け、各ファイル冒頭に役割を記載しています。
+
+```text
+v003/
+├─ README.md / VALIDATION_REPORT.md / requirements.txt
+├─ src/
+│  ├─ cli.py                 引数の解釈・終了コード・エラー表示
+│  ├─ trials.py              trial作成・存在確認・実験CSV準備
+│  ├─ trial_inputs.py        prepare/run共通の設定読込とTrialInputs
+│  ├─ workflow.py            入力→停止→学習→診断→公開の実行順序
+│  ├─ settings.py            定数・ProblemDefinition・VariableDefinition
+│  ├─ data_loader.py         CSVの読書き
+│  ├─ validation.py          問題CSV・実験CSVの検査
+│  ├─ preprocessing.py       同一条件の集約と正規化
+│  ├─ parameter_space.py     候補グリッド
+│  ├─ diagnostics.py         NN・Hybrid・実測の知識診断とCSV保存
+│  ├─ reporting.py           問題設定の確認表示
+│  ├─ knowledge.py / knowledge_loss.py   知識ルールの読込・採点
+│  ├─ hybrid/                NN・GP・支持度・推薦・解空間出力
+│  ├─ policies/              禁止領域と優先領域
+│  └─ stopping/              停止条件・収束判定・履歴
+├─ tests/
+└─ trials/                   利用者の入力と生成結果
+```
+
+| v002で共有している責務 | v003・v004で共通の配置 |
+|---|---|
+| `src/cli.py` の操作別処理 | [cli.py](src/cli.py) → [trials.py](src/trials.py) / [workflow.py](src/workflow.py) |
+| 設定・入力読込・検査 | [trial_inputs.py](src/trial_inputs.py)が各読込器・検査器を同じ順序で呼ぶ |
+| `hybrid/model.py`・`optimizer.py` | [hybrid/](src/hybrid/)に学習と推薦を維持 |
+| 結果表示・CSV保存 | [reporting.py](src/reporting.py)、[diagnostics.py](src/diagnostics.py)、[hybrid/reporting.py](src/hybrid/reporting.py) |
+
+### 処理の読み順と公開条件
+
+1. `cli.py` で `--new`・`--prepare`・`--run` の入口を確認します。
+2. `trials.py` → `trial_inputs.py` で入力ファイルと既定値の扱いを確認します。
+3. `workflow.py` の番号付きコメントを追い、`hybrid/` の学習・推薦処理を読みます。
+4. `diagnostics.py` と `stopping/` で、推薦を出さない条件を確認します。
+5. `hybrid/reporting.py` で推薦CSVと全候補の解空間を確認します。
+
+```text
+CSV・任意設定 → 共通の入力検査 → 候補と実測の準備
+                                      ↓
+                             学習前の必須停止判定
+                                      ↓
+                          Hybrid学習 → 推薦条件の計算
+                                      ↓
+                   NN・Hybrid・実測の必須知識ルール診断
+                                      ↓
+                         解空間・停止履歴保存 → 推薦公開
+```
+
+`trial_inputs.py` はprepareとrunの共通処理です。実験CSVの内容はrun時に検査します。
+必須知識ルールに違反・未検証があれば新しい推薦を公開せず、前回の推薦は履歴で確認できます。
+共通ファイルはv003内に保持しており、v004のコードを実行時にimportする依存はありません。
+
+### v004との機能差
+
+| 項目 | v003 | v004で追加された機能 |
+|---|---|---|
+| 問題の入力変数 | 全parameterを操作候補として探索 | 操作条件と流入状態を分離 |
+| 探索候補 | 問題CSVの全候補から既測定点・禁止領域を除外 | 現在の流入状態で候補を固定し、同じ状態内で既測定点を判定 |
+| 改善基準・停止履歴 | 単一trialの実測と既存の設定契約 | 流入状態に対応した実測の選択と接続設定の記録 |
+| 工程接続の設定・保存 | 対象外 | `connection.py`・`stage_bundle.py` |
+
+ファイル名・関数名・コメントの粒度は共通部分でそろえ、上記の機能差がコード差分として
+残るようにしています。学習係数・推薦方式・CSV列・既存の停止履歴形式は維持しています。
+
 ## バージョン上の位置付け
 
 v003では、当初検討していた具体的な物理式によるアンカーを、技能者が入力できる
@@ -13,11 +84,11 @@ v003では、当初検討していた具体的な物理式によるアンカー�
 新設する」案は現在のロードマップから外し、必要性が明確になった場合に改めて検討します。
 
 v003は単一工程・単一trial内で完結し、複数工程を接続する共通インターフェースは
-持ちません。後続の暫定構想は、[v004](../v004/README.md)でr接続用のstage bundleを
-公開し、[r001](../r001/README.md)が複数工程を接続する分担です。v004/r001はまだ
-未実装・未FIXであり、今後の検証により変更する可能性があります。
+持ちません。[v004](../v004/README.md)は流入状態を扱う個別探索とstage bundleの
+公開を追加し、[r001](../r001/README.md)が複数工程を接続する分担です。両版は現行機能範囲で
+実装・FIX済みです。今回のv003の整理では、これらの接続機能を含めず、共通部分の配置と説明をそろえています。
 
-## TL;DR（人・LLM向け索引）
+## 操作と入出力の索引
 
 - 実行入口: リポジトリ直下の `main.py`。必ず `--version v003` を指定
 - 問題定義: `trials/<trial>/problem.csv`
@@ -30,6 +101,7 @@ v003は単一工程・単一trial内で完結し、複数工程を接続する�
 - 知識違反診断: `trials/<trial>/output/knowledge_diagnostics.csv`
 - 終了判定と履歴: `trials/<trial>/output/stopping_status.json`
 - NN損失の実装: `src/knowledge_loss.py` → `src/hybrid/nn_component.py`
+- 実行手順: `src/workflow.py`、共通入力: `src/trial_inputs.py`
 - 全体統合: `src/hybrid/model.py`、推薦: `src/hybrid/optimizer.py`
 - 禁止/優先領域: `src/policies/`、終了判定: `src/stopping/`
 
@@ -204,9 +276,10 @@ python main.py --version v003 --run trial_003 --n 3
 
 ## 検証
 
-標準ライブラリのunittestで製品コードを検査します。
+標準ライブラリのunittestで製品コードを検査します。各版が同じ `src` パッケージ名を
+使うため、バージョンごとに別プロセスで実行してください。
 
-今回の確定検証値と考察は [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md) に保存しています。
+過去の探索性能と今回の構造整理の確認結果は [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md) に保存しています。
 
 ```powershell
 python -m unittest discover -s v003/tests -p "test_*.py" -v
@@ -224,22 +297,6 @@ python -m validation.single.src.checks.v003_validation --mode synthetic --optimi
 ```
 
 レーザー検証は収束履歴、oracle上の真値との全候補誤差、適合判定、最終予測空間をJSON/Markdown/PNGへ保存します。合成検証は「非負」「P1に対する単調増加」「P2の影響小」を独立に検査します。
-
-## モジュール配置
-
-| パス | 責務 |
-|---|---|
-| `src/cli.py` | new/prepare/runのオーケストレーション |
-| `src/knowledge.py` | 知識CSV、制約点、NN/Hybrid/実測診断 |
-| `src/knowledge_loss.py` | ルール別損失と予測値勾配 |
-| `src/hybrid/nn_component.py` | NumPy NNと知識損失の逆伝播 |
-| `src/hybrid/gp_component.py` | RBF残差GP |
-| `src/hybrid/model.py` | 知識付きNN、残差GP、支持度の統合 |
-| `src/hybrid/optimizer.py` | EI、制約確率、探索方針、推薦選択 |
-| `src/policies/regions.py` | forbidden/preferred領域 |
-| `src/stopping/` | 設定、停止判定、指標、履歴出力 |
-| `validation/single/src/checks/v003_validation.py` | oracle仮想実験と数値レポート |
-| `validation/single/src/checks/plot_v003_validation.py` | 収束・スコア・予測断面・支持度のPNG |
 
 ## 既知の限界
 
