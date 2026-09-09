@@ -7,6 +7,100 @@
 > 平均予測接続・連結窓・窓中心選択・同時変更評価の版固定です。検証結果、校正schema 1.1への
 > 移行、既知の広域誤許容については[FIX記録](../_old/V004_R001_FIX_RECORD.md)を参照してください。
 
+
+## 目視レビューの入口
+
+v002と同じく「1ファイルの責務を説明できる」粒度で整理しています。
+CLIは操作の受付、workflowは実行順序、計算は対象別のモジュールが担当します。
+
+```text
+r001/
+├─ README.md
+├─ src/
+│  ├─ cli.py                 引数の解釈・終了コード・エラー表示
+│  ├─ settings.py            フォルダ・設定ファイル名
+│  ├─ trials.py              trial作成・prepare
+│  ├─ data_loader.py         JSON・CSVの保存
+│  ├─ validation.py          pipeline・manifest・接続・任意設定の検査
+│  ├─ workflow.py            検査→接続→候補評価→追加評価→保存
+│  ├─ bundle_runtime.py      v004の保存済み予測器を復元する読込境界
+│  ├─ pipeline.py            平均予測の接続・仕様余裕・個別Best連結
+│  ├─ window_calibration.py  残差校正の適用契約と予測区間
+│  ├─ process_variation.py   工程入力ばらつきの標本評価と順位付け
+│  └─ windows/
+│     ├─ evaluation.py       工程制約・接続範囲・最終仕様・支持度の統合判定
+│     ├─ profiles.py         一変数断面の連続区間と境界理由
+│     ├─ selection.py        多様な候補の選択と対称余裕rhoの比較
+│     └─ simultaneous.py     同時変更の箱内標本・頂点・二変数断面
+├─ tests/
+└─ trials/                   pipeline.jsonと生成結果
+```
+
+| v002で共有している責務 | r001で読む場所 |
+|---|---|
+| `src/cli.py` の操作別処理 | [cli.py](src/cli.py) → [trials.py](src/trials.py) / [workflow.py](src/workflow.py) |
+| 入力検査と設定 | [validation.py](src/validation.py)・[settings.py](src/settings.py) |
+| モデル評価と最適化 | [pipeline.py](src/pipeline.py)・[windows/](src/windows/) |
+| 出力 | `workflow.py`が出力項目を組み立て、[data_loader.py](src/data_loader.py)が保存 |
+| r001固有の接続境界 | [bundle_runtime.py](src/bundle_runtime.py)でv004の予測器を読み込む |
+
+### 処理の読み順
+
+1. `cli.py` → `trials.py` で利用者の操作と設定ファイルを確認します。
+2. `validation.py` で工程順・単位・入力供給元・校正条件の拒否条件を確認します。
+3. `workflow.py` → `bundle_runtime.py` → `pipeline.py` でモデルの読込と接続を追います。
+4. `windows/evaluation.py` → `profiles.py` → `selection.py` で合否・窓・中心選択を確認します。
+5. 設定で有効な場合だけ `simultaneous.py` と `process_variation.py` を読みます。
+
+```text
+pipeline.json → manifest・接続契約の検査 → v004予測器の読込
+                                               ↓
+                 同じ行の状態を上流から下流へ伝播 → 全候補の余裕・支持度
+                                               ↓
+                         順位付け → 任意の窓中心選択 → 結果保存
+                                               ↓
+                       任意の同時変更評価・入力ばらつき評価
+```
+
+### 判定に使う言葉
+
+| 項目 | 意味 |
+|---|---|
+| 仕様余裕 | 規格までの距離を尺度で割った値。全仕様の最小値が全体の余裕 |
+| process窓 | 工程内制約・接続範囲・最終仕様を満たす範囲 |
+| trusted窓 | process窓に支持度条件も加えた範囲 |
+| ボトルネック | その条件で最も厳しい制約・支持度条件 |
+| rho | 必要な変動幅に対する左右の余裕比の最小値。候補中心の比較に使う |
+| 良品率 | 指定した入力ばらつきの有限標本に対する未校正の予測比率 |
+
+平均予測・支持度・良品率は別の指標です。確率評価を指定しなければ `NOT_EVALUATED` とし、
+支持度を正解確率に読み替えません。Wilson区間は標本誤差を表し、モデル誤差を含みません。
+
+### 共通処理と保存モデルの境界
+
+- `prepare` と `run` は同じ `validate_pipeline()` で接続を検査します。
+- 窓の走査・中心選択・同時変更は、同じ `evaluate_connected_window()` を使います。
+- 区間方式の切替は `window_calibration.interval_bounds()` に集約しています。
+- pickleの型名 `src.*` を復元する処理は `bundle_runtime.py` に限定しています。
+  v004のクラス配置を保ち、保存済みbundleをそのまま読みます。この読込器はCLIプロセス用です。
+
+検証器もCLI内部の補助関数ではなく、担当モジュールの関数を参照します。
+例えば旧 `r001.src.cli._run_connected_window` は
+`r001.src.windows.evaluation.evaluate_connected_window` に移りました。
+外部スクリプトで内部関数を直接importしている場合は、新しい担当モジュールへ更新してください。
+利用者向け `main.py --version r001 ...` の操作は維持しています。
+
+### テスト
+
+```powershell
+python -m unittest discover -s r001/tests -v
+python -m unittest discover -s validation -t . -v
+```
+
+**2026-09-09の構造整理後の確認:** 15件の自動テストが合格（既存10件＋接続契約5件）。保存済み3工程・19,683候補の再実行では、推薦・窓中心候補・連結窓・同時変更・ばらつき評価・要約の6ファイルが変更前とバイト単位で一致しました。
+共通検証器の88件も合格しています。学習器・物理モデル・閾値を変更する拡張は今回行っていません。
+
+
 ## 目的
 
 r001は、複数工程で個別に作成・更新された[v004 stage bundle](../v004/README.md)を蓄積し、

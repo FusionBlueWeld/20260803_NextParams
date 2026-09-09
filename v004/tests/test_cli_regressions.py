@@ -15,7 +15,7 @@ VERSION_ROOT = Path(__file__).resolve().parents[1]
 if str(VERSION_ROOT) not in sys.path:
     sys.path.insert(0, str(VERSION_ROOT))
 
-from src import cli  # noqa: E402
+from src import cli, trials  # noqa: E402
 from src.data_loader import read_csv, write_csv_atomic  # noqa: E402
 from src.knowledge import KNOWLEDGE_HEADER  # noqa: E402
 from src.policies.regions import SEARCH_REGIONS_HEADER  # noqa: E402
@@ -45,7 +45,7 @@ class CliRegressionTest(unittest.TestCase):
         ]
         self.write_problem()
         self.write_observations()
-        patcher = patch.object(cli, "trial_path", return_value=self.trial)
+        patcher = patch.object(trials, "trial_path", return_value=self.trial)
         patcher.start()
         self.addCleanup(patcher.stop)
 

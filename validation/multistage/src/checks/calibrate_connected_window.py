@@ -14,7 +14,7 @@ import numpy as np
 
 from validation.multistage.functional_coating.pipeline import LINE_INPUT_BOUNDS, evaluate_line
 from validation.multistage.src.checks.r001_diagnostic_validation import _lhs, _load_runtime
-from r001.src.cli import _run_connected_window
+from r001.src.windows.evaluation import evaluate_connected_window
 from r001.src.window_calibration import calibration_contract
 
 
@@ -100,7 +100,7 @@ def run(samples: int = 4096, seed: int = 20260921) -> dict[str, object]:
     }
     prediction_config.pop("_connected_window_calibration", None)
     _, truth, values = _dataset(config, samples, seed)
-    predicted = _run_connected_window(predictors, prediction_config, connections, values)
+    predicted = evaluate_connected_window(predictors, prediction_config, connections, values)
     _, tuning_truth, tuning_values = _dataset(config, samples, seed + 1)
     tuning_true = _truth_feasible(predictors, config, tuning_truth)
     comparisons = []
@@ -114,7 +114,7 @@ def run(samples: int = 4096, seed: int = 20260921) -> dict[str, object]:
                 **candidate_config["connected_window"], "interval_method": method,
             }
             candidate_config["_connected_window_calibration"] = {"offsets": offsets}
-            tuning_prediction = _run_connected_window(predictors, candidate_config, connections, tuning_values)
+            tuning_prediction = evaluate_connected_window(predictors, candidate_config, connections, tuning_values)
             selected = np.asarray(tuning_prediction["trusted_feasible"], dtype=bool)
             tp = int(np.sum(selected & tuning_true))
             fp = int(np.sum(selected & ~tuning_true))

@@ -5,6 +5,90 @@
 > 再読込を実装しています。工程ばらつき・測定誤差・出力相関を分離した確率伝播は未実装です。
 > 版固定の検証結果と制限は[FIX記録](../_old/V004_R001_FIX_RECORD.md)を参照してください。
 
+
+## 目視レビューの入口
+
+部内で共有しているv002の粒度を基準に、入口・入力設定・実行手順・計算・出力を分けています。
+まずこの構成表と読み順を確認してから、各ファイル冒頭の責務説明を読んでください。
+
+```text
+v004/
+├─ README.md / requirements.txt
+├─ src/
+│  ├─ cli.py                 引数の解釈・終了コード・エラー表示
+│  ├─ trials.py              trial作成・存在確認・実験CSV準備
+│  ├─ trial_inputs.py        prepare/run共通の設定読込とTrialInputs
+│  ├─ workflow.py            入力→停止→学習→診断→公開の実行順序
+│  ├─ settings.py            定数・ProblemDefinition・VariableDefinition
+│  ├─ data_loader.py         CSVの読書き
+│  ├─ validation.py          問題CSV・実験CSVの検査
+│  ├─ preprocessing.py       同一条件の集約と正規化
+│  ├─ parameter_space.py     候補グリッド
+│  ├─ diagnostics.py         NN・Hybrid・実測の知識診断とCSV保存
+│  ├─ reporting.py           問題設定の確認表示
+│  ├─ connection.py          操作条件と流入状態の役割・範囲
+│  ├─ stage_bundle.py        予測器・manifestの保存と再読込
+│  ├─ knowledge.py / knowledge_loss.py   知識ルールの読込・採点
+│  ├─ hybrid/                NN・GP・支持度・推薦・解空間出力
+│  ├─ policies/              禁止領域と優先領域
+│  └─ stopping/              停止条件・収束判定・履歴
+├─ tests/
+└─ trials/                   利用者の入力と生成結果
+```
+
+| v002で共有している責務 | v004で読む場所 |
+|---|---|
+| `src/cli.py` の操作別処理 | [cli.py](src/cli.py) → [trials.py](src/trials.py) / [workflow.py](src/workflow.py) |
+| 設定・入力読込・検査 | [trial_inputs.py](src/trial_inputs.py)が既存の各読込器・検査器を同じ順序で呼ぶ |
+| `hybrid/model.py`・`optimizer.py` | v004でも [hybrid/](src/hybrid/) に維持 |
+| 結果表示・CSV保存 | [reporting.py](src/reporting.py)、[diagnostics.py](src/diagnostics.py)、[hybrid/reporting.py](src/hybrid/reporting.py) |
+| v004固有の接続機能 | [connection.py](src/connection.py) → [stage_bundle.py](src/stage_bundle.py) |
+
+### 処理の読み順と公開条件
+
+1. `cli.py` で `--new`・`--prepare`・`--run` の入口を確認します。
+2. `trials.py` → `trial_inputs.py` で入力ファイルと既定値の扱いを確認します。
+3. `workflow.py` の番号付きコメントを追い、`hybrid/` の学習・推薦処理を読みます。
+4. `diagnostics.py` と `stopping/` で、推薦を出さない条件を確認します。
+5. `hybrid/reporting.py` と `stage_bundle.py` で公開される成果物を確認します。
+
+```text
+CSV・任意設定 → 共通の入力検査 → 現在の流入状態に固定した候補
+                                      ↓
+                             学習前の必須停止判定
+                                      ↓
+                          Hybrid学習 → 推薦条件の計算
+                                      ↓
+                   NN・Hybrid・実測の必須知識ルール診断
+                                      ↓
+                     解空間・停止履歴保存 → 推薦公開 → bundle保存
+```
+
+`trial_inputs.py` はprepareとrunの共通処理です。実験CSVの内容はrun時に検査します。
+広域の流入状態データは学習に使い、現在の流入状態に一致する実測を改善基準にします。
+必須知識ルールに違反・未検証があれば新しい推薦を公開せず、前回の推薦は履歴で確認できます。
+
+### 保存済みモデルとの互換性
+
+`StagePredictor`・`OracleStagePredictor` は既存の `stage_bundle.py` に残しています。
+pickleが記録するクラス名と配置を保つためです。計算係数・学習方式・CSV列・bundle schemaは
+今回の責務分割では変更していません。バージョンをまたぐ共通ライブラリは増やさず、
+v004内の共通処理をまとめています。
+
+### テスト
+
+作業フォルダ直下から、各バージョンのテストを別プロセスで実行してください。
+各版が `src` という同じパッケージ名を使うため、複数版のテストを一括importしない運用です。
+
+```powershell
+python -m unittest discover -s v004/tests -v
+python -m unittest discover -s validation -t . -v
+```
+
+**2026-09-09の構造整理後の確認:** 33件の自動テストが合格。熱硬化・seed 0・推薦1件・反復1回の実CLIで、変更前後の最良値、regret、予測誤差、制約適合率が一致しました。
+共通検証器の88件も合格しています。学習器・物理モデル・閾値を変更する拡張は今回行っていません。
+
+
 ## 連結用3工程の個別閉ループ検証（2026-09-08）
 
 塗工・乾燥・硬化をそれぞれ独立したv004 trialとして、3 seed×15反復で物理oracleへ戻す

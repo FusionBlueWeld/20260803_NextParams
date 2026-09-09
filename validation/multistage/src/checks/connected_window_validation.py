@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 
 from validation.multistage.functional_coating.pipeline import evaluate_line
-from r001.src.cli import _contiguous_true_interval
+from r001.src.windows.profiles import contiguous_true_interval
 
 
 from ..settings import PROJECT_ROOT as ROOT
@@ -93,7 +93,7 @@ def run() -> dict[str, object]:
         oracle_mask = np.zeros(len(axis), dtype=bool)
         for index, value in enumerate(axis):
             oracle_mask[index] = _oracle_process_feasible({**center, name: float(value)})[0]
-        oracle_low, oracle_high = _contiguous_true_interval(axis, oracle_mask, center[name])
+        oracle_low, oracle_high = contiguous_true_interval(axis, oracle_mask, center[name])
         learned_low, learned_high = profile["process_window"]
         learned_intervals = profile.get("buffered_all_intervals", [profile["process_window"]])
         trusted_intervals = profile.get("trusted_all_intervals", [profile["trusted_window"]])

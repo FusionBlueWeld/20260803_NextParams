@@ -15,9 +15,10 @@ import numpy as np
 from validation.multistage.src.checks.calibrate_connected_window import _truth_feasible
 from validation.multistage.src.checks.connected_window_validation import _oracle_process_feasible
 from validation.multistage.functional_coating.pipeline import LINE_INPUT_BOUNDS, evaluate_line
-from r001.src.cli import (
-    _contiguous_true_interval, _load_bundle_runtime, _read_config, _run_connected_window, _validate,
-)
+from r001.src.windows.profiles import contiguous_true_interval
+from r001.src.bundle_runtime import load_bundle_runtime
+from r001.src.validation import load_pipeline_config, validate_pipeline
+from r001.src.windows.evaluation import evaluate_connected_window
 
 
 from ..settings import PROJECT_ROOT as ROOT
@@ -26,9 +27,9 @@ REPORT = ROOT / "validation/multistage/results/window_center_joint_validation.js
 
 
 def _load():
-    config = _read_config(TRIAL)
-    stages = _validate(TRIAL, config)
-    load_bundle = _load_bundle_runtime()
+    config = load_pipeline_config(TRIAL)
+    stages = validate_pipeline(TRIAL, config)
+    load_bundle = load_bundle_runtime()
     predictors = [(item, manifest, load_bundle(path)[1]) for item, path, manifest in stages]
     connections = {row["to"]: row["from"] for row in config["connections"]}
     return config, predictors, connections
@@ -52,7 +53,7 @@ def _oracle_truth(config: dict, controls: dict[str, np.ndarray]) -> tuple[dict, 
 
 
 def _compare(config, predictors, connections, controls) -> dict[str, object]:
-    predicted = np.asarray(_run_connected_window(predictors, config, connections, _values(config, controls))["trusted_feasible"], dtype=bool)
+    predicted = np.asarray(evaluate_connected_window(predictors, config, connections, _values(config, controls))["trusted_feasible"], dtype=bool)
     truth, _ = _oracle_truth(config, controls)
     actual = _truth_feasible(predictors, config, truth)
     return {
@@ -68,7 +69,7 @@ def _oracle_rho(center: dict[str, float], required: dict[str, float], scan_point
     for name, (lower, upper) in ((name, LINE_INPUT_BOUNDS[name]) for name in required):
         axis = np.unique(np.append(np.linspace(lower, upper, scan_points), center[name]))
         mask = np.asarray([_oracle_process_feasible({**center, name: float(value)})[0] for value in axis])
-        low, high = _contiguous_true_interval(axis, mask, center[name])
+        low, high = contiguous_true_interval(axis, mask, center[name])
         windows[name] = [low, high]
         ratios[name] = None if low is None else min(center[name] - low, high - center[name]) / required[name]
     return {"rho": min(value for value in ratios.values() if value is not None), "ratios": ratios, "windows": windows}

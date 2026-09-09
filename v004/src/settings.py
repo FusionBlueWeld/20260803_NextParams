@@ -1,4 +1,4 @@
-"""v003全体で共有する設定値とデータ構造。
+"""v004全体で共有する設定値とデータ構造。
 
 このファイルには、計算処理そのものではなく、複数の機能から参照する
 定数と「データの入れ物」をまとめています。
@@ -123,6 +123,6 @@ class ProblemDefinition:
 
 
 def trial_path(trial_name: str) -> Path:
-    """trial名から、v003内のtrialフォルダを組み立てます。"""
+    """trial名から、v004内のtrialフォルダを組み立てます。"""
 
     return TRIALS_ROOT / trial_name

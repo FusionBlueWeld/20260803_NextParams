@@ -23,7 +23,8 @@ from validation.multistage.functional_coating.pipeline import (
     LINE_INPUT_BOUNDS,
     evaluate_line,
 )
-from r001.src.cli import _load_bundle_runtime, _margin_and_feasible, _run_stage_chain
+from r001.src.bundle_runtime import load_bundle_runtime
+from r001.src.pipeline import margin_and_feasible, run_stage_chain
 
 
 from ..settings import PROJECT_ROOT as ROOT
@@ -45,7 +46,7 @@ def _load_runtime() -> tuple[dict, list, dict[str, str]]:
     """固定trialの設定とbundleを読み込み、予測器一覧と接続先の対応を返します。"""
 
     config = json.loads(PIPELINE_PATH.read_text(encoding="utf-8"))
-    load_stage_bundle = _load_bundle_runtime()
+    load_stage_bundle = load_bundle_runtime()
     predictors = []
     for item in config["stages"]:
         manifest, predictor = load_stage_bundle(Path(item["bundle"]))
@@ -139,7 +140,7 @@ def _end_to_end(config: dict, predictors: list, connections: dict[str, str]) -> 
         "coating.incoming_solids_fraction": conditions["material_solids_fraction"],
         "coating.incoming_bubble_fraction": conditions["material_bubble_fraction"],
     }
-    free, support, valid = _run_stage_chain(predictors, config, connections, values)
+    free, support, valid = run_stage_chain(predictors, config, connections, values)
     teacher = {}
     teacher["coating"] = _teacher_forced_stage(*predictors[0], conditions, {
         "incoming_viscosity_pa_s": conditions["material_viscosity_pa_s"],
@@ -169,7 +170,7 @@ def _end_to_end(config: dict, predictors: list, connections: dict[str, str]) -> 
             "max_teacher_forced_nrmse": max(row["nrmse"] for row in teacher_metrics.values()),
             "max_free_running_nrmse": max(row["nrmse"] for row in free_metrics.values()),
         }
-    predicted_margin, predicted_ok = _margin_and_feasible(free["curing"], config["final_specifications"])
+    predicted_margin, predicted_ok = margin_and_feasible(free["curing"], config["final_specifications"])
     true_ok = np.asarray(truth["final"]["feasible"], dtype=bool)
     usable = np.asarray(valid, dtype=bool) & np.isfinite(predicted_margin)
     accuracy = float(np.mean(predicted_ok[usable] == true_ok[usable]))
@@ -243,9 +244,9 @@ def _scalar_prediction(config: dict, predictors: list, connections: dict[str, st
         "coating.incoming_solids_fraction": conditions["material_solids_fraction"],
         "coating.incoming_bubble_fraction": conditions["material_bubble_fraction"],
     })
-    means, support, valid = _run_stage_chain(predictors, config, connections, values)
+    means, support, valid = run_stage_chain(predictors, config, connections, values)
     final = {name: np.asarray(value).reshape(1) for name, value in means["curing"].items()}
-    margin, feasible = _margin_and_feasible(final, config["final_specifications"])
+    margin, feasible = margin_and_feasible(final, config["final_specifications"])
     return means, {"margin": float(margin[0]), "feasible": bool(feasible[0]), "support": float(support), "valid": bool(valid)}
 
 
@@ -318,8 +319,8 @@ def _search(config: dict, predictors: list, connections: dict[str, str], conditi
         "coating.incoming_solids_fraction": np.full(size, conditions["material_solids_fraction"]),
         "coating.incoming_bubble_fraction": np.full(size, conditions["material_bubble_fraction"]),
     })
-    outputs, support, valid = _run_stage_chain(predictors, config, connections, values)
-    margin, feasible = _margin_and_feasible(outputs["curing"], config["final_specifications"])
+    outputs, support, valid = run_stage_chain(predictors, config, connections, values)
+    margin, feasible = margin_and_feasible(outputs["curing"], config["final_specifications"])
     eligible = feasible & valid & (support >= 0.5)
     if not np.any(eligible):
         eligible = valid & np.isfinite(margin)

@@ -5,7 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
-from r001.src.cli import _run_connected_window, UserInputError
+from r001.src.windows.evaluation import evaluate_connected_window
+from r001.src.validation import UserInputError
 from r001.src.window_calibration import calibration_contract, validate_calibration
 
 
@@ -74,14 +75,14 @@ class CalibrationTests(unittest.TestCase):
             outcomes = []
             for method in ("residual_quantile", "standardized_residual_quantile"):
                 config["connected_window"]["interval_method"] = method
-                result = _run_connected_window(ps, config, links, {"x": .7})
+                result = evaluate_connected_window(ps, config, links, {"x": .7})
                 outcomes.append(bool(result["trusted_feasible"]))
             self.assertEqual(outcomes, [True, False])
 
     def test_runtime_rejects_varying_external_context(self):
         config = copy.deepcopy(self.config); config["_connected_window_calibration"] = self.cal
         with self.assertRaises(UserInputError):
-            _run_connected_window([({"id": "s"}, self.manifest, Predictor())], config, {},
+            evaluate_connected_window([({"id": "s"}, self.manifest, Predictor())], config, {},
                                   {"x": .7, "s.incoming": np.asarray([.1, .2])})
 
 

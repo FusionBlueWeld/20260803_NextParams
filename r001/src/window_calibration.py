@@ -1,4 +1,4 @@
-"""Binding and validation of connected residual calibration artifacts."""
+"""連結窓の残差校正ファイルの適用契約と区間計算。"""
 
 import hashlib
 import json
@@ -6,7 +6,8 @@ import math
 
 
 def calibration_contract(config, stages):
-    """Bind empirical tuning to the exact chain, manifests and decision policy."""
+    """校正を工程順・予測器とmanifestのハッシュ・接続・原料状態・判定方針へ結び付けます。"""
+
     window = config.get("connected_window") or {}
     return {
         "stage_order": [str(item["id"]) for item, _, _ in stages],
@@ -28,6 +29,8 @@ def calibration_contract(config, stages):
 
 
 def validate_calibration(calibration, config, stages):
+    """校正の適用契約と残差区間を検査し、異なる条件や不完全な係数を拒否します。"""
+
     if not isinstance(calibration, dict):
         raise ValueError("残差調整情報はobjectで指定してください。")
     if calibration.get("schema_version") != "1.1":
@@ -57,6 +60,8 @@ def validate_calibration(calibration, config, stages):
 
 
 def interval_bounds(values, std, method, offset, confidence_z):
+    """指定方式に従って予測区間を作ります。不足時に従来方式へ黙って切り替えません。"""
+
     import numpy as np
     if method == "std_multiplier":
         return values - confidence_z * std, values + confidence_z * std

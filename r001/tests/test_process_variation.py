@@ -6,13 +6,10 @@ import unittest
 
 import numpy as np
 
-from r001.src.cli import (
-    _all_true_intervals,
-    _diverse_candidate_indices,
-    _process_variation_rows,
-    _run_connected_window,
-    _wilson_interval,
-)
+from r001.src.windows.profiles import all_true_intervals
+from r001.src.windows.selection import diverse_candidate_indices
+from r001.src.process_variation import process_variation_rows, wilson_interval
+from r001.src.windows.evaluation import evaluate_connected_window
 
 
 class FakePredictor:
@@ -29,7 +26,7 @@ class FakePredictor:
 class ProcessVariationTests(unittest.TestCase):
     def test_wilson_interval_contains_observed_fraction(self):
         successes = np.asarray([0, 50, 100])
-        low, high = _wilson_interval(successes, 100)
+        low, high = wilson_interval(successes, 100)
         observed = successes / 100
         self.assertTrue(np.all(low <= observed))
         self.assertTrue(np.all(observed <= high))
@@ -52,7 +49,7 @@ class ProcessVariationTests(unittest.TestCase):
             },
         }
         values = {"control": np.asarray([0.2, 0.8])}
-        rows = _process_variation_rows(
+        rows = process_variation_rows(
             predictors, config, {}, ["control"], values,
             np.asarray([0, 1]), np.asarray([-0.2, 0.4]),
         )
@@ -72,7 +69,7 @@ class ProcessVariationTests(unittest.TestCase):
             "final_specifications": [{"name": "quality", "direction": "greater_equal", "target": 0.5}],
             "connected_window": {"support_threshold": 0.5, "enforce_local_constraints": True},
         }
-        result = _run_connected_window(
+        result = evaluate_connected_window(
             predictors, config, {}, {"control": np.asarray([0.2, 0.5, 1.0])},
         )
         np.testing.assert_array_equal(result["process_feasible"], [False, True, False])
@@ -85,7 +82,7 @@ class ProcessVariationTests(unittest.TestCase):
             "controls": ["control"], "incoming_context": ["incoming"],
             "predicted_outputs": ["quality"], "local_constraints": [],
         }
-        result = _run_connected_window(
+        result = evaluate_connected_window(
             [({"id": "stage"}, manifest, FakePredictor())],
             {"external_context": {"stage.incoming": 0.1},
              "final_specifications": [{"name": "quality", "direction": "greater_equal", "target": 0.5}],
@@ -99,8 +96,8 @@ class ProcessVariationTests(unittest.TestCase):
         points = np.asarray([[0., 0.], [0., 1.], [1., 0.], [1., 1.], [.5, .5]])
         eligible = np.asarray([True, False, True, True, True])
         order = np.asarray([4, 3, 2, 0, 1])
-        first = _diverse_candidate_indices(points, eligible, order, 3)
-        second = _diverse_candidate_indices(points, eligible, order, 3)
+        first = diverse_candidate_indices(points, eligible, order, 3)
+        second = diverse_candidate_indices(points, eligible, order, 3)
         np.testing.assert_array_equal(first, second)
         self.assertEqual(len(first), 3)
         self.assertTrue(np.all(eligible[first]))
@@ -108,7 +105,7 @@ class ProcessVariationTests(unittest.TestCase):
     def test_disconnected_true_intervals_are_not_joined(self):
         grid = np.asarray([0.0, 1.0, 2.0, 3.0, 4.0])
         feasible = np.asarray([True, True, False, True, True])
-        self.assertEqual(_all_true_intervals(grid, feasible), [[0.0, 1.0], [3.0, 4.0]])
+        self.assertEqual(all_true_intervals(grid, feasible), [[0.0, 1.0], [3.0, 4.0]])
 
 
 if __name__ == "__main__":
