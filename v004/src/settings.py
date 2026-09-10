@@ -58,6 +58,11 @@ FAR_FROM_MEASUREMENTS_DISTANCE = 0.35
 
 # Hybrid内部のNN設定です。少数データ時も学習を止めません。
 NN_SEED = 42
+NN_ENSEMBLE_SIZE = 5
+# 95%予測区間と制約達成確率には、validationで確認した保守的な校正値を使います。
+HYBRID_UNCERTAINTY_CALIBRATION_SCALE = 2.0
+# Expected Improvementとdiversityは過探索を避けるため、生の合成標準偏差を使います。
+HYBRID_ACQUISITION_UNCERTAINTY_SCALE = 1.0
 NN_HIDDEN_SIZE = 32
 NN_MAX_EPOCHS = 2_000
 NN_LEARNING_RATE = 0.01

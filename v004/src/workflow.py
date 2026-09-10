@@ -198,6 +198,9 @@ def run_trial(trial_name: str, recommendation_count: int) -> None:
         prediction,
         experiment_allowed=grid_policy.allowed_mask,
         preferred_multiplier=grid_policy.preferred_multiplier,
+        ensemble_size=len(training.model.nn_model.members),
+        uncertainty_calibration_scale=training.model.uncertainty_calibration_scale,
+        acquisition_uncertainty_scale=training.model.acquisition_uncertainty_scale,
     )
 
     optimum_index = predicted_optimum_index(

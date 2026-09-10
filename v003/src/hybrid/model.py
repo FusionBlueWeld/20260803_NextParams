@@ -7,7 +7,13 @@ from dataclasses import dataclass
 import numpy as np
 
 from ..preprocessing import PreparedData
-from ..settings import ProblemDefinition
+from ..settings import (
+    HYBRID_ACQUISITION_UNCERTAINTY_SCALE,
+    HYBRID_UNCERTAINTY_CALIBRATION_SCALE,
+    NN_ENSEMBLE_SIZE,
+    NN_SEED,
+    ProblemDefinition,
+)
 from ..knowledge import KnowledgeRule
 from .gp_component import GaussianProcess, predict_in_chunks
 from .nn_component import NeuralTrainingResult, ResidualNeuralNetwork, train_network
@@ -21,28 +27,68 @@ class HybridPrediction:
 
 
 @dataclass
+class EnsembleNeuralNetwork:
+    """同じデータを異なる初期値で学習した小規模NN ensemble。"""
+
+    members: tuple[ResidualNeuralNetwork, ...]
+
+    @property
+    def output_mean(self) -> np.ndarray:
+        return self.members[0].output_mean
+
+    @property
+    def output_scale(self) -> np.ndarray:
+        return self.members[0].output_scale
+
+    def predict_members(self, inputs: np.ndarray) -> np.ndarray:
+        return np.stack([member.predict(inputs) for member in self.members], axis=0)
+
+    def predict(self, inputs: np.ndarray) -> np.ndarray:
+        return np.mean(self.predict_members(inputs), axis=0)
+
+
+@dataclass
 class HybridModel:
     gp_models: dict[str, GaussianProcess]
-    nn_model: ResidualNeuralNetwork
+    nn_model: EnsembleNeuralNetwork
     support_model: SupportModel
     result_columns: list[str]
+    uncertainty_calibration_scale: float = 1.0
+    acquisition_uncertainty_scale: float = 1.0
 
     def predict(self, normalized_x: np.ndarray) -> HybridPrediction:
         support = self.support_model.predict(normalized_x)
-        nn_values = self.nn_model.predict(normalized_x)
+        nn_member_values = self.nn_model.predict_members(normalized_x)
+        nn_values = np.mean(nn_member_values, axis=0)
+        nn_std_values = (
+            np.std(nn_member_values, axis=0, ddof=1)
+            if len(self.nn_model.members) > 1
+            else np.zeros_like(nn_values)
+        )
         results: dict[str, dict[str, np.ndarray]] = {}
         for index, column in enumerate(self.result_columns):
             # GPはNNの残差を学習し、測定点近傍だけを補正する。
             gp_mean, gp_std = predict_in_chunks(self.gp_models[column], normalized_x)
             nn_prediction = nn_values[:, index]
+            nn_std = nn_std_values[:, index]
             hybrid_mean = nn_prediction + support * gp_mean
+            raw_hybrid_std = np.sqrt(np.square(gp_std) + np.square(nn_std))
+            hybrid_std = self.uncertainty_calibration_scale * raw_hybrid_std
+            acquisition_std = self.acquisition_uncertainty_scale * raw_hybrid_std
             results[column] = {
                 "gp_mean": gp_mean,
                 "gp_std": gp_std,
                 "nn_pred": nn_prediction,
+                "nn_std": nn_std,
                 "hybrid_mean": hybrid_mean,
-                # 未観測域の不確かさを0にしない（平均の補正だけtaperする）。
-                "hybrid_std": gp_std,
+                "raw_hybrid_std": raw_hybrid_std,
+                "acquisition_std": acquisition_std,
+                "uncertainty_calibration_scale": np.full(
+                    len(normalized_x), self.uncertainty_calibration_scale
+                ),
+                # GP残差とNN ensembleの独立近似分散を合成し、validation由来の
+                # 単純倍率で区間の系統的な過小評価を補正する。
+                "hybrid_std": hybrid_std,
             }
         return HybridPrediction(support=support, results=results)
 
@@ -60,9 +106,23 @@ def train_hybrid_model(
     prepared: PreparedData,
     problem: ProblemDefinition,
     knowledge_rules: list[KnowledgeRule] | None = None,
+    *,
+    ensemble_size: int = NN_ENSEMBLE_SIZE,
+    uncertainty_calibration_scale: float = HYBRID_UNCERTAINTY_CALIBRATION_SCALE,
+    acquisition_uncertainty_scale: float = HYBRID_ACQUISITION_UNCERTAINTY_SCALE,
 ) -> HybridTrainingResult:
-    nn_training: NeuralTrainingResult = train_network(prepared, problem, knowledge_rules)
-    nn_at_data = nn_training.model.predict(prepared.normalized_parameters)
+    if ensemble_size < 1:
+        raise ValueError("ensemble_size must be at least 1")
+    if not np.isfinite(uncertainty_calibration_scale) or uncertainty_calibration_scale <= 0:
+        raise ValueError("uncertainty_calibration_scale must be finite and positive")
+    if not np.isfinite(acquisition_uncertainty_scale) or acquisition_uncertainty_scale <= 0:
+        raise ValueError("acquisition_uncertainty_scale must be finite and positive")
+    nn_trainings = [
+        train_network(prepared, problem, knowledge_rules, seed=NN_SEED + member_index)
+        for member_index in range(ensemble_size)
+    ]
+    nn_model = EnsembleNeuralNetwork(tuple(item.model for item in nn_trainings))
+    nn_at_data = nn_model.predict(prepared.normalized_parameters)
     gp_models: dict[str, GaussianProcess] = {}
     for result in problem.result_variables:
         index = [item.column for item in problem.result_variables].index(result.column)
@@ -74,14 +134,16 @@ def train_hybrid_model(
         )
     model = HybridModel(
         gp_models=gp_models,
-        nn_model=nn_training.model,
+        nn_model=nn_model,
         support_model=SupportModel.fit(prepared.normalized_parameters),
         result_columns=[item.column for item in problem.result_variables],
+        uncertainty_calibration_scale=uncertainty_calibration_scale,
+        acquisition_uncertainty_scale=acquisition_uncertainty_scale,
     )
     return HybridTrainingResult(
         model=model,
-        nn_epochs=nn_training.epochs,
-        nn_normalized_mse=nn_training.normalized_mse,
-        nn_knowledge_loss=nn_training.knowledge_loss,
-        knowledge_rule_losses=nn_training.rule_losses,
+        nn_epochs=max(item.epochs for item in nn_trainings),
+        nn_normalized_mse=float(np.mean([item.normalized_mse for item in nn_trainings])),
+        nn_knowledge_loss=float(np.mean([item.knowledge_loss for item in nn_trainings])),
+        knowledge_rule_losses=nn_trainings[0].rule_losses,
     )

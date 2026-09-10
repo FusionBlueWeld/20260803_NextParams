@@ -12,7 +12,14 @@ import numpy as np
 
 from ..data_loader import write_csv_atomic
 from ..preprocessing import PreparedData
-from ..settings import HYBRID_RESPONSE_FILE_PREFIX, NN_SEED, ProblemDefinition
+from ..settings import (
+    HYBRID_RESPONSE_FILE_PREFIX,
+    HYBRID_ACQUISITION_UNCERTAINTY_SCALE,
+    HYBRID_UNCERTAINTY_CALIBRATION_SCALE,
+    NN_ENSEMBLE_SIZE,
+    NN_SEED,
+    ProblemDefinition,
+)
 from ..validation import ExperimentData
 from .model import HybridPrediction
 from .optimizer import OptimizationResult
@@ -108,6 +115,10 @@ def write_recommendations(
         header.extend(
             [
                 f"{variable.column}_nn_pred",
+                f"{variable.column}_nn_std",
+                f"{variable.column}_raw_std",
+                f"{variable.column}_calibration_scale",
+                f"{variable.column}_acquisition_std",
                 f"{variable.column}_mean",
                 f"{variable.column}_std",
             ]
@@ -167,10 +178,21 @@ def write_response_space(
     prediction: HybridPrediction,
     experiment_allowed: np.ndarray | None = None,
     preferred_multiplier: np.ndarray | None = None,
+    ensemble_size: int = NN_ENSEMBLE_SIZE,
+    uncertainty_calibration_scale: float = HYBRID_UNCERTAINTY_CALIBRATION_SCALE,
+    acquisition_uncertainty_scale: float = HYBRID_ACQUISITION_UNCERTAINTY_SCALE,
 ) -> None:
     """NNグリッド、GP支持度、Hybrid予測を同じ行へ保存します。"""
 
-    header = ["run_id", "data_rows", "unique_conditions", "nn_seed"]
+    header = [
+        "run_id",
+        "data_rows",
+        "unique_conditions",
+        "nn_seed",
+        "nn_ensemble_size",
+        "uncertainty_calibration_scale",
+        "acquisition_uncertainty_scale",
+    ]
     header.extend(item.column for item in problem.parameters)
     header.extend(["experiment_allowed", "preferred_multiplier", "gp_support"])
     allowed = (
@@ -187,7 +209,11 @@ def write_response_space(
         header.extend(
             [
                 f"{result.column}_nn_pred",
+                f"{result.column}_nn_std",
                 f"{result.column}_hybrid_mean",
+                f"{result.column}_raw_hybrid_std",
+                f"{result.column}_calibration_scale",
+                f"{result.column}_acquisition_std",
                 f"{result.column}_hybrid_std",
             ]
         )
@@ -199,6 +225,9 @@ def write_response_space(
                 "data_rows": experiments.row_count,
                 "unique_conditions": prepared.unique_condition_count,
                 "nn_seed": NN_SEED,
+                "nn_ensemble_size": ensemble_size,
+                "uncertainty_calibration_scale": uncertainty_calibration_scale,
+                "acquisition_uncertainty_scale": acquisition_uncertainty_scale,
                 "experiment_allowed": allowed[row_index],
                 "preferred_multiplier": f"{multipliers[row_index]:.10g}",
                 "gp_support": f"{prediction.support[row_index]:.10g}",
@@ -208,8 +237,18 @@ def write_response_space(
             for result in problem.result_variables:
                 values = prediction.results[result.column]
                 row[f"{result.column}_nn_pred"] = f"{values['nn_pred'][row_index]:.10g}"
+                row[f"{result.column}_nn_std"] = f"{values['nn_std'][row_index]:.10g}"
                 row[f"{result.column}_hybrid_mean"] = (
                     f"{values['hybrid_mean'][row_index]:.10g}"
+                )
+                row[f"{result.column}_raw_hybrid_std"] = (
+                    f"{values['raw_hybrid_std'][row_index]:.10g}"
+                )
+                row[f"{result.column}_calibration_scale"] = (
+                    f"{values['uncertainty_calibration_scale'][row_index]:.10g}"
+                )
+                row[f"{result.column}_acquisition_std"] = (
+                    f"{values['acquisition_std'][row_index]:.10g}"
                 )
                 row[f"{result.column}_hybrid_std"] = (
                     f"{values['hybrid_std'][row_index]:.10g}"

@@ -149,6 +149,8 @@ def train_network(
     prepared: PreparedData,
     problem: ProblemDefinition,
     knowledge_rules: list[KnowledgeRule] | None = None,
+    *,
+    seed: int = NN_SEED,
 ) -> NeuralTrainingResult:
     """データ適合損失と知見損失を同時に最小化します。"""
     rules = [r for r in (knowledge_rules or []) if r.enabled]
@@ -163,7 +165,7 @@ def train_network(
         output_scale,
     )
     targets = (raw_outputs - output_mean) / output_scale
-    rng = np.random.default_rng(NN_SEED)
+    rng = np.random.default_rng(seed)
     input_count = inputs.shape[1]
     output_count = targets.shape[1]
     hidden = NN_HIDDEN_SIZE

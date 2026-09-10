@@ -6,6 +6,7 @@ import sys
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 import numpy as np
 
@@ -39,7 +40,53 @@ class _FlatModel:
         )
 
 
+class _SplitStdModel(_FlatModel):
+    def predict(self, inputs: np.ndarray) -> HybridPrediction:
+        size = len(inputs)
+        values = np.zeros(size)
+        return HybridPrediction(
+            support=values,
+            results={
+                "y": {
+                    "hybrid_mean": values,
+                    "hybrid_std": np.full(size, 2.0),
+                    "acquisition_std": np.full(size, 0.75),
+                    "nn_pred": values,
+                }
+            },
+        )
+
+
 class OptimizerPolicyTest(unittest.TestCase):
+    def test_expected_improvement_uses_acquisition_std(self) -> None:
+        parameter = VariableDefinition(
+            "p", "入力", "", "parameter", "", 0.0, 3.0, 1.0, None
+        )
+        objective = VariableDefinition(
+            "y", "結果", "", "objective", "maximize", None, None, None, None
+        )
+        problem = ProblemDefinition([parameter], objective, [], [], [objective], 4)
+        prepared = PreparedData(
+            raw_parameters=np.array([[0.0]]),
+            normalized_parameters=np.array([[0.0]]),
+            result_means={"y": np.array([0.0])},
+            result_noise_std={"y": 0.1},
+            repeat_counts=np.ones(1, dtype=int),
+            warnings=[],
+        )
+        experiments = ExperimentData(["e1"], [[0.0]], {"y": [0.0]})
+
+        with patch("src.hybrid.optimizer.expected_improvement") as expected:
+            expected.side_effect = lambda **kwargs: np.ones_like(kwargs["std"])
+            result = run_optimization(
+                experiments, prepared, problem, recommendation_count=1,
+                model=_SplitStdModel(),
+            )
+
+        np.testing.assert_allclose(expected.call_args.kwargs["std"], 0.75)
+        self.assertEqual(result.recommendations[0]["y_std"], 2.0)
+        self.assertEqual(result.recommendations[0]["y_acquisition_std"], 0.75)
+
     def test_forbidden_is_removed_and_preferred_wins_equal_base_score(self) -> None:
         parameter = VariableDefinition(
             "p", "入力", "", "parameter", "", 0.0, 3.0, 1.0, None

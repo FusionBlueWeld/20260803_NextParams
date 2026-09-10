@@ -58,6 +58,13 @@ FAR_FROM_MEASUREMENTS_DISTANCE = 0.35
 
 # Hybrid内部のNN設定です。少数データ時も学習を止めません。
 NN_SEED = 42
+NN_ENSEMBLE_SIZE = 5
+# 過去の物理validationで95%区間が系統的に狭かったため、NN間分散を
+# 合成した後の標準偏差へ適用する保守的な初期校正値です。
+HYBRID_UNCERTAINTY_CALIBRATION_SCALE = 2.0
+# Expected Improvementとdiversityには、予測区間の校正倍率とは独立した
+# 不確実性倍率を使います。1.0はensemble+GPの生の標準偏差です。
+HYBRID_ACQUISITION_UNCERTAINTY_SCALE = 1.0
 NN_HIDDEN_SIZE = 32
 NN_MAX_EPOCHS = 2_000
 NN_LEARNING_RATE = 0.01

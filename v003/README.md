@@ -180,15 +180,17 @@ problem.csv + experiments.csv + knowledge_constraints.csv
         ├─ 全候補から再現可能な知識評価点/隣接ペアを生成
         │
         ▼
-NN損失 = データMSE + L2 + Σ(strength重み × 知識違反²)
+5-member NN損失 = データMSE + L2 + Σ(strength重み × 知識違反²)
         │
         ├─ d_loss/d_predictionをNNへ逆伝播
         ▼
-残差GPを学習: 実測値 − NN予測
+残差GPを学習: 実測値 − NN ensemble平均
         │
         ▼
-Hybrid平均 = NN予測 + GPデータ支持度 × 残差GP平均
-Hybrid標準偏差 = 残差GP標準偏差
+Hybrid平均 = NN ensemble平均 + GPデータ支持度 × 残差GP平均
+raw標準偏差 = sqrt(残差GP標準偏差² + NN member間標準偏差²)
+予測区間用標準偏差 = 2.0 × raw標準偏差
+探索用標準偏差 = 1.0 × raw標準偏差
         │
         ├─ forbidden候補を除外
         ├─ 制約達成確率 × Expected Improvement
@@ -198,7 +200,7 @@ Hybrid標準偏差 = 残差GP標準偏差
 recommendations.csv + response_spaces/*.csv + 各種診断
 ```
 
-GPはNNの残差だけを学習します。測定点近傍ではデータでNNを補正し、未観測域では補正平均を弱めて知識付きNNへ戻します。一方、標準偏差は支持度で0へ潰さず、未観測域の探索可能性を残します。
+GPはNN ensemble平均の残差だけを学習します。測定点近傍ではデータでNNを補正し、未観測域では補正平均を弱めて知識付きNNへ戻します。制約達成確率と95%区間には校正済みの予測区間用標準偏差を使い、Expected Improvementとdiversityには校正倍率から分離した探索用標準偏差を使います。
 
 現在のNNは追加依存を避けたNumPy実装です。知識損失は `calculate_rule_loss()` が損失と `d_loss/d_prediction` を返す境界に分離されています。将来PyTorch等へ移行し、物理式を追加する場合も、この境界へ新しい項を接続できます。
 

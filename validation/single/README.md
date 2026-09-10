@@ -307,3 +307,67 @@ py -m validation.single.src.checks.plot_v003_validation validation\single\result
 
 合成問題の学習データは125候補すべてではなく、角点＋数点だけです。未測定候補を
 残すことで、`--run` の推薦処理と response-space の制約検査を同時に確認できます。
+
+## v003 GP残差アブレーション
+
+GP残差の平均補正だけの効果を物理シミュレータで分離する検証です。v003の
+`train_hybrid_model`と`run_optimization`を同一プロセスから呼び、GPありは
+`nn_pred + support * gp_mean`、GPなしは同じ学習済みモデルの平均だけを`nn_pred`
+へ置換します。GP標準偏差、support、NN、初期設計、無ノイズの物理真値は共通です。
+両armに objective の物理的な`lower_bound=0, strength=2, enabled=true`を1ルールだけ
+適用します（NN損失への知識priorを最小限にしたアブレーション）。
+
+```powershell
+python -m validation.single.src.checks.gp_residual_ablation `
+  --simulators thermal_curing press_forming convection_drying `
+  --seeds 0 1 2 --iterations 15 `
+  --output validation/single/results/gp_residual_ablation_YYYYMMDD
+```
+
+既存の出力ディレクトリは上書きしません。`raw_results.json`はseed・armごとの
+履歴とcheckpoint、`raw_results.csv`はarm・seed単位のcheckpoint集計、`trajectories.csv`は
+stepごとの推薦履歴、`report.md`はpaired summaryを保存します。
+最適グリッド点を初めて追加したstepでcheckpointを取り、未到達は予算最終時の
+checkpointおよび`censored=true`とします。MAE/RMSE/NRMSE（出力別、全体／局所）、
+macro NRMSE、出力幅正規化Gaussian NLPD、95% coverage、feasible分類精度を出力します。
+local windowは最適点から正規化入力距離`<=0.20`です。
+
+## v002 vs v003 製品版進化比較
+
+v002の直接GP+NN support blendと、v003の残差GP（NN予測を基準にしたGP補正）および
+objectiveの最小知識制約を、同じ工程・初期設計・seed・ノイズ0・1回1推薦・固定予算で
+比較します。これはGP残差だけを切り出す要因分解ではなく、v002からv003への総合比較です。
+
+既定では低次元3工程（`thermal_curing press_forming convection_drying`）と高次元2工程
+（`electroplating milling`）、seed `0 1 2`、15反復を実行します。
+
+```powershell
+py -m validation.single.src.checks.v002_v003_evolution `
+  --simulators thermal_curing press_forming convection_drying electroplating milling `
+  --seeds 0 1 2 --iterations 15 `
+  --output validation/single/results/v002_v003_evolution_YYYYMMDD
+```
+
+`--batch-size 3`を指定すると、各ラウンドで第1候補`BEST_SCORE`と第2候補以降の
+`DIVERSITY`を同時取得し、3件をまとめて観測データへ追加してから再学習します。
+`--iterations`はラウンド数ではなく、比較で共通化する総取得条件数です。
+
+batch=1/3の結果を4セルにまとめるには、次を実行します。
+
+```powershell
+py -m validation.single.src.checks.batch_matrix `
+  --batch1 path/to/batch1/raw_results.json `
+  --batch3 path/to/batch3/raw_results.json `
+  --output path/to/batch_matrix
+```
+
+`raw_results.json/csv`、`trajectories.csv`、`report.md`を出力します。最適点への到達step、
+全体・local（最適点から正規化距離`<=0.20`）のMAE/RMSE/NRMSE、Gaussian NLPD、95% coverage、
+feasible accuracyに加え、初期・最終の真値regretとその減少量を記録します。未到達は
+`arrival=budget+1`のcensored値として集計します。到達判定は制約付き大域最適目的値を
+持つ格子点（同率最適を含む）です。8入力の高次元工程ではradius=0.20の
+local windowが到達した最適点1点になりやすいため、nearest-64 grid points（実効半径も保存）を
+補助指標として出力し、reportでは高次元の判断にこちらを優先します。
+
+`--seeds`は初期実験条件の選択を変え、探索経路の再現性を検査します。NNの初期化seedは
+製品版v003と同じ固定値`42`です。最適点へ到達したarmは、その時点のモデルを採点して終了します。

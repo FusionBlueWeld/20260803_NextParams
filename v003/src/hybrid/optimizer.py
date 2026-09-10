@@ -163,7 +163,14 @@ def run_optimization(
         predictions[result.column] = {
             "mean": values["hybrid_mean"],
             "std": values["hybrid_std"],
+            "acquisition_std": values.get("acquisition_std", values["hybrid_std"]),
             "nn_pred": values["nn_pred"],
+            "nn_std": values.get("nn_std", np.zeros_like(values["hybrid_mean"])),
+            "raw_std": values.get("raw_hybrid_std", values["hybrid_std"]),
+            "calibration_scale": values.get(
+                "uncertainty_calibration_scale",
+                np.ones_like(values["hybrid_mean"]),
+            ),
         }
 
     # 各制約の達成確率を掛け合わせます。制約がなければ常に1です。
@@ -186,7 +193,7 @@ def run_optimization(
     if observed_best is not None:
         improvement = expected_improvement(
             mean=objective_prediction["mean"],
-            std=objective_prediction["std"],
+            std=objective_prediction["acquisition_std"],
             best_observed=observed_best[problem.objective.column],
             direction=problem.objective.direction,
         )
@@ -195,7 +202,7 @@ def run_optimization(
         # 合格実測がまだない場合は、制約達成確率と不確かさを優先します。
         improvement = np.zeros(len(raw_candidates), dtype=float)
         uncertainty_scale = max(model.gp_models[problem.objective.column].y_scale, 1e-12)
-        normalized_uncertainty = np.clip(objective_prediction["std"] / uncertainty_scale, 0.0, 1.0)
+        normalized_uncertainty = np.clip(objective_prediction["acquisition_std"] / uncertainty_scale, 0.0, 1.0)
         base_score = total_feasibility * (0.25 + 0.75 * normalized_uncertainty)
 
     # preferredは科学的な獲得価値を置き換えず、有界な倍率だけを掛ける。
@@ -217,7 +224,7 @@ def run_optimization(
 
     diversity_state = calculate_diversity_state(
         score=score,
-        objective_std=objective_prediction["std"],
+        objective_std=objective_prediction["acquisition_std"],
         objective_scale=model.gp_models[problem.objective.column].y_scale,
         nearest_distance=nearest_distance,
         force_narrow=preferred_candidates is not None,
@@ -258,8 +265,20 @@ def run_optimization(
             recommendation[f"{result.column}_std"] = float(
                 predictions[result.column]["std"][candidate_index]
             )
+            recommendation[f"{result.column}_acquisition_std"] = float(
+                predictions[result.column]["acquisition_std"][candidate_index]
+            )
             recommendation[f"{result.column}_nn_pred"] = float(
                 predictions[result.column]["nn_pred"][candidate_index]
+            )
+            recommendation[f"{result.column}_nn_std"] = float(
+                predictions[result.column]["nn_std"][candidate_index]
+            )
+            recommendation[f"{result.column}_raw_std"] = float(
+                predictions[result.column]["raw_std"][candidate_index]
+            )
+            recommendation[f"{result.column}_calibration_scale"] = float(
+                predictions[result.column]["calibration_scale"][candidate_index]
             )
             if result.role == "constraint":
                 recommendation[f"{result.column}_probability"] = float(
