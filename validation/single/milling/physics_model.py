@@ -24,6 +24,22 @@ _INPUT_BOUNDS: dict[str, tuple[float, float]] = {
 }
 
 
+def _ideal_feed_mark_ra_um(
+    feed_per_tooth_mm: np.ndarray | float,
+    nose_radius_mm: np.ndarray | float,
+) -> np.ndarray:
+    """Return the ideal arithmetic-average feed-mark roughness in µm.
+
+    For a circular tool nose and small feed relative to the radius, the
+    peak-to-valley height is approximately ``1000*fz**2/(8*r)``.  The
+    corresponding arithmetic-average roughness is one quarter of that value.
+    """
+
+    feed = np.asarray(feed_per_tooth_mm, dtype=float)
+    radius = np.asarray(nose_radius_mm, dtype=float)
+    return 1000.0 * feed**2 / (32.0 * radius)
+
+
 def _broadcast_and_validate(
     spindle_speed_rpm: np.ndarray | float,
     feed_per_tooth_mm: np.ndarray | float,
@@ -160,12 +176,12 @@ def evaluate_model(
         material_removal_rate * specific_cutting_force / 60000.0
     )
 
-    # Feed-mark geometry with wear and a small cutting-depth/engagement
-    # contribution. Units: mm are converted to micrometres by 1000.
+    # Arithmetic-average feed-mark geometry with wear and a small
+    # cutting-depth/engagement contribution. Units: mm are converted to
+    # micrometres by 1000. The 1/32 coefficient is Ra; 1/8 would be the
+    # ideal peak-to-valley height Rt and must not be used for this output.
     wear_multiplier = 1.0 + 0.55 * tool_wear / 0.30
-    geometric_ra = (
-        1000.0 * feed**2 / (8.0 * nose_radius) * wear_multiplier
-    )
+    geometric_ra = _ideal_feed_mark_ra_um(feed, nose_radius) * wear_multiplier
     ploughing_ra = (
         0.10
         + 0.055 * axial_depth

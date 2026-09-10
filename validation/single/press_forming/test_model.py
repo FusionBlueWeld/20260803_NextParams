@@ -22,14 +22,17 @@ HERE = Path(__file__).resolve().parent
 class PressFormingModelTest(unittest.TestCase):
     """Check physical structure, input contract, and deterministic behavior."""
 
-    def test_clearance_burr_minimum_and_force_trend(self) -> None:
+    def test_clearance_burr_and_force_follow_experimental_trends(self) -> None:
         low = evaluate_model(3.0, 200.0, 60.0)
+        reference = evaluate_model(4.0, 200.0, 60.0)
         nominal = evaluate_model(8.0, 200.0, 60.0)
         high = evaluate_model(15.0, 200.0, 60.0)
-        self.assertLess(nominal["burr_height_mm"], low["burr_height_mm"])
+        self.assertLess(reference["burr_height_mm"], low["burr_height_mm"])
+        self.assertLess(reference["burr_height_mm"], nominal["burr_height_mm"])
         self.assertLess(nominal["burr_height_mm"], high["burr_height_mm"])
-        self.assertGreater(low["peak_force_kn"], nominal["peak_force_kn"])
-        self.assertGreater(high["peak_force_kn"], nominal["peak_force_kn"])
+        self.assertGreater(low["peak_force_kn"], reference["peak_force_kn"])
+        self.assertGreater(reference["peak_force_kn"], nominal["peak_force_kn"])
+        self.assertGreater(nominal["peak_force_kn"], high["peak_force_kn"])
 
     def test_speed_and_holder_limiting_trends(self) -> None:
         slow = evaluate_model(12.0, 80.0, 60.0)

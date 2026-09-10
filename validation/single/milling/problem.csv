@@ -8,5 +8,5 @@ tooth_count,刃数,tooth,parameter,,2,8,2,
 nose_radius_mm,ノーズ半径,mm,parameter,,0.40,1.60,0.40,
 tool_wear_mm,工具摩耗量,mm,parameter,,0.00,0.30,0.10,
 material_removal_rate_cm3_min,材料除去率,cm3/min,objective,maximize,,,,
-roughness_ra_um,算術平均粗さ,um,constraint,less_equal,,,,7.50
+roughness_ra_um,算術平均粗さ,um,constraint,less_equal,,,,2.50
 spindle_power_kw,主軸動力,kW,constraint,less_equal,,,,14.00

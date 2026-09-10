@@ -7,9 +7,9 @@ import unittest
 import numpy as np
 
 try:
-    from .physics_model import evaluate_model
+    from .physics_model import _ideal_feed_mark_ra_um, evaluate_model
 except ImportError:  # pragma: no cover - supports direct script execution
-    from physics_model import evaluate_model
+    from physics_model import _ideal_feed_mark_ra_um, evaluate_model
 
 
 _MID = (4500.0, 0.10, 2.0, 12.5, 45.0, 5.0, 1.0, 0.15)
@@ -82,6 +82,14 @@ class MillingModelTests(unittest.TestCase):
         self.assertGreater(
             float(evaluate_model(*worn)["roughness_ra_um"]),
             float(base["roughness_ra_um"]),
+        )
+
+    def test_ideal_feed_mark_term_uses_arithmetic_average_ra(self) -> None:
+        feed = np.array([0.04, 0.10, 0.16])
+        radius = np.array([0.40, 1.00, 1.60])
+        expected = 1000.0 * feed**2 / (32.0 * radius)
+        np.testing.assert_allclose(
+            _ideal_feed_mark_ra_um(feed, radius), expected, rtol=1.0e-14
         )
 
     def test_multiple_tooth_passing_resonances_are_nonmonotonic(self) -> None:

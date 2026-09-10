@@ -14,7 +14,7 @@
 |---|---|---|---|
 |[laser_welding](laser_welding/README.md)|レーザー出力・径・走査速度|深さ最大化、スパッタ制約|モード遷移、飽和、離散制約|
 |[milling](milling/README.md)|回転数・送り・切込み・工具／摩耗など8入力|除去率最大化、粗さ・動力制約|高次元、共振による非単調性、生産性と品質の競合|
-|[press_forming](press_forming/README.md)|クリアランス・速度・保持力|バリ最小化、荷重・平面度制約|適正クリアランスの内部最適、最小化|
+|[press_forming](press_forming/README.md)|クリアランス・速度・保持力|バリ最小化、荷重・平面度制約|4%以上でバリ増加・荷重低下、最小化|
 |[thermal_curing](thermal_curing/README.md)|温度・時間・層厚|強度最大化、硬化率・劣化率制約|熱遅れ、反応速度、過処理による悪化|
 |[convection_drying](convection_drying/README.md)|温度・風速・時間|エネルギー最小化、水分・欠陥制約|内部／外部移動抵抗、狭い良品領域|
 |[electroplating](electroplating/README.md)|電流・浴・濃度・撹拌・電極など8入力|目標膜厚誤差最小化、粗さ・効率制約|高次元、電気量の等価条件、目標値の谷、輸送飽和|

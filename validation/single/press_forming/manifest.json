@@ -1,7 +1,7 @@
 {
   "id": "press_forming",
   "name": "プレス打抜き",
-  "model_version": "1.0.0",
+  "model_version": "1.1.0",
   "description": "板厚・材料強度・工具摩耗を固定したプレス打抜きの決定論的な物理構造合成モデル。クリアランス、速度、ブランクホルダー力からバリ、最大荷重、平面度誤差を返す。",
   "reference_datasets": [
     "dataset_17: press_wave",
@@ -13,7 +13,7 @@
     "NumPy-only deterministic evaluation",
     "Broadcasting for scalar, vector, and multidimensional inputs",
     "Perimeter-times-thickness-times-shear-strength base load",
-    "Clearance fracture-mismatch burr model",
+    "Experiment-aligned clearance trends for increasing burr and decreasing peak force",
     "Rate and blank-holder empirical corrections",
     "Fixed moderate tool wear rather than an optimization variable"
   ]

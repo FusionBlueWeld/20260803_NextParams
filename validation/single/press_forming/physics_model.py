@@ -102,6 +102,7 @@ def evaluate_model(
     )
 
     clearance_deviation = (clearance - 8.0) / 5.0
+    low_clearance_penalty = np.maximum(-clearance_deviation, 0.0)
     speed_fraction = (speed - STROKE_SPEED_LOWER) / (
         STROKE_SPEED_UPPER - STROKE_SPEED_LOWER
     )
@@ -109,13 +110,14 @@ def evaluate_model(
         HOLDER_FORCE_UPPER - HOLDER_FORCE_LOWER
     )
 
-    # Empirical load corrections: low clearance raises confinement and all
-    # rate/holder effects are smooth, bounded modifiers of the shear load.
-    low_clearance_penalty = np.maximum(-clearance_deviation, 0.0)
+    # Experimental blanking studies show a weak decrease in peak force as
+    # clearance increases, with a steeper confinement penalty only at very
+    # small clearance. This monotone form replaces the former U-shaped load
+    # correction, whose high-clearance branch had the wrong sign.
     clearance_load_factor = (
         1.0
-        + 0.18 * clearance_deviation**2
-        + 0.06 * low_clearance_penalty
+        - 0.005 * (clearance - 8.0)
+        + 0.18 * np.exp(-(clearance - CLEARANCE_PCT_LOWER) / 2.5)
     )
     rate_load_factor = 1.0 + 0.12 * speed_fraction + 0.03 * speed_fraction**2
     holder_friction_factor = 1.0 + 0.04 * holder_fraction
@@ -144,14 +146,18 @@ def evaluate_model(
         + overholding_distortion_mm
     )
 
-    # Burr height has a minimum at the nominal 8 percent clearance.  The
-    # fourth-power term makes fracture mismatch grow more rapidly at the
-    # ends; speed and holder terms are small empirical process effects.
+    # Burr height increases with clearance over the experimentally supported
+    # 4--15 percent range. A small penalty below 4 percent represents
+    # secondary shear/fracture mismatch without asserting a universal 8
+    # percent optimum. Speed and holder terms remain synthetic process terms.
+    clearance_above_reference = clearance - 4.0
+    very_low_clearance = np.maximum(4.0 - clearance, 0.0)
     burr_height_mm = (
         0.018
         + 0.010 * FIXED_TOOL_WEAR_FRACTION
-        + 0.055 * clearance_deviation**2
-        + 0.006 * clearance_deviation**4
+        + 0.0040 * clearance_above_reference
+        + 0.00065 * clearance_above_reference**2
+        + 0.0040 * very_low_clearance**2
         + 0.004 * ((speed - 200.0) / 120.0) ** 2
         + 0.003 * ((holder - 60.0) / 40.0) ** 2
     )

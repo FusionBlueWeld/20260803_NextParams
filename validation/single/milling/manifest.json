@@ -1,7 +1,7 @@
 {
   "id": "milling",
   "name": "フライス切削",
-  "model_version": "2.0.0",
+  "model_version": "2.1.0",
   "high_dimension": true,
   "initial_design_size": 64,
   "description": "8入力・4水準ずつの65,536候補で、材料除去率を最大化しながら表面粗さと主軸動力を制約する決定論的な物理構造付き合成モデル。",
@@ -13,7 +13,7 @@
     "Sandvik metric milling MRR and specific-cutting-force power equations",
     "cutting-speed-dependent specific cutting force and wear coupling",
     "explicit ae, cutter diameter, tooth count, nose radius, and tool wear inputs",
-    "feed-mark roughness geometry",
+    "arithmetic-average feed-mark Ra geometry (fz^2 / 32r)",
     "three-mode damped tooth-passing forced-response surrogate",
     "4^8 high-dimensional Cartesian benchmark",
     "broadcast-safe deterministic NumPy evaluation"

@@ -201,20 +201,20 @@
     "name": "フライス切削",
     "provenance": {
       "id": "milling",
-      "model_version": "2.0.0",
+      "model_version": "2.1.0",
       "sha256_lf": {
         "__init__.py": "1b556bfc877e4557065f5852726c5b3e38d8b38a57f9f33728bd2855aff37449",
-        "physics_model.py": "4e433b8972855e349e338078c67d24d4e9c0246bf57c0c65d07db2eb6034663b",
-        "problem.csv": "fee57bed6741e7457f0399985c3589fefc0f7fcc09b34d7223ffeeba81aec963",
-        "manifest.json": "f1e264a6da09f5cb3f991da18aec143b492c8d5d80445ad49bed8dfc1d4a4fa5"
+        "physics_model.py": "f18eb02f9627dbe8ca44c04922d293764cb07ce751c0d7b4a09238963b02f9ef",
+        "problem.csv": "d17b7adf4295ecfdb0431d9eed2f6dccb5fb02c7ba23f4cc84bb91fbb445e9e3",
+        "manifest.json": "360ce92397924a1a4cf2f4640b15ab4d21fb6cac5019fbc6eb974a73a43fd887"
       }
     },
     "parameter_count": 8,
     "initial_design": "deterministic_maximin_grid",
     "candidate_count": 65536,
-    "feasible_count": 60347,
+    "feasible_count": 61278,
     "initial_count": 64,
-    "initial_feasible_count": 49,
+    "initial_feasible_count": 53,
     "objective": "material_removal_rate_cm3_min",
     "direction": "maximize",
     "grid_best": {
@@ -230,7 +230,7 @@
       },
       "outputs": {
         "material_removal_rate_cm3_min": 362.88000000000005,
-        "roughness_ra_um": 4.635992827000221,
+        "roughness_ra_um": 1.6359928270002213,
         "spindle_power_kw": 12.765907538658531
       }
     },
@@ -247,7 +247,7 @@
       },
       "outputs": {
         "material_removal_rate_cm3_min": 161.28000000000003,
-        "roughness_ra_um": 2.3386176769677194,
+        "roughness_ra_um": 0.8386176769677196,
         "spindle_power_kw": 5.538881327459448
       }
     },
@@ -257,8 +257,8 @@
         "max": 645.1200000000001
       },
       "roughness_ra_um": {
-        "min": 0.2663346078713999,
-        "max": 13.49184842421449
+        "min": 0.17258460787139987,
+        "max": 4.191848424214491
       },
       "spindle_power_kw": {
         "min": 0.012011941202879203,
@@ -271,54 +271,54 @@
     "name": "プレス打抜き",
     "provenance": {
       "id": "press_forming",
-      "model_version": "1.0.0",
+      "model_version": "1.1.0",
       "sha256_lf": {
-        "__init__.py": "64d410100c44372761cb758335f9d05dfcc2cb210f70243e196edc666d869c42",
-        "physics_model.py": "26ef78c14b41271bae7ecfbb487c112196aa402244541aa56cda437a1c75c90a",
+        "__init__.py": "04311e7b4a96d1198336923e761a4153717255fcfa56d0fa88ae404a8fa57aa3",
+        "physics_model.py": "3a31df8a0e272e3a562c4e0ecfe34078cfcd2dbd54be55e9bcfb8f8f0220d711",
         "problem.csv": "36c86379355c80f34be5e6a321168bf4a1d76ed2adaf45c49846a153241707bf",
-        "manifest.json": "e79f8b417855fd0f2cca84bef9ef57a5bc6b7633deef5948a6f6dae26a3d9c06"
+        "manifest.json": "abf0918a85dd2680b7f2932646db171f8a792ccbcfb5b0e586fbebace8446a46"
       }
     },
     "parameter_count": 3,
     "initial_design": "corners_midpoints",
     "candidate_count": 1521,
-    "feasible_count": 1407,
+    "feasible_count": 1500,
     "initial_count": 27,
-    "initial_feasible_count": 18,
+    "initial_feasible_count": 23,
     "objective": "burr_height_mm",
     "direction": "minimize",
     "grid_best": {
       "parameters": {
-        "clearance_pct": 8.0,
+        "clearance_pct": 4.0,
         "stroke_speed_mm_s": 200.0,
         "blank_holder_force_kn": 60.0
       },
       "outputs": {
         "burr_height_mm": 0.019999999999999997,
-        "peak_force_kn": 14.802280000000003,
-        "flatness_error_mm": 0.04169571444506451
+        "peak_force_kn": 16.76266447081809,
+        "flatness_error_mm": 0.08583364547954728
       }
     },
     "initial_best": {
       "parameters": {
-        "clearance_pct": 9.0,
+        "clearance_pct": 3.0,
         "stroke_speed_mm_s": 200.0,
         "blank_holder_force_kn": 60.0
       },
       "outputs": {
-        "burr_height_mm": 0.022209599999999996,
-        "peak_force_kn": 14.902628416000006,
-        "flatness_error_mm": 0.044040542031271404
+        "burr_height_mm": 0.020649999999999998,
+        "peak_force_kn": 17.6594224,
+        "flatness_error_mm": 0.10859226616920245
       }
     },
     "output_ranges": {
       "burr_height_mm": {
         "min": 0.019999999999999997,
-        "max": 0.1578496
+        "max": 0.14965
       },
       "peak_force_kn": {
-        "min": 13.080000000000002,
-        "max": 22.20974464000001
+        "min": 12.650961337200943,
+        "max": 19.947104000000003
       },
       "flatness_error_mm": {
         "min": 0.03314375,
