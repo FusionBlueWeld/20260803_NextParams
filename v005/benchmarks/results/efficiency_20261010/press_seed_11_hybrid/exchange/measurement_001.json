@@ -1,0 +1,77 @@
+{
+  "step": 1,
+  "request_sha256": "eee5d133871d11209c30108585edf9d29fff9168cc82ec84cd3c8e1f97c882aa",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_001_rank_1",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 320.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.027649999999999997,
+        "peak_force_kn": 18.017600000000005,
+        "flatness_error_mm": 0.165
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_2",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.027649999999999997,
+        "peak_force_kn": 15.704,
+        "flatness_error_mm": 0.135
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_3",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.023649999999999997,
+        "peak_force_kn": 16.745120000000004,
+        "flatness_error_mm": 0.14718378594534354
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_4",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 320.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0248375,
+        "peak_force_kn": 18.717726500000005,
+        "flatness_error_mm": 0.1287502920560748
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 260.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0233375,
+        "peak_force_kn": 17.579364700000003,
+        "flatness_error_mm": 0.14181472256580135
+      },
+      "feasible": true
+    }
+  ]
+}

@@ -253,7 +253,7 @@ python -m validation.single.run suite --simulators milling electroplating --vers
 ```
 
 比較表には入力数、初期／最終の正規化regret、改善量を出力します。
-今回の実行結果は[高次元収束レポート](results/high_dimension_convergence_20260905/comparison.md)です。
+今回の実行結果は[高次元収束レポート](../../_old/validation/single/results/high_dimension_convergence_20260905/comparison.md)です。
 再現性は決定論・固定候補・seed固定を意味し、実機に対する予測精度を意味しません。
 
 `evaluate_model(入力列名=値, ...)` はNumPy配列の辞書を返し、

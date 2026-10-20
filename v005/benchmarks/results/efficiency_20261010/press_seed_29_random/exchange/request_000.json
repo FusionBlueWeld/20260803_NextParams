@@ -1,0 +1,77 @@
+{
+  "step": 0,
+  "conditions": [
+    {
+      "experiment_id": "initial_000",
+      "clearance_pct": 6.0,
+      "stroke_speed_mm_s": 180.0,
+      "blank_holder_force_kn": 80.0
+    },
+    {
+      "experiment_id": "initial_001",
+      "clearance_pct": 10.0,
+      "stroke_speed_mm_s": 180.0,
+      "blank_holder_force_kn": 90.0
+    },
+    {
+      "experiment_id": "initial_002",
+      "clearance_pct": 10.0,
+      "stroke_speed_mm_s": 260.0,
+      "blank_holder_force_kn": 90.0
+    },
+    {
+      "experiment_id": "initial_003",
+      "clearance_pct": 3.0,
+      "stroke_speed_mm_s": 140.0,
+      "blank_holder_force_kn": 60.0
+    },
+    {
+      "experiment_id": "initial_004",
+      "clearance_pct": 3.0,
+      "stroke_speed_mm_s": 240.0,
+      "blank_holder_force_kn": 50.0
+    },
+    {
+      "experiment_id": "initial_005",
+      "clearance_pct": 11.0,
+      "stroke_speed_mm_s": 200.0,
+      "blank_holder_force_kn": 40.0
+    },
+    {
+      "experiment_id": "initial_006",
+      "clearance_pct": 4.0,
+      "stroke_speed_mm_s": 240.0,
+      "blank_holder_force_kn": 90.0
+    },
+    {
+      "experiment_id": "initial_007",
+      "clearance_pct": 15.0,
+      "stroke_speed_mm_s": 100.0,
+      "blank_holder_force_kn": 20.0
+    },
+    {
+      "experiment_id": "initial_008",
+      "clearance_pct": 9.0,
+      "stroke_speed_mm_s": 220.0,
+      "blank_holder_force_kn": 30.0
+    },
+    {
+      "experiment_id": "initial_009",
+      "clearance_pct": 15.0,
+      "stroke_speed_mm_s": 80.0,
+      "blank_holder_force_kn": 90.0
+    },
+    {
+      "experiment_id": "initial_010",
+      "clearance_pct": 5.0,
+      "stroke_speed_mm_s": 320.0,
+      "blank_holder_force_kn": 80.0
+    },
+    {
+      "experiment_id": "initial_011",
+      "clearance_pct": 9.0,
+      "stroke_speed_mm_s": 260.0,
+      "blank_holder_force_kn": 50.0
+    }
+  ]
+}

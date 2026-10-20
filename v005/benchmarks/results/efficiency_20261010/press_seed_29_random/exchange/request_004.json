@@ -1,0 +1,35 @@
+{
+  "step": 4,
+  "conditions": [
+    {
+      "experiment_id": "step_004_rank_1",
+      "clearance_pct": 9.0,
+      "stroke_speed_mm_s": 280.0,
+      "blank_holder_force_kn": 20.0
+    },
+    {
+      "experiment_id": "step_004_rank_2",
+      "clearance_pct": 11.0,
+      "stroke_speed_mm_s": 240.0,
+      "blank_holder_force_kn": 80.0
+    },
+    {
+      "experiment_id": "step_004_rank_3",
+      "clearance_pct": 10.0,
+      "stroke_speed_mm_s": 80.0,
+      "blank_holder_force_kn": 20.0
+    },
+    {
+      "experiment_id": "step_004_rank_4",
+      "clearance_pct": 4.0,
+      "stroke_speed_mm_s": 220.0,
+      "blank_holder_force_kn": 90.0
+    },
+    {
+      "experiment_id": "step_004_rank_5",
+      "clearance_pct": 13.0,
+      "stroke_speed_mm_s": 120.0,
+      "blank_holder_force_kn": 20.0
+    }
+  ]
+}

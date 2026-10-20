@@ -1,0 +1,85 @@
+{
+  "trial": "trial_single_laser_welding_20261010",
+  "run": 7,
+  "observations": 54,
+  "had_feasible_observation": true,
+  "previous_count": 5,
+  "new_count": 5,
+  "previous_actual_passed": 1,
+  "previous_low_probability_count": 5,
+  "old_low_probability_retained": 1,
+  "previous_actual_failed_retained": 0,
+  "previous_actual_passed_retained": 1,
+  "new_low_probability_count": 0,
+  "selected": [
+    {
+      "rank": 1,
+      "selection_role": "IMPROVEMENT",
+      "feasibility_probability": 0.5093288686950179,
+      "score": 0.16596360659103718,
+      "controls": {
+        "laser_power_w": 5900.0,
+        "spot_diameter_um": 300.0,
+        "scan_speed_mm_s": 60.0
+      },
+      "actual_passed_if_previously_measured": true
+    },
+    {
+      "rank": 2,
+      "selection_role": "IMPROVEMENT",
+      "feasibility_probability": 0.6477482291281671,
+      "score": 0.09045396634555053,
+      "controls": {
+        "laser_power_w": 5700.0,
+        "spot_diameter_um": 300.0,
+        "scan_speed_mm_s": 60.0
+      },
+      "actual_passed_if_previously_measured": null
+    },
+    {
+      "rank": 3,
+      "selection_role": "IMPROVEMENT",
+      "feasibility_probability": 0.054492328393966005,
+      "score": 0.01971392025543816,
+      "controls": {
+        "laser_power_w": 5700.0,
+        "spot_diameter_um": 275.0,
+        "scan_speed_mm_s": 60.0
+      },
+      "actual_passed_if_previously_measured": null
+    },
+    {
+      "rank": 4,
+      "selection_role": "IMPROVEMENT",
+      "feasibility_probability": 0.0958562744301974,
+      "score": 0.014884780745424587,
+      "controls": {
+        "laser_power_w": 5500.0,
+        "spot_diameter_um": 275.0,
+        "scan_speed_mm_s": 60.0
+      },
+      "actual_passed_if_previously_measured": null
+    },
+    {
+      "rank": 5,
+      "selection_role": "IMPROVEMENT",
+      "feasibility_probability": 0.15765045889313611,
+      "score": 0.004647203534086651,
+      "controls": {
+        "laser_power_w": 5300.0,
+        "spot_diameter_um": 275.0,
+        "scan_speed_mm_s": 60.0
+      },
+      "actual_passed_if_previously_measured": null
+    }
+  ],
+  "warnings": [
+    "同一条件の反復測定がありません。予測の測定ノイズには既定値を使用します。",
+    "レーザー出力の探索範囲には、実測した最小値・最大値の外側が含まれます。",
+    "走査速度の探索範囲には、実測した最小値・最大値の外側が含まれます。"
+  ],
+  "seconds": 0.1797684000339359,
+  "scale_source": "reconstructed residual scale from CSV-published NN predictions at measured points",
+  "response_sha256": "275498209ebb20835b5deb5ce5a40c915e4ee7ee4f1d7f7fb6c16065172111ca",
+  "interpretation": "same historical model and observations; newly selected unmeasured points have unknown truth"
+}

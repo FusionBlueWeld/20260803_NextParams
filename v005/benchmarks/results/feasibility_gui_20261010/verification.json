@@ -1,0 +1,8 @@
+{
+  "status": "OK",
+  "saved_recommendations_compared": 1,
+  "max_probability_tolerance": 1e-07,
+  "boundary_checks": "joint product, zero std, inclusive threshold, forbidden points, no constraints",
+  "qualifying_grid_points_95_percent": 48313,
+  "saved_allowed_points": 65536
+}

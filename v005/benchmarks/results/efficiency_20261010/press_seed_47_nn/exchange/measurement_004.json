@@ -1,0 +1,77 @@
+{
+  "step": 4,
+  "request_sha256": "a826939b0ab6ca90ae07b42097bf0802753ef38003f60c4010df7c6e1ddbb279",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_004_rank_1",
+      "inputs": {
+        "clearance_pct": 5.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0294,
+        "peak_force_kn": 15.624321551325862,
+        "flatness_error_mm": 0.05588246268656717
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_2",
+      "inputs": {
+        "clearance_pct": 5.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.026615277777777776,
+        "peak_force_kn": 15.69653810002713,
+        "flatness_error_mm": 0.059205160179417175
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_3",
+      "inputs": {
+        "clearance_pct": 5.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02551111111111111,
+        "peak_force_kn": 16.42197550155531,
+        "flatness_error_mm": 0.061621404600713706
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_4",
+      "inputs": {
+        "clearance_pct": 5.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0288375,
+        "peak_force_kn": 15.39699778165923,
+        "flatness_error_mm": 0.05733575
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_5",
+      "inputs": {
+        "clearance_pct": 5.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 90.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.028115277777777777,
+        "peak_force_kn": 16.157232983929834,
+        "flatness_error_mm": 0.05656351414284718
+      },
+      "feasible": true
+    }
+  ]
+}

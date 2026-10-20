@@ -12,14 +12,15 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
 import json
+import queue
+import threading
 from pathlib import Path
 import sys
 import time
 import tkinter as tk
-from tkinter import messagebox, ttk
-from typing import Callable, Mapping
+from tkinter import filedialog, messagebox, ttk
+from typing import Mapping
 
 import numpy as np
 
@@ -35,31 +36,21 @@ PROCESS_DURATION_MS = 5000
 ANIMATION_INTERVAL_MS = 50
 
 
-@dataclass(frozen=True)
-class FieldSpec:
-    name: str
-    label: str
-    unit: str
-    lower: float | None = None
-    upper: float | None = None
-    default: float | None = None
-
-    def initial_value(self) -> float:
-        if self.default is not None:
-            return self.default
-        if self.lower is not None and self.upper is not None:
-            return (self.lower + self.upper) / 2.0
-        return 0.0
+from validation.gui_contract import FieldSpec, SimulatorSpec
+from validation.gui_interconnect import electrical_specs
 
 
-@dataclass(frozen=True)
-class SimulatorSpec:
-    id: str
-    label: str
-    inputs: tuple[FieldSpec, ...]
-    outputs: tuple[FieldSpec, ...]
-    evaluate: Callable[[Mapping[str, float]], Mapping[str, object]]
-    noise_scales: Mapping[str, float]
+def evaluate_display(spec, values, noise, rng):
+    """検査可能な値と内部真値を分け、合否フラグへ数値ノイズを加えません。"""
+    result = dict(spec.evaluate(values))
+    if noise and spec.allow_noise:
+        if spec.observe is not None:
+            return dict(spec.observe(result, rng))
+        for name, scale in spec.noise_scales.items():
+            if name in result and np.asarray(result[name]).dtype.kind in "fiu":
+                result[name] = np.asarray(result[name]) + rng.normal(
+                    0, MEASUREMENT_NOISE_FRACTION * scale, size=np.shape(result[name]))
+    return result
 
 
 def _manifest(path: Path) -> dict[str, object]:
@@ -251,8 +242,14 @@ def _multistage_specs() -> list[SimulatorSpec]:
 def load_specs() -> tuple[SimulatorSpec, ...]:
     """GUIに表示する全シミュレータを安定した順序で読み込みます。"""
 
-    specs = tuple([*_single_specs(), *_multistage_specs()])
-    missing = [item.id for item in specs if not (IMAGE_ROOT / f"{item.id}.png").is_file()]
+    electrical = electrical_specs()
+    # 新しい連結ラインを先頭へ置き、スクロールしなくても見つけられるようにします。
+    lines = [item for item in electrical if item.id in
+             {"interconnect_cu_al", "interconnect_cu_cu", "interconnect_al_al"}]
+    stages = [item for item in electrical if item not in lines]
+    specs = tuple([*lines, *stages, *_single_specs(), *_multistage_specs()])
+    missing = [item.id for item in specs if not item.diagram_nodes and
+               not (IMAGE_ROOT / f"{item.image_id or item.id}.png").is_file()]
     if missing:
         raise FileNotFoundError(f"対応する画像がありません: {', '.join(missing)}")
     return specs
@@ -274,6 +271,15 @@ class ScrollablePanel(ttk.Frame):
         self.columnconfigure(0, weight=1)
         self.content.bind("<Configure>", self._update_scrollregion)
         self.canvas.bind("<Configure>", self._fit_width)
+        self.bind_all("<MouseWheel>", self._wheel, add="+")
+
+    def _wheel(self, event):
+        widget = event.widget
+        while widget is not None:
+            if widget is self:
+                self.canvas.yview_scroll(-int(event.delta / 120), "units")
+                return "break"
+            widget = getattr(widget, "master", None)
 
     def _update_scrollregion(self, _event: tk.Event) -> None:
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
@@ -297,6 +303,9 @@ class ValidationGui(tk.Tk):
         self._pending_values: dict[str, float] | None = None
         self.noise_enabled = tk.BooleanVar(value=False)
         self.rng = np.random.default_rng()
+        self._results = queue.Queue()
+        self._ready = None
+        self._last_result = None
 
         self.title("物理シミュレータ GUI")
         self.geometry("1500x900")
@@ -330,7 +339,8 @@ class ValidationGui(tk.Tk):
             state="readonly",
             values=[item.label for item in self.specs],
             font=("Yu Gothic UI", 11),
-            width=40,
+            width=54,
+            height=len(self.specs),
         )
         self.selector.grid(row=0, column=1, sticky="w")
         self.selector.bind("<<ComboboxSelected>>", lambda _event: self._select(self.selector.get()))
@@ -364,6 +374,10 @@ class ValidationGui(tk.Tk):
         self.noise_toggle.grid(row=1, column=0, pady=(8, 2))
         self.run_button = ttk.Button(center, text="計 算", style="Run.TButton", command=self._run)
         self.run_button.grid(row=2, column=0, pady=(6, 6))
+        self.save_button = ttk.Button(center, text="結果JSON保存", command=self._save_result, state="disabled")
+        self.save_button.grid(row=5, column=0, pady=4)
+        self.description_var = tk.StringVar()
+        ttk.Label(center, textvariable=self.description_var, style="Hint.TLabel", wraplength=390).grid(row=6, column=0, sticky="ew", pady=6)
         self.progress_var = tk.DoubleVar(value=0.0)
         self.progress = ttk.Progressbar(
             center,
@@ -399,22 +413,54 @@ class ValidationGui(tk.Tk):
         self._build_inputs()
         self._build_outputs()
         self._load_image()
+        self.description_var.set(self.current.description)
+        self.noise_enabled.set(False)
+        self.noise_toggle.configure(text=self.current.noise_label, state="normal" if self.current.allow_noise else "disabled")
+        self._last_result = None
+        self.save_button.configure(state="disabled")
         self.status_var.set("入力値を確認して「計算」を押してください。")
+
+    def _save_result(self):
+        path = filedialog.asksaveasfilename(parent=self, defaultextension=".json", filetypes=[("JSON", "*.json")])
+        if path and self._last_result is not None:
+            def plain(value):
+                if isinstance(value, dict):
+                    return {str(key): plain(item) for key, item in value.items()}
+                if isinstance(value, (list, tuple)):
+                    return [plain(item) for item in value]
+                if isinstance(value, np.ndarray):
+                    return plain(value.item() if value.size == 1 else value.tolist())
+                if isinstance(value, np.generic):
+                    return plain(value.item())
+                if isinstance(value, float) and not np.isfinite(value):
+                    return None
+                return value
+            try:
+                Path(path).write_text(json.dumps(plain(self._last_result), ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
+            except Exception as error:
+                messagebox.showerror("保存エラー", str(error), parent=self)
 
     def _build_inputs(self) -> None:
         frame = self.input_panel.content
         self._clear(frame)
         self.input_vars = {}
         frame.columnconfigure(0, weight=1)
-        for row_index, field in enumerate(self.current.inputs):
+        row_index, previous_group = 0, ""
+        for field in self.current.inputs:
+            if field.group and field.group != previous_group:
+                ttk.Label(frame, text=field.group, style="Field.TLabel").grid(row=row_index, column=0, sticky="w", pady=(12, 2))
+                row_index += 1
+                previous_group = field.group
             block = ttk.Frame(frame, style="Panel.TFrame", padding=(4, 6))
             block.grid(row=row_index, column=0, sticky="ew")
+            row_index += 1
             block.columnconfigure(0, weight=1)
             ttk.Label(block, text=field.label, style="Field.TLabel").grid(row=0, column=0, sticky="w")
             variable = tk.StringVar(value=f"{field.initial_value():.10g}")
             self.input_vars[field.name] = variable
-            ttk.Entry(block, textvariable=variable, font=("Consolas", 11)).grid(row=1, column=0, pady=(3, 0), sticky="ew")
-            range_text = f"{field.name}  ｜  {field.lower:g} ～ {field.upper:g} {field.unit}"
+            ttk.Entry(block, textvariable=variable, state="readonly" if field.readonly else "normal", font=("Consolas", 11)).grid(row=1, column=0, pady=(3, 0), sticky="ew")
+            bounds = f"{field.lower:g} ～ {field.upper:g}" if field.lower is not None and field.upper is not None else ""
+            range_text = f"{field.name}  ｜  {bounds} {field.unit}" + ("（固定）" if field.readonly else "")
             ttk.Label(block, text=range_text, style="Hint.TLabel").grid(row=2, column=0, pady=(2, 0), sticky="w")
 
     def _build_outputs(self) -> None:
@@ -422,9 +468,15 @@ class ValidationGui(tk.Tk):
         self._clear(frame)
         self.output_vars = {}
         frame.columnconfigure(0, weight=1)
-        for row_index, field in enumerate(self.current.outputs):
+        row_index, previous_group = 0, ""
+        for field in self.current.outputs:
+            if field.group and field.group != previous_group:
+                ttk.Label(frame, text=field.group, style="Output.TLabel").grid(row=row_index, column=0, sticky="w", pady=(12, 2))
+                row_index += 1
+                previous_group = field.group
             block = ttk.Frame(frame, style="Panel.TFrame", padding=(4, 6))
             block.grid(row=row_index, column=0, sticky="ew")
+            row_index += 1
             block.columnconfigure(0, weight=1)
             ttk.Label(block, text=field.label, style="Output.TLabel").grid(row=0, column=0, sticky="w")
             variable = tk.StringVar(value="—")
@@ -433,7 +485,12 @@ class ValidationGui(tk.Tk):
             ttk.Label(block, text=f"{field.name}  ｜  {field.unit}", style="Hint.TLabel").grid(row=2, column=0, pady=(2, 0), sticky="w")
 
     def _load_image(self) -> None:
-        path = IMAGE_ROOT / f"{self.current.id}.png"
+        self.image_canvas.delete("all")
+        self._image_item = None
+        if self.current.diagram_nodes:
+            self.after_idle(self._center_image)
+            return
+        path = IMAGE_ROOT / f"{self.current.image_id or self.current.id}.png"
         self._image_source = tk.PhotoImage(file=path)
         factor = max(1, int(np.ceil(max(self._image_source.width(), self._image_source.height()) / 440)))
         self._image_photo = self._image_source.subsample(factor, factor)
@@ -442,6 +499,21 @@ class ValidationGui(tk.Tk):
         self.after_idle(self._center_image)
 
     def _center_image(self, _event: tk.Event | None = None, offset_y: float = 0.0) -> None:
+        if self.current.diagram_nodes:
+            # DAGの分岐・合流をそのまま描画し、画像資産への依存を増やしません。
+            canvas = self.image_canvas
+            canvas.delete("diagram")
+            width, height = max(canvas.winfo_width(), 360), max(canvas.winfo_height(), 280)
+            positions = {sid: (x * width, y * height) for sid, _, x, y in self.current.diagram_nodes}
+            for source, target in self.current.diagram_edges:
+                x1, y1 = positions[source]
+                x2, y2 = positions[target]
+                canvas.create_line(x1, y1 + 24, x2, y2 - 24, arrow=tk.LAST, fill="#7790ac", width=2, tags="diagram")
+            for sid, label, _, _ in self.current.diagram_nodes:
+                x, y = positions[sid]
+                canvas.create_rectangle(x - 78, y - 24, x + 78, y + 24, fill="#e9f1fa", outline="#7790ac", tags="diagram")
+                canvas.create_text(x, y, text=label, width=150, font=("Yu Gothic UI", 10), tags="diagram")
+            return
         if self._image_item is not None:
             self.image_canvas.coords(
                 self._image_item,
@@ -468,9 +540,16 @@ class ValidationGui(tk.Tk):
 
     @staticmethod
     def _format_output(value: object) -> str:
+        if value is None:
+            return "未測定／未評価"
+        array = np.asarray(value)
+        if array.size == 1 and isinstance(array.reshape(-1)[0], (str, np.str_)):
+            return str(array.reshape(-1)[0])
         scalar = _scalar(value)
         if isinstance(scalar, bool):
             return "True" if scalar else "False"
+        if not np.isfinite(scalar):
+            return "評価不能"
         if scalar == 0:
             return "0"
         if abs(scalar) >= 1.0e6 or abs(scalar) < 1.0e-5:
@@ -478,6 +557,8 @@ class ValidationGui(tk.Tk):
         return f"{scalar:.8g}"
 
     def _run(self) -> None:
+        if self._pending_values is not None:
+            return
         try:
             self._pending_values = self._read_inputs()
         except Exception as error:
@@ -488,18 +569,32 @@ class ValidationGui(tk.Tk):
         self.run_button.configure(state="disabled")
         self.selector.configure(state="disabled")
         self.noise_toggle.configure(state="disabled")
+        self.save_button.configure(state="disabled")
         self.progress_var.set(0.0)
         self.left_dim.place(in_=self.left_card, x=0, y=0, relwidth=1, relheight=1)
         self.right_dim.place(in_=self.right_card, x=0, y=0, relwidth=1, relheight=1)
         self.left_dim.lift()
         self.right_dim.lift()
         self._processing_started = time.monotonic()
+        self._ready = None
+        self._last_result = None
+        spec, values, noise = self.current, dict(self._pending_values), self.noise_enabled.get()
+        # ワーカーはTkの変数・ウィジェットに触れず、結果だけをキューへ返します。
+        def compute():
+            try:
+                payload = {
+                    "values": values, "outputs": evaluate_display(spec, values, noise, self.rng),
+                    "message": "計算完了"}
+                self._results.put((payload, None))
+            except Exception as error:
+                self._results.put((None, error))
+        threading.Thread(target=compute, daemon=True).start()
         self.status_var.set("加工中… しばらくお待ちください。")
         self._animate_processing()
 
     def _animate_processing(self) -> None:
         elapsed_ms = (time.monotonic() - self._processing_started) * 1000.0
-        progress = min(100.0, elapsed_ms / PROCESS_DURATION_MS * 100.0)
+        progress = min(95.0, elapsed_ms / max(PROCESS_DURATION_MS, 1) * 100.0)
         self.progress_var.set(progress)
 
         phase = elapsed_ms / 170.0
@@ -507,9 +602,14 @@ class ValidationGui(tk.Tk):
         glow = int(235 + 20 * (0.5 + 0.5 * np.sin(phase * 0.75)))
         self.image_canvas.configure(background=f"#{glow:02x}{glow:02x}ff")
         self._center_image(offset_y=offset_y)
-        self.status_var.set(f"加工中… {progress:3.0f}%")
+        self.status_var.set(f"計算中… {elapsed_ms / 1000:.1f}秒")
+        if self._ready is None:
+            try:
+                self._ready = self._results.get_nowait()
+            except queue.Empty:
+                pass
 
-        if elapsed_ms < PROCESS_DURATION_MS:
+        if elapsed_ms < PROCESS_DURATION_MS or self._ready is None:
             self.after(ANIMATION_INTERVAL_MS, self._animate_processing)
             return
         self._finish_processing()
@@ -518,27 +618,23 @@ class ValidationGui(tk.Tk):
         try:
             if self._pending_values is None:
                 raise RuntimeError("計算条件が失われました。")
-            result = self.current.evaluate(self._pending_values)
-            if self.noise_enabled.get():
-                result = {
-                    name: np.asarray(value, dtype=float) + self.rng.normal(
-                        0.0,
-                        MEASUREMENT_NOISE_FRACTION * self.current.noise_scales[name],
-                        size=np.shape(value),
-                    )
-                    for name, value in result.items()
-                    if name in self.current.noise_scales
-                }
+            payload, error = self._ready
+            if error is not None:
+                raise error
+            result = payload["outputs"]
             for field in self.current.outputs:
                 if field.name not in result:
                     raise ValueError(f"出力「{field.name}」がモデルから返されませんでした。")
                 self.output_vars[field.name].set(self._format_output(result[field.name]))
+            self._last_result = {"simulator": self.current.id, "mode": "physical_simulation",
+                                 "noise": self.noise_enabled.get(),
+                                 "requested_inputs": dict(self._pending_values), **payload}
         except Exception as error:  # GUIでは利用者入力とモデル契約エラーを同じ場所へ表示する。
             self.status_var.set("計算できませんでした。入力値を確認してください。")
             messagebox.showerror("計算エラー", str(error), parent=self)
         else:
             mode = "測定ノイズあり" if self.noise_enabled.get() else "測定ノイズなし"
-            self.status_var.set(f"加工完了（{mode}）")
+            self.status_var.set(payload["message"] + (f"（{mode}）" if self.current.allow_noise else ""))
         finally:
             self._pending_values = None
             self.progress_var.set(100.0)
@@ -548,7 +644,8 @@ class ValidationGui(tk.Tk):
             self.right_dim.place_forget()
             self.run_button.configure(state="normal")
             self.selector.configure(state="readonly")
-            self.noise_toggle.configure(state="normal")
+            self.noise_toggle.configure(state="normal" if self.current.allow_noise else "disabled")
+            self.save_button.configure(state="normal" if self._last_result is not None else "disabled")
 
 
 def smoke_test(specs: tuple[SimulatorSpec, ...]) -> None:
@@ -560,10 +657,10 @@ def smoke_test(specs: tuple[SimulatorSpec, ...]) -> None:
         missing = [item.name for item in spec.outputs if item.name not in result]
         for item in spec.outputs:
             if item.name in result:
-                _scalar(result[item.name])
+                ValidationGui._format_output(result[item.name])
         if missing:
             raise ValueError(f"{spec.id}: missing outputs: {', '.join(missing)}")
-        missing_scales = [item.name for item in spec.outputs if item.name not in spec.noise_scales]
+        missing_scales = [item.name for item in spec.outputs if item.name not in spec.noise_scales] if spec.allow_noise and spec.observe is None else []
         if missing_scales:
             raise ValueError(f"{spec.id}: missing noise scales: {', '.join(missing_scales)}")
         print(f"OK  {spec.id}: inputs={len(spec.inputs)}, outputs={len(spec.outputs)}")

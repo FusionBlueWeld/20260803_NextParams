@@ -1,0 +1,23 @@
+{
+  "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+  "numpy": "2.5.1",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "logical_cpus": 28,
+  "blas_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "parallel_trainings": 1,
+  "simulator_independent_process": true,
+  "total_measured_conditions": 288,
+  "training_and_suggestion_seconds": 2.8181013003923,
+  "total_suggestion_cpu_seconds": 2.515625,
+  "peak_suggestion_resident_memory_bytes": 41558016,
+  "hashes": {
+    "v005\\src\\hybrid\\optimizer.py": "e2909101ba80df4b05bd2d96f14ca50bafe2f552c30292dde2073b229b07f266",
+    "v005\\src\\hybrid\\model.py": "381260017b03fc49a1f463dfc05abd181d7a0b1eddb39f17e3befb26b26946aa",
+    "v005\\src\\search_config.py": "0c34719b47da7e915066da083459446318d3aee7505fad4cc18a8873bbd485c3",
+    "v005\\benchmarks\\efficiency_validation.py": "2b7c4f8b9319c6b58ab7902527fc867b73e675e8b982b8d9cf9543c7abb3222d"
+  }
+}

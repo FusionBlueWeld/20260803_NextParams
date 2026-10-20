@@ -1,0 +1,77 @@
+{
+  "step": 1,
+  "request_sha256": "9e5bccd5f4b1937cd54a4ac4dd1e5f8b832c4f4fdee7e4bb8d71e070ef6ef0de",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_001_rank_1",
+      "inputs": {
+        "clearance_pct": 7.0,
+        "stroke_speed_mm_s": 260.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0390375,
+        "peak_force_kn": 16.14163019045196,
+        "flatness_error_mm": 0.05006508246685058
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_2",
+      "inputs": {
+        "clearance_pct": 10.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.06758749999999998,
+        "peak_force_kn": 15.037909154358678,
+        "flatness_error_mm": 0.04964537300501986
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_3",
+      "inputs": {
+        "clearance_pct": 13.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 100.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.11176111111111112,
+        "peak_force_kn": 15.567647320548938,
+        "flatness_error_mm": 0.08709852747044694
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_4",
+      "inputs": {
+        "clearance_pct": 6.0,
+        "stroke_speed_mm_s": 240.0,
+        "blank_holder_force_kn": 100.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.03404444444444444,
+        "peak_force_kn": 16.989066944945,
+        "flatness_error_mm": 0.05353123677153217
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_5",
+      "inputs": {
+        "clearance_pct": 14.0,
+        "stroke_speed_mm_s": 100.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.13077777777777777,
+        "peak_force_kn": 12.85132242083786,
+        "flatness_error_mm": 0.16158627570156586
+      },
+      "feasible": true
+    }
+  ]
+}

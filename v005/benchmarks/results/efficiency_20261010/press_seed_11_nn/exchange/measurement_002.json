@@ -1,0 +1,77 @@
+{
+  "step": 2,
+  "request_sha256": "6217f74a924f6697e5d82e7879101893c95ad5d426b2d1fa37718ab14cee2002",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_002_rank_1",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0248375,
+        "peak_force_kn": 16.8286625,
+        "flatness_error_mm": 0.09522375000000001
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_2",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.021094444444444443,
+        "peak_force_kn": 17.279220800000004,
+        "flatness_error_mm": 0.10514981443672321
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_3",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 100.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.023615277777777777,
+        "peak_force_kn": 16.529237633333334,
+        "flatness_error_mm": 0.10720732061799321
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_4",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.022615277777777776,
+        "peak_force_kn": 17.158029166666665,
+        "flatness_error_mm": 0.09709316017941717
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 100.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.023427777777777777,
+        "peak_force_kn": 16.758082400000003,
+        "flatness_error_mm": 0.10100777634590752
+      },
+      "feasible": true
+    }
+  ]
+}

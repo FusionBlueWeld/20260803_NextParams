@@ -132,6 +132,6 @@ python -m validation.single.src.checks.gp_residual_ablation `
   --output validation/single/results/gp_residual_ablation_20260909_rerun
 ```
 
-本実行の機械可読結果は`validation/single/results/gp_residual_ablation_20260909/`にあります。
+本実行の機械可読結果は`_old/validation/single/results/gp_residual_ablation_20260909/`にあります。
 検証コードは`src/checks/gp_residual_ablation.py`、回帰テストは
 `tests/test_gp_residual_ablation.py`です。

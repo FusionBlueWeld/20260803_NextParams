@@ -2,6 +2,44 @@
 
 `functional_coating` は、塗工 → 熱風乾燥 → 熱硬化の3工程を個別モデルとして評価し、`pipeline.py` で工程間の状態を受け渡す検証用ラインです。既存の `validation/single/` 個別工程検証とは独立したパッケージです。
 
+現行の個別閉ループ判定は [`stage_closed_loop_final_validation.json`](results/stage_closed_loop_final_validation.json) を参照してください。smoke・初期失敗・修正前の履歴は [`_old/validation/multistage/results/README.md`](../../_old/validation/multistage/results/README.md) に整理しています。
+
+## Cu/Al電気接続部品の追加ライン
+
+[`electrical_interconnect/`](electrical_interconnect/README.md)は、Cu/Alの切り出し・成形を
+個別に行い、組立で合流してレーザー溶接へ渡す6ノードです。44操作×4水準なら
+全組合せは`4^44 = 309,485,009,821,345,068,724,781,056`件になります。
+各工程の流入状態・形状・隙間・表面・加工損傷が後工程へつながります。
+Cu/Al・Cu/Cu・Al/Alの物理傾向を監査し、Cu/Alでv005→r002の模型検証を行います。
+
+```powershell
+python -m validation.multistage interconnect audit --samples 1024
+python -m validation.multistage interconnect benchmark `
+  --workdir r002/trials/trial_interconnect_review --samples 8192 --budget 2048 `
+  --sample-cap 256 --seeds 0 1 2 --output validation/multistage/results/interconnect_review.json
+```
+
+`workdir`と`output`には新しい保存先を指定します。生成された各seedの
+`pipeline.json`は、v005 bundleのパスを含みます。先頭seedの設定は親にも保存されるので、
+`python main.py --version r002 --prepare trial_interconnect_review`で読み込めます。
+
+処理は[`electrical_interconnect_validation.py`](src/checks/electrical_interconnect_validation.py)→
+[`interconnect_data.py`](src/checks/interconnect_data.py)のワーク製作・学習→
+[`interconnect_metrics.py`](src/checks/interconnect_metrics.py)の独立採点→
+[`interconnect_lifecycle.py`](src/checks/interconnect_lifecycle.py)の下流再調整・在庫測定・更新です。
+上流NGのワークは後工程の学習に使いません。ランダムとr002の主比較は同じ学習模型で
+選択してから別経路の正解関数で採点します。局所oracle最適と大予算oracle探索は
+比較用の参考値で、同じ費用のアルゴリズム比較とは区別します。
+
+内部状態ラベルを使う合成模型検証と、現場の部分観測を分けています。検査の
+whitelistから潜在状態を除外し、部分観測では`UNKNOWN_WITH_UNOBSERVED_STATE`と
+記録します。模型上合格・oracle不合格の候補も報告に残します。推薦の確認実験は
+最大4回×4条件で、新たに製作したワークの上流がNGならそこで停止し、観測した
+工程だけ学習データへ追加して再探索します。在庫実験後の再学習・再探索も別途確認します。
+[`interconnect_history.py`](src/checks/interconnect_history.py)では、実験済みの良品系譜を
+各工程模型の間引きで保持し、既知レシピを探索の起点にします。
+実行結果と限界は[`ELECTRICAL_INTERCONNECT_REPORT.md`](ELECTRICAL_INTERCONNECT_REPORT.md)を参照してください。
+
 ## 構成と各ファイルの役割
 
 ```text

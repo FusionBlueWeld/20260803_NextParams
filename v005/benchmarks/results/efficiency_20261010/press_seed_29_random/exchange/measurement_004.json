@@ -1,0 +1,77 @@
+{
+  "step": 4,
+  "request_sha256": "fe98edde5e520732dae13ab3d5c33e27877e77cd99f7c3ea6d14b1fa5d3503fe",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_004_rank_1",
+      "inputs": {
+        "clearance_pct": 9.0,
+        "stroke_speed_mm_s": 280.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.06102777777777778,
+        "peak_force_kn": 14.789203375907915,
+        "flatness_error_mm": 0.06506931202497684
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_2",
+      "inputs": {
+        "clearance_pct": 11.0,
+        "stroke_speed_mm_s": 240.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.08104444444444445,
+        "peak_force_kn": 15.480301137645624,
+        "flatness_error_mm": 0.06215670141248425
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_3",
+      "inputs": {
+        "clearance_pct": 10.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0744,
+        "peak_force_kn": 13.092106384288503,
+        "flatness_error_mm": 0.05160000000000001
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_4",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 90.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02179861111111111,
+        "peak_force_kn": 17.660057269143575,
+        "flatness_error_mm": 0.07791526171683869
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_5",
+      "inputs": {
+        "clearance_pct": 13.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.11342777777777778,
+        "peak_force_kn": 13.063078382666303,
+        "flatness_error_mm": 0.12592095340533932
+      },
+      "feasible": true
+    }
+  ]
+}

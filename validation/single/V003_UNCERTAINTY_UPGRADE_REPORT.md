@@ -94,5 +94,5 @@ millingは前後とも全seed到達したが、新実装は探索を広げるた
 - optimizer連携: `v003/src/hybrid/optimizer.py`
 - CSV出力: `v003/src/hybrid/reporting.py`
 - validation: `validation/single/src/checks/v003_uncertainty_ablation.py`
-- 生結果: `validation/single/results/v003_uncertainty_ablation_20260909/raw_results.json`
-- 自動集計: `validation/single/results/v003_uncertainty_ablation_20260909/report.md`
+- 生結果: `_old/validation/single/results/v003_uncertainty_ablation_20260909/raw_results.json`
+- 自動集計: `_old/validation/single/results/v003_uncertainty_ablation_20260909/report.md`

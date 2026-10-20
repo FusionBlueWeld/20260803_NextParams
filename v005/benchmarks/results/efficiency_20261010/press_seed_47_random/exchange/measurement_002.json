@@ -1,0 +1,77 @@
+{
+  "step": 2,
+  "request_sha256": "181c3c84c3ebd79ee8d1a88519ac1cba8a45323405e70a37dc5eb6bb0d678f0d",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_002_rank_1",
+      "inputs": {
+        "clearance_pct": 12.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.09659999999999999,
+        "peak_force_kn": 13.737923241833569,
+        "flatness_error_mm": 0.10458378594534355
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_2",
+      "inputs": {
+        "clearance_pct": 5.0,
+        "stroke_speed_mm_s": 100.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.027615277777777777,
+        "peak_force_kn": 15.543772537659503,
+        "flatness_error_mm": 0.058094966449002174
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_3",
+      "inputs": {
+        "clearance_pct": 12.0,
+        "stroke_speed_mm_s": 260.0,
+        "blank_holder_force_kn": 90.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.09628749999999998,
+        "peak_force_kn": 15.779285821681675,
+        "flatness_error_mm": 0.07576274691158268
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_4",
+      "inputs": {
+        "clearance_pct": 6.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.030787499999999995,
+        "peak_force_kn": 15.924031517784362,
+        "flatness_error_mm": 0.052717373005019864
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_5",
+      "inputs": {
+        "clearance_pct": 11.0,
+        "stroke_speed_mm_s": 100.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.08431527777777778,
+        "peak_force_kn": 13.317301919228747,
+        "flatness_error_mm": 0.06464321130477833
+      },
+      "feasible": true
+    }
+  ]
+}

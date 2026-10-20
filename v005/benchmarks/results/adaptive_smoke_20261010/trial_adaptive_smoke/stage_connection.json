@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "stage_id": "synthetic_adaptive_smoke",
+  "controls": [
+    "x",
+    "y",
+    "z"
+  ],
+  "incoming_context": [],
+  "connector_outputs": [
+    "cost",
+    "quality"
+  ],
+  "current_incoming_context": {}
+}

@@ -1,0 +1,77 @@
+{
+  "step": 3,
+  "request_sha256": "394381f2d76d4506e19ff3ac644bb6f3f9e48597362126bf46dcd9cc7af14a9b",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_003_rank_1",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.020298611111111108,
+        "peak_force_kn": 16.722127418532104,
+        "flatness_error_mm": 0.09277810678044798
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_2",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.019999999999999997,
+        "peak_force_kn": 16.76266447081809,
+        "flatness_error_mm": 0.08583364547954728
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_3",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.020631944444444442,
+        "peak_force_kn": 16.17566117155425,
+        "flatness_error_mm": 0.0870248572398121
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_4",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.020861111111111108,
+        "peak_force_kn": 16.126796916881066,
+        "flatness_error_mm": 0.09479355322954731
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_5",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.020861111111111108,
+        "peak_force_kn": 16.495457455879237,
+        "flatness_error_mm": 0.09909924668885646
+      },
+      "feasible": true
+    }
+  ]
+}

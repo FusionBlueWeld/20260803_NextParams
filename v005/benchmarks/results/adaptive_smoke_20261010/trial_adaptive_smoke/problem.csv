@@ -1,0 +1,6 @@
+column,display_name,unit,role,direction,lower,upper,step,target
+x,x,1,parameter,,-1,1,0.6666666666666666,
+y,y,1,parameter,,-1,1,0.6666666666666666,
+z,z,1,parameter,,-1,1,0.6666666666666666,
+cost,cost,s,objective,minimize,,,,
+quality,quality,1,constraint,less_equal,,,,1

@@ -1,0 +1,175 @@
+{
+  "step": 0,
+  "request_sha256": "8c0a00935f22e87cd385838042376d88e2c2bdb960c34e78b731970e37cbda73",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "initial_000",
+      "inputs": {
+        "clearance_pct": 15.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.14444861111111112,
+        "peak_force_kn": 13.851594105427882,
+        "flatness_error_mm": 0.19920584185963966
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_001",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.020749999999999998,
+        "peak_force_kn": 16.308055015221836,
+        "flatness_error_mm": 0.09689237628191309
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_002",
+      "inputs": {
+        "clearance_pct": 9.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.061,
+        "peak_force_kn": 13.640714306022598,
+        "flatness_error_mm": 0.03747704081632653
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_003",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.024749999999999998,
+        "peak_force_kn": 15.312671559926777,
+        "flatness_error_mm": 0.08694642857142859
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_004",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 140.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.021187499999999998,
+        "peak_force_kn": 16.005855275600677,
+        "flatness_error_mm": 0.0853470432077745
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_005",
+      "inputs": {
+        "clearance_pct": 7.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.041315277777777784,
+        "peak_force_kn": 14.096457413375047,
+        "flatness_error_mm": 0.043910337330642084
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_006",
+      "inputs": {
+        "clearance_pct": 12.0,
+        "stroke_speed_mm_s": 260.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.09534999999999999,
+        "peak_force_kn": 15.549201711432007,
+        "flatness_error_mm": 0.07811504894295765
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_007",
+      "inputs": {
+        "clearance_pct": 12.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0937111111111111,
+        "peak_force_kn": 14.755499346035363,
+        "flatness_error_mm": 0.08107738082334426
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_008",
+      "inputs": {
+        "clearance_pct": 4.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.020444444444444442,
+        "peak_force_kn": 16.402764182251563,
+        "flatness_error_mm": 0.08239119374706805
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_009",
+      "inputs": {
+        "clearance_pct": 8.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.04669861111111111,
+        "peak_force_kn": 15.5366388475756,
+        "flatness_error_mm": 0.042671559404063454
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_010",
+      "inputs": {
+        "clearance_pct": 10.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.07158749999999998,
+        "peak_force_kn": 13.71835048005283,
+        "flatness_error_mm": 0.04396524532710281
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "initial_011",
+      "inputs": {
+        "clearance_pct": 7.0,
+        "stroke_speed_mm_s": 240.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.03829444444444444,
+        "peak_force_kn": 15.729689912783048,
+        "flatness_error_mm": 0.04950644818338698
+      },
+      "feasible": true
+    }
+  ]
+}

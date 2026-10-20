@@ -1,0 +1,77 @@
+{
+  "step": 3,
+  "request_sha256": "83e62952df46f1ff99abadedb9e5a098acfa0b48d67a498666d8283f33c8c260",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_003_rank_1",
+      "inputs": {
+        "clearance_pct": 11.0,
+        "stroke_speed_mm_s": 280.0,
+        "blank_holder_force_kn": 100.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.08462777777777779,
+        "peak_force_kn": 16.30620022150922,
+        "flatness_error_mm": 0.06308911159209309
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_2",
+      "inputs": {
+        "clearance_pct": 7.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0380375,
+        "peak_force_kn": 15.603673237036675,
+        "flatness_error_mm": 0.04465337300501986
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_3",
+      "inputs": {
+        "clearance_pct": 12.0,
+        "stroke_speed_mm_s": 240.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.09573194444444443,
+        "peak_force_kn": 14.2740833975426,
+        "flatness_error_mm": 0.1008886712277853
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_4",
+      "inputs": {
+        "clearance_pct": 10.0,
+        "stroke_speed_mm_s": 280.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.06992777777777777,
+        "peak_force_kn": 15.070088264780598,
+        "flatness_error_mm": 0.06512545879589947
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_5",
+      "inputs": {
+        "clearance_pct": 9.0,
+        "stroke_speed_mm_s": 300.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.05977777777777778,
+        "peak_force_kn": 16.312396593156485,
+        "flatness_error_mm": 0.05134004133418493
+      },
+      "feasible": true
+    }
+  ]
+}

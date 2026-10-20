@@ -1,0 +1,10 @@
+{
+  "seconds": 0.09871519997250289,
+  "cpu_seconds": 0.09375,
+  "peak_resident_memory_bytes": 41250816,
+  "training_seconds": 0.08134440006688237,
+  "source_observations": 17,
+  "returned_count": 5,
+  "requested_maximum": 5,
+  "note": "NN-only comparison fits the same ensemble/residual backend but disables GP prediction; runtime is not a pure NN training cost comparison"
+}

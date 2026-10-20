@@ -1,0 +1,77 @@
+{
+  "step": 3,
+  "request_sha256": "a0ede8f702274d63147c4325c7c7a6a1f6df43d900084d1079a4519a1e76e9f3",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_003_rank_1",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02076111111111111,
+        "peak_force_kn": 17.466044,
+        "flatness_error_mm": 0.10681912255599689
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_2",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02094861111111111,
+        "peak_force_kn": 18.096724166666668,
+        "flatness_error_mm": 0.10475155940406346
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_3",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 70.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02094861111111111,
+        "peak_force_kn": 17.701484166666667,
+        "flatness_error_mm": 0.10137589573196511
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_4",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 50.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0208375,
+        "peak_force_kn": 17.426159300000002,
+        "flatness_error_mm": 0.11542975818343444
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_003_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 60.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02076111111111111,
+        "peak_force_kn": 17.859356000000002,
+        "flatness_error_mm": 0.11045669116817183
+      },
+      "feasible": true
+    }
+  ]
+}

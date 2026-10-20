@@ -1,0 +1,37 @@
+[
+  {
+    "rank": 1,
+    "selection_role": "UNIFORM_RANDOM",
+    "clearance_pct": 11.0,
+    "stroke_speed_mm_s": 280.0,
+    "blank_holder_force_kn": 100.0
+  },
+  {
+    "rank": 2,
+    "selection_role": "UNIFORM_RANDOM",
+    "clearance_pct": 7.0,
+    "stroke_speed_mm_s": 200.0,
+    "blank_holder_force_kn": 70.0
+  },
+  {
+    "rank": 3,
+    "selection_role": "UNIFORM_RANDOM",
+    "clearance_pct": 12.0,
+    "stroke_speed_mm_s": 240.0,
+    "blank_holder_force_kn": 30.0
+  },
+  {
+    "rank": 4,
+    "selection_role": "UNIFORM_RANDOM",
+    "clearance_pct": 10.0,
+    "stroke_speed_mm_s": 280.0,
+    "blank_holder_force_kn": 40.0
+  },
+  {
+    "rank": 5,
+    "selection_role": "UNIFORM_RANDOM",
+    "clearance_pct": 9.0,
+    "stroke_speed_mm_s": 300.0,
+    "blank_holder_force_kn": 80.0
+  }
+]

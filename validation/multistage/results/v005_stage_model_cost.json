@@ -1,0 +1,48 @@
+{
+  "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+  "numpy": "2.5.1",
+  "input_axes": 16,
+  "output_axes": 6,
+  "predictions": 4096,
+  "seed": 14,
+  "memory_kind": "tracemalloc_peak_not_process_RSS",
+  "accuracy_or_physics_validation": false,
+  "results": [
+    {
+      "source_samples": 128,
+      "cap": 128,
+      "added_experiments": 0,
+      "fit_and_save_seconds": 0.051078999997116625,
+      "load_seconds": 0.016713200020603836,
+      "predict_4096_seconds": 0.03810369991697371,
+      "traced_peak_bytes": 4858508
+    },
+    {
+      "source_samples": 256,
+      "cap": 256,
+      "added_experiments": 0,
+      "fit_and_save_seconds": 0.036940100020729005,
+      "load_seconds": 0.012973899953067303,
+      "predict_4096_seconds": 0.08460709999781102,
+      "traced_peak_bytes": 5449881
+    },
+    {
+      "source_samples": 512,
+      "cap": 512,
+      "added_experiments": 0,
+      "fit_and_save_seconds": 0.09040440001990646,
+      "load_seconds": 0.014592800056561828,
+      "predict_4096_seconds": 0.1734979999018833,
+      "traced_peak_bytes": 14448641
+    },
+    {
+      "source_samples": 528,
+      "cap": 512,
+      "added_experiments": 16,
+      "fit_and_save_seconds": 0.08471899991855025,
+      "load_seconds": 0.01814529998227954,
+      "predict_4096_seconds": 0.17597920005209744,
+      "traced_peak_bytes": 14453689
+    }
+  ]
+}

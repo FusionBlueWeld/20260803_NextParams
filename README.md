@@ -50,13 +50,21 @@
 | `v002` | GP–NNハイブリッド | GPのデータ支持度を使って、GPとNNを1つの統計モデルとして融合する | Hybrid推薦、run別Hybrid解空間 |
 | `v003` | 技能者知見制約 | 単純な知識をNN損失、探索方針、終了判断へどう反映するか | 知識付きHybrid推薦、知識診断、終了状態 |
 | `v004` | r接続インターフェース（暫定） | v003の個別工程モデルを、役割・単位・予測分布付きで工程接続へ渡す方法 | Best候補、stage bundle、条件付き予測口（Robustは検討中） |
-| `v005` | UI（暫定） | 予測・不確かさ・推薦を視覚的に確認する方法 | 3D表示、設定画面、再学習 |
+| `v005` | 予算付き個別探索・bundle 2.0 | 流入状態を固定して探索し、学習モデルを安全な数値形式で渡す方法 | 予算付き候補、支持度、NPZ stage bundle |
 
 rシリーズはvシリーズの後継スナップショットではなく、複数の個別工程モデルを利用する別レイヤーです。
 
 | バージョン | 主題 | 利用者が理解する内容 | 主な出力 |
 |---|---|---|---|
 | `r001` | 複合工程接続（暫定） | 複数のv004 stage bundleを接続し、最終良品確率と全体条件をどう調整するか | 全体条件案、良品確率、工程別影響、追加実験候補 |
+| `r002` | 予算付き分岐合流探索 | 上流変更の伝播、残り工程の再調整、実在ワークに対する追加実験 | 全体条件、制約余裕、支持度、局所受入評価、部分実験 |
+
+v005は今回、r002向けのbundle更新に割り当てました。UIは後続版で扱います。
+新しい[Cu/Al電気接続部品ライン](validation/multistage/electrical_interconnect/README.md)は
+切断・成形の2材料枝が組立で合流し、レーザー溶接後の電気・機械品質へつながります。
+44操作×4水準の全直積を作らず、NumPyと標準ライブラリだけで探索します。
+[v005](v005/README.md)・[r002](r002/README.md)と
+[新ラインの検証結果](validation/multistage/ELECTRICAL_INTERCONNECT_REPORT.md)を参照してください。
 
 > **実装ステータス（2026-09-09）: v004・r001は現行機能範囲でFIX**
 > 修正内容、再検証結果、既知の制限は[FIX記録](_old/V004_R001_FIX_RECORD.md)を参照してください。
@@ -73,12 +81,15 @@ v000  ベイズ最適化
        └─ v002  GP + NN + 統計的ハイブリッド
             └─ v003  知識制約付きNN + 残差GP + 探索/停止方針
                  └─ v004  v003 + r接続用stage bundle（暫定）
-                      └─ v005  全機能 + UI
+                      └─ v005  予算付き条件探索 + bundle 2.0
 ```
 
 ```text
 複数のv004 stage bundle
   └─ r001  工程グラフ + 不確実性伝播 + 全体条件調整（暫定）
+
+複数のv005 stage bundle 2.0
+  └─ r002  分岐合流DAG + 予算付き探索 + 下流追従 + 部分実験
 ```
 
 ### 共通の実行入口
@@ -98,6 +109,9 @@ python main.py --version v001 --run trial_001 --n 3
 python main.py --version v003 --new trial_003
 python main.py --version v003 --prepare trial_003
 python main.py --version v003 --run trial_003 --n 3
+
+python main.py --version v005 --new trial_005
+python main.py --version r002 --new trial_line
 ```
 
 各バージョンの内部CLIは`src/cli.py`にあり、共通入口から呼び出されます。利用者が直接実行する必要はありません。

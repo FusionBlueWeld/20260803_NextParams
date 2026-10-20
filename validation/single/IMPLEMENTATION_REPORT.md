@@ -44,9 +44,9 @@
 結果ファイルは以下に保存した。自動生成結果・trialはGit管理外であり、
 リポジトリを別環境へ取得した場合は[READMEのコマンド](README.md)で再生成する。
 
-- [高次元8ケースの接続結果](results/high_dimension_smoke_20260905/comparison.md)
-- [高次元2ケースの収束結果](results/high_dimension_convergence_20260905/comparison.md)
-- `multiphysics_*_20260905` は高次元化前のmodel_version 1系の履歴
+- [高次元8ケースの接続結果](../../_old/validation/single/results/high_dimension_smoke_20260905/comparison.md)
+- [高次元2ケースの収束結果](../../_old/validation/single/results/high_dimension_convergence_20260905/comparison.md)
+- 高次元化前の `model_version 1` 系の履歴は [`_old/validation/single/results/multiphysics_*_20260905/`](../../_old/validation/single/results/) にあります。
 
 ## 8入力・v003収束試験の要点
 

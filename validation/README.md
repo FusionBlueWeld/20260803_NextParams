@@ -5,7 +5,7 @@
 | フォルダ | 検証対象 | 詳細 |
 |---|---|---|
 | `single/` | レーザー溶接など6工程を個別に評価し、各バージョンの探索を比較 | [単工程の説明](single/README.md) |
-| `multistage/` | 塗工→乾燥→硬化の状態接続、v004・r001の連結探索 | [複合工程の説明](multistage/README.md) |
+| `multistage/` | 塗工3工程、Cu/Al電気接続6ノード、v004/r001・v005/r002の連結探索 | [複合工程の説明](multistage/README.md) |
 
 各フォルダに実行器、物理モデル、テスト、検証結果をまとめています。
 物理式と設計根拠は各 `DESIGN.md` を参照してください。
@@ -29,7 +29,7 @@
 | 物理モデル・接続 | 工程フォルダ、複合工程の `functional_coating/` |
 | 特定機能の検証シナリオ | 各 `src/checks/` |
 
-通常のCLI名は今回の `src/` 整理でも維持しています。追加検証は、例えば
+追加検証は、例えば
 `python -m validation.single.src.checks.v003_validation --help` のようにモジュールで起動します。
 Pythonから共通APIを使う場合の入口は `validation.single.src.simulators` です。
 
@@ -40,29 +40,32 @@ Pythonから共通APIを使う場合の入口は `validation.single.src.simulato
 ```powershell
 python -m validation.single.run list
 python -m validation.multistage.run list
+python -m validation.multistage interconnect audit --samples 1024
 python -m unittest discover -s validation -t . -v
 ```
 
 共通テストは各 `tests/`、単工程の物理式テストは工程内の `test_model.py`、
 パッケージ配置・起動の回帰テストは `validation/tests/` にあります。
 
-旧 `validation.run` は `validation.single.run`、旧 `multistage_validation` は
-`validation.multistage` に変更しました。保存先もそれぞれの配下へ移しています。
-外部スクリプトで旧パスやモジュール名を指定している場合は更新してください。
+2026-10-08までの単工程生成結果は [`_old/validation/single/results/README.md`](../_old/validation/single/results/README.md) に整理しました。
+新しい検証結果は従来どおり `validation/single/results/` に保存します。検証コードは過去の保存結果を自動で学習データとして読み込みません。
 
-保存済みの結果JSONとソースハッシュは実行当時の記録として保持しています。
-記録内の旧パスは、単工程なら `validation/single/`、複合工程なら
-`validation/multistage/` に読み替えてください。ハッシュは移動前のコードのものです。
+## 手入力GUI
 
-## 今回の整理で確認した範囲（2026-09-09）
+`python validation/konogui.py` で起動します。従来の左入力・中央計算・右出力の構成に、
+電気接続の独立6工程と銅／アルミ・銅／銅・アルミ／アルミの3連結ラインを追加しています。
+連結ラインは44操作＋14原材条件を工程別に入力し、途中工程と最終品質を右欄で確認できます。
+材種は選択したラインに固定されます。プルダウンの先頭には
+「複合工程全体｜電気接続 銅／アルミ」「銅／銅」「アルミ／アルミ」の3ライン、
+続いて電気接続の6工程と従来の10シミュレータを並べ、19項目の一覧を表示します。
+起動時は銅／アルミの連結ラインが選択されます。
 
-- 自動テスト88件：既存84件と、パス・起動・追加検証のimportに関する4件が合格。
-- 変更前後の監査比較：単工程6モデルの全候補・初期点・出力範囲・最良値、および複合工程の監査結果が数値一致。
-- v002実CLI：熱硬化・seed 0・推薦1件・反復1回の比較処理が完了。最終予測と比較表出力まで確認。
-- 資料の相対リンクにリンク切れなし。v002の実装・テストコードには変更なし。
+このGUIは物理式を直接計算します。v005・r002や保存済みbundleの読み込みは不要です。
+左欄を変更して「計算」を押すと、連結ラインでは前工程の加工状態が後工程へ伝播します。
+「結果JSON保存」は入力と物理計算・検査結果を保存します。
+予測モデルの学習や連結最適化は、各バージョンのAPI・CLIで実行します。
 
-実CLIの結果は [比較表](single/results/refactor_review_20260909/comparison.md) にあります
-（ローカル生成物のためGit管理外）。全モデル再学習や長時間の本番規模検証は今回の確認範囲に含みません。
-
-分割後の実行器ハッシュには `src/` 配下の設定・読書き・採点・シナリオも含めます。
-保存済みの結果・ハッシュは書き換えず、新規実行分から新しい構成を記録します。
+新しい物理モデルの「検査ノイズあり」は非破壊検査項目だけを表示し、
+内部状態・破壊検査値は未測定表示になります。このとき合否・制約余裕は真値基準の参考値です。
+物理モデルと検査ノイズは未校正の合成モデルです。
+`python validation/konogui.py --smoke-test` で画面を開かず19モデルを確認できます。

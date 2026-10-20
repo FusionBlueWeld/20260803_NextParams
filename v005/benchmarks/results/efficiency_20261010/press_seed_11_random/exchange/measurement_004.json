@@ -1,0 +1,77 @@
+{
+  "step": 4,
+  "request_sha256": "f9fbb430bedc25cbedaf91cd7084a6b74cded634713108b44815306d0d040fbc",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_004_rank_1",
+      "inputs": {
+        "clearance_pct": 9.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.06325,
+        "peak_force_kn": 13.225014164378809,
+        "flatness_error_mm": 0.0414
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_2",
+      "inputs": {
+        "clearance_pct": 6.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.03371111111111111,
+        "peak_force_kn": 14.65399670133428,
+        "flatness_error_mm": 0.06601272770619546
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_3",
+      "inputs": {
+        "clearance_pct": 7.0,
+        "stroke_speed_mm_s": 260.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.041850000000000005,
+        "peak_force_kn": 15.033724576050693,
+        "flatness_error_mm": 0.06443958197945404
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_4",
+      "inputs": {
+        "clearance_pct": 14.0,
+        "stroke_speed_mm_s": 320.0,
+        "blank_holder_force_kn": 90.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.1306875,
+        "peak_force_kn": 16.148375091200425,
+        "flatness_error_mm": 0.11904130244755244
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_004_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0214,
+        "peak_force_kn": 18.135323600000003,
+        "flatness_error_mm": 0.09849964832557824
+      },
+      "feasible": true
+    }
+  ]
+}

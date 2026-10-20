@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import sys
 
 import numpy as np
 
@@ -95,6 +96,7 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--samples", type=int, default=512)
     check.add_argument("--seed", type=int, default=0)
     check.add_argument("--output")
+    subparsers.add_parser("interconnect", help="Cu/Alの分岐合流ライン検証（interconnect --helpで詳細）")
     return parser
 
 
@@ -106,7 +108,12 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     """引数を解釈して担当処理を実行し、終了コードを返します。"""
 
-    args = build_parser().parse_args(argv)
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if arguments and arguments[0] == "interconnect":
+        # 既存の塗工系CLIを保ち、追加ラインは専用の検証器へ渡します。
+        from .checks.electrical_interconnect_validation import main as interconnect_main
+        return interconnect_main(arguments[1:])
+    args = build_parser().parse_args(arguments)
     try:
         if args.command == "list":
             payload = {

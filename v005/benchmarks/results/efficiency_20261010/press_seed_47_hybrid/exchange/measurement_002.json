@@ -1,0 +1,77 @@
+{
+  "step": 2,
+  "request_sha256": "e99b7935313bd449c2edbe75fbe6cfdc255b44e29572bd7b57aba0cc8cb751fe",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_002_rank_1",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02244861111111111,
+        "peak_force_kn": 16.7784735,
+        "flatness_error_mm": 0.1319029434437712
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_2",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.025427777777777775,
+        "peak_force_kn": 16.025333333333332,
+        "flatness_error_mm": 0.13792095340533933
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_3",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.024094444444444443,
+        "peak_force_kn": 16.37237333333334,
+        "flatness_error_mm": 0.14219223093324865
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_4",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 140.0,
+        "blank_holder_force_kn": 30.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.0233375,
+        "peak_force_kn": 16.4167807,
+        "flatness_error_mm": 0.12771006880035807
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.021844444444444444,
+        "peak_force_kn": 16.819547066666672,
+        "flatness_error_mm": 0.11975641300673358
+      },
+      "feasible": true
+    }
+  ]
+}

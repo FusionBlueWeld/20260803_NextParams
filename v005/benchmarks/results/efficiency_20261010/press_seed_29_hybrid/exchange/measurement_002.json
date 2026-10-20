@@ -1,0 +1,77 @@
+{
+  "step": 2,
+  "request_sha256": "e7c40efccbf85e1652e972e1e41045aeefb703ae8c666b55c92e7ddf24c60a75",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_002_rank_1",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 220.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.023761111111111108,
+        "peak_force_kn": 16.941133333333337,
+        "flatness_error_mm": 0.14988720219384913
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_2",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 320.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.027649999999999997,
+        "peak_force_kn": 18.017600000000005,
+        "flatness_error_mm": 0.165
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_3",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.024094444444444443,
+        "peak_force_kn": 16.37237333333334,
+        "flatness_error_mm": 0.14219223093324865
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_4",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 260.0,
+        "blank_holder_force_kn": 20.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02465,
+        "peak_force_kn": 17.352440000000005,
+        "flatness_error_mm": 0.15563958197945402
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_002_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 180.0,
+        "blank_holder_force_kn": 40.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02151111111111111,
+        "peak_force_kn": 17.00453866666667,
+        "flatness_error_mm": 0.1217323287397514
+      },
+      "feasible": true
+    }
+  ]
+}

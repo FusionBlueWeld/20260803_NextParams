@@ -1,0 +1,16 @@
+{
+  "initial_design_enabled": true,
+  "parameter_focus_enabled": true,
+  "temporary_fix_enabled": true,
+  "max_total_experiments": 40,
+  "initial_max_conditions": 20,
+  "stability_updates": 2,
+  "effect_tolerances": {
+    "cost": 0.5,
+    "quality": 0.05
+  },
+  "never_fix": [
+    "x",
+    "y"
+  ]
+}

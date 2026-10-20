@@ -75,6 +75,6 @@ electroplatingは4セルすべて全seed未到達であり、batch分散だけ�
 
 - バッチ対応ランナー: `validation/single/src/checks/v002_v003_evolution.py`
 - 4セル集計コード: `validation/single/src/checks/batch_matrix.py`
-- batch=1生データ: `validation/single/results/v002_v003_evolution_20260909_r2/raw_results.json`
-- batch=3生データ: `validation/single/results/v002_v003_batch3_20260909/raw_results.json`
-- 4セル集計: `validation/single/results/v002_v003_batch_matrix_20260909_r2/`
+- batch=1生データ: `_old/validation/single/results/v002_v003_evolution_20260909_r2/raw_results.json`
+- batch=3生データ: `_old/validation/single/results/v002_v003_batch3_20260909/raw_results.json`
+- 4セル集計: `_old/validation/single/results/v002_v003_batch_matrix_20260909_r2/`

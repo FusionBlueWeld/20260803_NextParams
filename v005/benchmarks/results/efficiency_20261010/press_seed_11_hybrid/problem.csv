@@ -1,0 +1,7 @@
+﻿column,display_name,unit,role,direction,lower,upper,step,target
+clearance_pct,クリアランス,%,parameter,,3.0,15.0,1.0,
+stroke_speed_mm_s,ストローク速度,mm/s,parameter,,80.0,320.0,20.0,
+blank_holder_force_kn,ブランクホルダー力,kN,parameter,,20.0,100.0,10.0,
+burr_height_mm,burr_height_mm,mm,objective,minimize,,,,
+peak_force_kn,peak_force_kn,kN,constraint,less_equal,,,,19.5
+flatness_error_mm,flatness_error_mm,mm,constraint,less_equal,,,,0.2

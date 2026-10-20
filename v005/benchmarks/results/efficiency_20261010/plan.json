@@ -1,0 +1,27 @@
+{
+  "trials": [
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_11_random",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_11_nn",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_11_hybrid",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_29_random",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_29_nn",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_29_hybrid",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_47_random",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_47_nn",
+    "v005\\benchmarks\\results\\efficiency_20261010\\press_seed_47_hybrid"
+  ],
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "same_initial_conditions_per_seed": true,
+  "training_parallelism": 1,
+  "limits": {
+    "observations": 32,
+    "candidates": 1521,
+    "epochs": 300,
+    "ensemble": 2
+  },
+  "simulator_command": "python -m v005.trials.trial_single_press_forming_20261010.simulator_worker evaluate --trial TRIAL --request REQUEST"
+}

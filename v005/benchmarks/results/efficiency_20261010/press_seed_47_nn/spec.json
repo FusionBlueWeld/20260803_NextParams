@@ -1,0 +1,8 @@
+{
+  "name": "trial_single_press_forming_20261010",
+  "title": "単工程｜プレス打ち抜き",
+  "backend": "single",
+  "stage": "press_forming",
+  "extra_constraints": [],
+  "absolute_outputs": {}
+}

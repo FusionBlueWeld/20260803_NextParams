@@ -27,7 +27,28 @@ Thumbs.db
 # Project-specific datasets, experiments, and generated artifacts
 data/
 **/trials/
-_old/
+# Keep the archived validation indexes and selected multistage evidence reviewable.
+_old/*
+!_old/validation/
+_old/validation/*
+!_old/validation/single/
+_old/validation/single/*
+!_old/validation/single/results/
+_old/validation/single/results/*
+!_old/validation/single/results/README.md
+!_old/validation/multistage/
+_old/validation/multistage/*
+!_old/validation/multistage/results/
+_old/validation/multistage/results/*
+!_old/validation/multistage/results/README.md
+!_old/validation/multistage/results/calibration_fix_run.json
+!_old/validation/multistage/results/fix_broad_domain_limitation.json
+!_old/validation/multistage/results/stage_closed_loop_production2_validation.json
+!_old/validation/multistage/results/stage_loop_smoke3_coating_s0.json
+!_old/validation/multistage/results/v004_r001_fix_manifest.json
+!_old/validation/multistage/results/pre_fix_20260909/
+_old/validation/multistage/results/pre_fix_20260909/*
+!_old/validation/multistage/results/pre_fix_20260909/**
 validation/single/baselines/
 validation/single/results/
 **/output/*
@@ -38,3 +59,4 @@ validation/single/results/
 *.tmp
 *.bak
 ~$*
+.test_tmp/

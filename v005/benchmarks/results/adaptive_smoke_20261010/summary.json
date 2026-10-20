@@ -1,0 +1,92 @@
+{
+  "scope": "synthetic CLI smoke only, not a manufacturing accuracy comparison",
+  "measurements": 26,
+  "best": 10.036666666666667,
+  "states": [
+    {
+      "rows": 16,
+      "phase": "ADAPTIVE_SEARCH",
+      "fixed_values": {},
+      "scope": "full"
+    },
+    {
+      "rows": 20,
+      "phase": "ADAPTIVE_SEARCH",
+      "fixed_values": {},
+      "scope": "full"
+    },
+    {
+      "rows": 21,
+      "phase": "ADAPTIVE_SEARCH",
+      "fixed_values": {},
+      "scope": "full"
+    },
+    {
+      "rows": 22,
+      "phase": "ADAPTIVE_SEARCH",
+      "fixed_values": {},
+      "scope": "full"
+    },
+    {
+      "rows": 23,
+      "phase": "FOCUSED_SEARCH",
+      "fixed_values": {
+        "z": -1.0
+      },
+      "scope": "focused_with_checks"
+    },
+    {
+      "rows": 24,
+      "phase": "FOCUSED_SEARCH",
+      "fixed_values": {
+        "z": -1.0
+      },
+      "scope": "focused_with_checks"
+    },
+    {
+      "rows": 25,
+      "phase": "FOCUSED_SEARCH",
+      "fixed_values": {
+        "z": -1.0
+      },
+      "scope": "focused_with_checks"
+    },
+    {
+      "rows": 26,
+      "phase": "FOCUSED_SEARCH",
+      "fixed_values": {
+        "z": -1.0
+      },
+      "scope": "focused_with_checks"
+    }
+  ],
+  "status": "REVIEW_REQUIRED",
+  "metrics": {
+    "all_candidates_explored": null,
+    "configured_coverage_scope": "promising",
+    "coverage_scope": "promising",
+    "global_support_coverage": 0.375,
+    "promising_support_coverage": 1.0,
+    "promising_region_complete": false,
+    "candidate_space_complete": false,
+    "promising_candidate_count": 1,
+    "support_coverage": null,
+    "coverage_sufficient": false,
+    "recent_improvement": 0.0,
+    "objective_stagnant": true,
+    "top_score_spread": 6.442026982965336e-13,
+    "top_score_stable_and_small": true,
+    "condition_distance": 0.0,
+    "predicted_optimum_condition_stable": true,
+    "predicted_optimum_objective_spread": 0.001309593512310414,
+    "predicted_optimum_objective_stable": false,
+    "predicted_optimum_stable": false,
+    "distinct_history_states": 4,
+    "minimum_history_reached": false,
+    "converged": false,
+    "focus_phase": "FOCUSED_SEARCH",
+    "temporarily_fixed_controls": 1,
+    "convergence_scope": "focused_with_checks",
+    "useful_candidate_count": 0
+  }
+}

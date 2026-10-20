@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "python": "3.12.2",
+  "numpy": "2.5.1",
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "BLIS_NUM_THREADS": "1"
+  },
+  "seed": 20261010,
+  "memory_measurement": "tracemalloc additional Python/NumPy allocations, excluding pre-created inputs and OS RSS",
+  "distance_small": {
+    "candidate_shape": [
+      2048,
+      50
+    ],
+    "measured_shape": [
+      124,
+      50
+    ],
+    "old_broadcast_once": {
+      "seconds": 0.05882739997468889,
+      "peak_additional_mib": 197.6261749267578
+    },
+    "new_memory_mb_2": {
+      "seconds": 0.002297299914062023,
+      "peak_additional_mib": 2.3678970336914062
+    },
+    "max_absolute_error": 8.881784197001252e-16,
+    "peak_memory_reduction_ratio": 83.4606286146956,
+    "speedup_ratio": 25.60719199726599
+  },
+  "distance_full": {
+    "candidate_shape": [
+      65536,
+      50
+    ],
+    "measured_shape": [
+      124,
+      50
+    ],
+    "memory_mb": 2,
+    "seconds": 0.04356529994402081,
+    "peak_additional_mib": 2.92120361328125,
+    "finite": true
+  },
+  "near_identical_diagnostic": {
+    "reference": [
+      0.0,
+      0.0,
+      5.862135067264666e-16,
+      5.636036217109994e-16
+    ],
+    "new": [
+      0.0,
+      0.0,
+      5.862135067264666e-16,
+      5.636036217109994e-16
+    ],
+    "max_absolute_error": 0.0
+  },
+  "design_checks": {
+    "ordinal_boundary_cases_passed": 7,
+    "strict_context_cases_passed": 3,
+    "csv_roundtrip_values_passed": 2004,
+    "design_assumptions": [
+      "unit=level with integer raw observations means an integer ordinal with origin 0",
+      "explicit fractional ordinal steps have origin 0",
+      "continuity correction applies to predicted probability; actual feasibility retains the original limit",
+      "old rounded incoming contexts are not silently normalized to a different true incoming state"
+    ],
+    "review_notes": [
+      "An ordinal origin other than 0 requires additional metadata before enabling this correction.",
+      "Noninteger raw level observations keep the continuous boundary unless an explicit ordinal step is configured.",
+      "Unknown ordinal constraint column names are rejected by trial input validation.",
+      "17 significant decimal digits preserve finite binary64 input values when parsed back to float."
+    ]
+  },
+  "source_sha256": {
+    "v005/src/hybrid/optimizer.py": "ed2d225a06e27a0bbfb078709eee76de734cc54569522d2a501d565af8a0ff69",
+    "v005/src/connection.py": "51c2146ada43e354632a95ff69e11b41e7ff0927af345c25f321c8fd94869019",
+    "v005/src/hybrid/reporting.py": "1ffa628f7b8452128e73d00e316ff81d6e10cca808c163cb42fe730d24bef6c8",
+    "v005/src/candidate_identity.py": "99e5d05d0320ab3e074e8b3567f8f978c01dc72d4afa3588016003511ee9d86e",
+    "v005/src/search_config.py": "7e0732679c7a60c8dd261b298979622cc2b529f1e8d30db4c3206d9e7f4be648",
+    "v005/src/trial_inputs.py": "b1fd1a066276e1702a3fe0cd601379e818af0425c442c37a8039f1c543774943"
+  }
+}

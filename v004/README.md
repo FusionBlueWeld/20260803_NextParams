@@ -218,7 +218,7 @@ pickle予測器は信頼できるローカルbundleだけを読み込んでく�
 96件の流入状態付き塗工oracleデータで、27候補の流入値固定、全8出力の最大NRMSE 0.0322、
 保存・再読込差0を確認しました。これらは予測コア同期前の履歴です。同期後は単体・接続回帰テストと
 現行v003/v004の予測値一致テストを実施し、物理oracleの長期再評価は別途行います。
-旧互換比較の要約は[`v003_v004_compatibility.json`](../validation/single/results/v004/v003_v004_compatibility.json)に保存しています。
+旧互換比較の要約は[`v003_v004_compatibility.json`](../_old/validation/single/results/v004/v003_v004_compatibility.json)に保存しています。
 
 ## v004の責務
 

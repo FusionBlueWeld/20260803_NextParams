@@ -1,0 +1,77 @@
+{
+  "step": 1,
+  "request_sha256": "0517f1746a1ec05523b3fe3b7772cf0008ea2dda81f58f3fe597204a4c988049",
+  "noise": false,
+  "results": [
+    {
+      "experiment_id": "step_001_rank_1",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 140.0,
+        "blank_holder_force_kn": 100.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.02465,
+        "peak_force_kn": 18.052265600000005,
+        "flatness_error_mm": 0.0881832392975781
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_2",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 200.0,
+        "blank_holder_force_kn": 100.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.023649999999999997,
+        "peak_force_kn": 18.6237248,
+        "flatness_error_mm": 0.09199146628702293
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_3",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 80.0,
+        "blank_holder_force_kn": 100.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.027649999999999997,
+        "peak_force_kn": 17.540960000000002,
+        "flatness_error_mm": 0.08557894736842106
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_4",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 160.0,
+        "blank_holder_force_kn": 80.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.021844444444444444,
+        "peak_force_kn": 17.75139453333334,
+        "flatness_error_mm": 0.09551961548253651
+      },
+      "feasible": true
+    },
+    {
+      "experiment_id": "step_001_rank_5",
+      "inputs": {
+        "clearance_pct": 3.0,
+        "stroke_speed_mm_s": 120.0,
+        "blank_holder_force_kn": 90.0
+      },
+      "outputs": {
+        "burr_height_mm": 0.024115277777777777,
+        "peak_force_kn": 17.632982499999997,
+        "flatness_error_mm": 0.08968239526172829
+      },
+      "feasible": true
+    }
+  ]
+}

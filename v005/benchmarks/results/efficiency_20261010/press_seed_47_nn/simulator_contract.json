@@ -1,0 +1,120 @@
+{
+  "spec": {
+    "name": "trial_single_press_forming_20261010",
+    "title": "単工程｜プレス打ち抜き",
+    "backend": "single",
+    "stage": "press_forming",
+    "extra_constraints": [],
+    "absolute_outputs": {}
+  },
+  "parameters": [
+    "clearance_pct",
+    "stroke_speed_mm_s",
+    "blank_holder_force_kn"
+  ],
+  "controls": [
+    "clearance_pct",
+    "stroke_speed_mm_s",
+    "blank_holder_force_kn"
+  ],
+  "context": {},
+  "fields": {
+    "clearance_pct": {
+      "lower": 3.0,
+      "upper": 15.0,
+      "step": 1.0,
+      "unit": "%",
+      "display_name": "クリアランス"
+    },
+    "stroke_speed_mm_s": {
+      "lower": 80.0,
+      "upper": 320.0,
+      "step": 20.0,
+      "unit": "mm/s",
+      "display_name": "ストローク速度"
+    },
+    "blank_holder_force_kn": {
+      "lower": 20.0,
+      "upper": 100.0,
+      "step": 10.0,
+      "unit": "kN",
+      "display_name": "ブランクホルダー力"
+    }
+  },
+  "input_aliases": {},
+  "axes": {
+    "clearance_pct": [
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0
+    ],
+    "stroke_speed_mm_s": [
+      80.0,
+      100.0,
+      120.0,
+      140.0,
+      160.0,
+      180.0,
+      200.0,
+      220.0,
+      240.0,
+      260.0,
+      280.0,
+      300.0,
+      320.0
+    ],
+    "blank_holder_force_kn": [
+      20.0,
+      30.0,
+      40.0,
+      50.0,
+      60.0,
+      70.0,
+      80.0,
+      90.0,
+      100.0
+    ]
+  },
+  "objective": "burr_height_mm",
+  "direction": "minimize",
+  "constraints": [
+    {
+      "name": "peak_force_kn",
+      "direction": "less_equal",
+      "target": 19.5
+    },
+    {
+      "name": "flatness_error_mm",
+      "direction": "less_equal",
+      "target": 0.2
+    }
+  ],
+  "output_units": {
+    "burr_height_mm": "mm",
+    "peak_force_kn": "kN",
+    "flatness_error_mm": "mm"
+  },
+  "outputs": [
+    "burr_height_mm",
+    "peak_force_kn",
+    "flatness_error_mm"
+  ],
+  "candidate_count": 1521,
+  "context_provenance": "Existing standalone model problem grid, objective and constraints unchanged.",
+  "observation_regime": "complete_synthetic_state_no_noise",
+  "sources": {
+    "C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\validation\\single\\press_forming\\physics_model.py": "3a31df8a0e272e3a562c4e0ecfe34078cfcd2dbd54be55e9bcfb8f8f0220d711",
+    "C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\validation\\single\\press_forming\\manifest.json": "abf0918a85dd2680b7f2932646db171f8a792ccbcfb5b0e586fbebace8446a46",
+    "C:\\Users\\tsuts\\Desktop\\PythonDev_std\\20260803_NextParams\\validation\\single\\press_forming\\problem.csv": "36c86379355c80f34be5e6a321168bf4a1d76ed2adaf45c49846a153241707bf"
+  }
+}

@@ -19,7 +19,9 @@ VERSION_ROOTS = {
     "v002": PROJECT_ROOT / "v002",
     "v003": PROJECT_ROOT / "v003",
     "v004": PROJECT_ROOT / "v004",
+    "v005": PROJECT_ROOT / "v005",
     "r001": PROJECT_ROOT / "r001",
+    "r002": PROJECT_ROOT / "r002",
 }
 
 
@@ -41,7 +43,9 @@ def print_help(*, stream: object = sys.stdout) -> None:
         "  v002  GP-NN統計Hybridによる探索とrun別解空間\n"
         "  v003  技能者知見制約付きNN + 残差GPによる探索\n"
         "  v004  v003互換探索 + r接続用stage bundle\n"
+        "  v005  予算付き条件探索 + bundle 2.0\n"
         "  r001  複数stage bundleの接続と全体条件調整\n"
+        "  r002  工程グラフの予算付き探索・下流追従・部分実験\n"
         "\n"
         "例:\n"
         "  python main.py --version v000 --run trial_000\n"
@@ -49,7 +53,9 @@ def print_help(*, stream: object = sys.stdout) -> None:
         "  python main.py --version v002 --run trial_002 --n 9\n"
         "  python main.py --version v003 --run trial_003 --n 9\n"
         "  python main.py --version v004 --run trial_004 --n 9\n"
-        "  python main.py --version r001 --run trial_r001 --n 9",
+        "  python main.py --version r001 --run trial_r001 --n 9\n"
+        "  python main.py --version v005 --run trial_005 --n 9\n"
+        "  python main.py --version r002 --run trial_line --n 3",
         file=stream,
     )
 

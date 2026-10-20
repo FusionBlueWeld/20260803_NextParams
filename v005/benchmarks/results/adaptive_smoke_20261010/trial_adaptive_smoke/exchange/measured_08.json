@@ -1,0 +1,12 @@
+{
+  "measurements": [
+    {
+      "experiment_id": "s08_00",
+      "x": 1.0,
+      "y": -1.0,
+      "z": -1.0,
+      "cost": 11.77,
+      "quality": 0.1
+    }
+  ]
+}
