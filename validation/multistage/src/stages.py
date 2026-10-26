@@ -40,6 +40,7 @@ class Stage:
     def evaluate(self, conditions: Mapping[str, ArrayLike]) -> dict[str, np.ndarray]:
         """入力名が工程の契約と一致することを確認して物理モデルを呼びます。"""
 
+        conditions = {**getattr(self.module, "OPTIONAL_INPUT_DEFAULTS", {}), **conditions}
         if set(conditions) != set(self.input_bounds):
             raise ValueError(f"Expected inputs: {', '.join(self.input_bounds)}")
         return self.module.evaluate_model(**conditions)

@@ -1,8 +1,8 @@
 {
   "id": "curing",
   "name": "熱硬化",
-  "model_version": "1.0.0",
-  "description": "乾燥膜の加熱履歴、Arrhenius型硬化・劣化、残留溶剤脱離を表す決定論的な物理縮約モデル。係数は検証用仮定であり実機校正値ではない。",
+  "model_version": "2.0.0",
+  "description": "乾燥膜の加熱履歴、Arrhenius型硬化・劣化、残留溶剤脱離を表す決定論的な物理縮約モデル。係数は検証用仮定であり実機校正値ではない。v2は流入温度を引継ぎ、溶剤質量から濃度・膜厚を計算する。",
   "local_objective": {"name": "bond_strength_mpa", "direction": "maximize"},
   "local_constraints": [
     {"name": "cure_fraction", "direction": "greater_equal", "target": 0.80},
@@ -20,7 +20,8 @@
     {"name": "incoming_residual_solvent_pct", "unit": "%", "range": [0.0, 70.0], "description": "乾燥工程からの残留溶剤率"},
     {"name": "incoming_internal_stress_mpa", "unit": "MPa", "range": [0.0, 8.0], "description": "乾燥工程からの内部応力"},
     {"name": "incoming_drying_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "乾燥工程からの欠陥指数"},
-    {"name": "incoming_thickness_cv_fraction", "unit": "fraction", "range": [0.0, 0.40], "description": "乾燥工程からの膜厚変動係数"}
+    {"name": "incoming_thickness_cv_fraction", "unit": "fraction", "range": [0.0, 0.40], "description": "乾燥工程からの膜厚変動係数"},
+    {"name": "incoming_film_temperature_c", "unit": "degC", "range": [25.0, 180.0], "default": 25.0, "description": "流入膜温度（単独評価の省略時は25℃）"}
   ],
   "outputs": [
     {"name": "bond_strength_mpa", "unit": "MPa", "range": [0.0, 100.0], "description": "最終接着強度"},
@@ -30,7 +31,7 @@
     {"name": "final_thickness_um", "unit": "um", "range": [0.0, 310.0], "description": "最終膜厚"},
     {"name": "final_internal_stress_mpa", "unit": "MPa", "range": [0.0, 10.0], "description": "最終内部応力"},
     {"name": "final_defect_index", "unit": "0-1", "range": [0.0, 1.0], "description": "最終欠陥指数"},
-    {"name": "dimensional_change_um", "unit": "um", "range": [0.0, 100.0], "description": "硬化による寸法変化"},
+    {"name": "dimensional_change_um", "unit": "um", "range": [0.0, 310.0], "description": "硬化による寸法変化"},
     {"name": "blister_index", "unit": "0-1", "range": [0.0, 1.0], "description": "ブリスター指数"},
     {"name": "terminal_film_temperature_c", "unit": "degC", "range": [25.0, 180.0], "description": "硬化終了時膜温度"},
     {"name": "curing_energy_kj_m2", "unit": "kJ/m2", "range": [0.0, 10000.0], "description": "硬化工程エネルギー"}

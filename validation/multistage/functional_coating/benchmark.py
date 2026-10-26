@@ -93,6 +93,7 @@ def individual_best_chain() -> dict[str, object]:
     curing_points, ux = _grid(curing_names)
     curing_outputs = evaluate_curing(
         **ux,
+        incoming_film_temperature_c=drying_outputs["terminal_film_temperature_c"][drying_index],
         incoming_dry_thickness_um=drying_outputs["dry_thickness_um"][drying_index],
         incoming_residual_solvent_pct=drying_outputs["residual_solvent_pct"][drying_index],
         incoming_internal_stress_mpa=drying_outputs["internal_stress_mpa"][drying_index],

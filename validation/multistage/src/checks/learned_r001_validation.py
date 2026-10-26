@@ -80,6 +80,7 @@ def _current_contexts() -> dict[str, dict[str, float]]:
             "incoming_coating_defect_index": float(result["coating"]["coating_defect_index"]),
         },
         "curing": {
+            "incoming_film_temperature_c": float(result["drying"]["terminal_film_temperature_c"]),
             "incoming_dry_thickness_um": float(result["drying"]["dry_thickness_um"]),
             "incoming_residual_solvent_pct": float(result["drying"]["residual_solvent_pct"]),
             "incoming_internal_stress_mpa": float(result["drying"]["internal_stress_mpa"]),
