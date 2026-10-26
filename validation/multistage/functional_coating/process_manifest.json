@@ -1,7 +1,7 @@
 {
   "id": "functional_coating",
   "name": "機能性コーティング複合工程",
-  "model_version": "1.0.0",
+  "model_version": "2.0.0",
   "stages": ["coating", "drying", "curing"],
   "connections": [
     {"from": "coating.wet_thickness_um", "to": "drying.incoming_wet_thickness_um"},
@@ -12,7 +12,8 @@
     {"from": "drying.residual_solvent_pct", "to": "curing.incoming_residual_solvent_pct"},
     {"from": "drying.internal_stress_mpa", "to": "curing.incoming_internal_stress_mpa"},
     {"from": "drying.drying_defect_index", "to": "curing.incoming_drying_defect_index"},
-    {"from": "drying.dry_thickness_cv_fraction", "to": "curing.incoming_thickness_cv_fraction"}
+    {"from": "drying.dry_thickness_cv_fraction", "to": "curing.incoming_thickness_cv_fraction"},
+    {"from": "drying.terminal_film_temperature_c", "to": "curing.incoming_film_temperature_c"}
   ],
   "final_specifications": [
     {"name": "bond_strength_mpa", "direction": "greater_equal", "target": 32.0},

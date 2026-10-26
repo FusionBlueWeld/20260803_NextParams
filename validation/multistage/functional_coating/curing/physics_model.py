@@ -29,11 +29,16 @@ INCOMING_STATE_BOUNDS = {
     "incoming_internal_stress_mpa": (0.0, 8.0),
     "incoming_drying_defect_index": (0.0, 1.0),
     "incoming_thickness_cv_fraction": (0.0, 0.40),
+    "incoming_film_temperature_c": (25.0, 180.0),
 }
 
 INPUT_BOUNDS = {**CONTROL_BOUNDS, **INCOMING_STATE_BOUNDS}
 
+OPTIONAL_INPUT_DEFAULTS = {"incoming_film_temperature_c": 25.0}
+
 _AMBIENT_TEMPERATURE_C = 25.0
+_DRY_POLYMER_DENSITY_KG_M3 = 1250.0
+_SOLVENT_DENSITY_KG_M3 = 790.0
 _GAS_CONSTANT_J_MOL_K = 8.314462618
 _INTEGRATION_STEPS = 96
 
@@ -59,6 +64,7 @@ def evaluate_model(
     incoming_internal_stress_mpa: ArrayLike,
     incoming_drying_defect_index: ArrayLike,
     incoming_thickness_cv_fraction: ArrayLike,
+    incoming_film_temperature_c: ArrayLike = 25.0,
 ) -> dict[str, np.ndarray]:
     """Evaluate final film cure, damage, adhesion, thickness, and defects."""
 
@@ -72,9 +78,11 @@ def evaluate_model(
             "incoming_internal_stress_mpa": incoming_internal_stress_mpa,
             "incoming_drying_defect_index": incoming_drying_defect_index,
             "incoming_thickness_cv_fraction": incoming_thickness_cv_fraction,
+            "incoming_film_temperature_c": incoming_film_temperature_c,
         },
         INPUT_BOUNDS,
     )
+    initial_temperature = x["incoming_film_temperature_c"]
     oven = x["oven_temperature_c"]
     hold = x["hold_time_min"]
     pressure = x["nip_pressure_mpa"]
@@ -90,8 +98,8 @@ def evaluate_model(
         np.arange(_INTEGRATION_STEPS, dtype=float) + 0.5
     ) / _INTEGRATION_STEPS
     time_min = hold[..., None] * midpoint_fraction
-    temperature_c = _AMBIENT_TEMPERATURE_C + (
-        oven[..., None] - _AMBIENT_TEMPERATURE_C
+    temperature_c = initial_temperature[..., None] + (
+        oven[..., None] - initial_temperature[..., None]
     ) * (1.0 - np.exp(-time_min / thermal_time_constant_min[..., None]))
     temperature_k = temperature_c + 273.15
     dt_min = hold / _INTEGRATION_STEPS
@@ -120,10 +128,23 @@ def evaluate_model(
     solvent_escape_exposure = np.sum(solvent_escape_rate, axis=-1) * dt_min
     cure_fraction = -np.expm1(-cure_exposure)
     degradation_fraction = -np.expm1(-degradation_exposure)
-    final_residual_solvent_pct = residual_solvent * np.exp(-solvent_escape_exposure)
+    # Wet-basis concentration is a ratio, not a conserved quantity. Recover
+    # areal masses using the same ideal-volume convention as coating/drying.
+    solvent_mass_fraction = residual_solvent / 100.0
+    incoming_density = 1.0 / (
+        (1.0 - solvent_mass_fraction) / _DRY_POLYMER_DENSITY_KG_M3
+        + solvent_mass_fraction / _SOLVENT_DENSITY_KG_M3
+    )
+    incoming_mass = dry_thickness * 1e-6 * incoming_density
+    solids_mass = incoming_mass * (1.0 - solvent_mass_fraction)
+    initial_solvent_mass = incoming_mass * solvent_mass_fraction
+    final_solvent_mass = initial_solvent_mass * np.exp(-solvent_escape_exposure)
+    final_residual_solvent_pct = 100.0 * final_solvent_mass / (
+        solids_mass + final_solvent_mass
+    )
 
-    terminal_temperature_c = _AMBIENT_TEMPERATURE_C + (
-        oven - _AMBIENT_TEMPERATURE_C
+    terminal_temperature_c = initial_temperature + (
+        oven - initial_temperature
     ) * (1.0 - np.exp(-hold / thermal_time_constant_min))
 
     # Rapid gel formation can trap vapor before it diffuses out.  Thickness and
@@ -147,7 +168,14 @@ def evaluate_model(
     )
     cure_shrinkage = 0.022 * cure_fraction
     compaction = 0.006 * (1.0 - np.exp(-pressure / 0.18))
-    final_thickness_um = dry_thickness * (1.0 - cure_shrinkage - compaction)
+    # Polymer densification changes volume, not polymer mass. Escaped
+    # solvent contributes no final volume; the remaining liquid is not
+    # assigned the polymer's cure shrinkage or compaction.
+    polymer_volume = solids_mass / _DRY_POLYMER_DENSITY_KG_M3
+    final_thickness_um = 1e6 * (
+        polymer_volume * (1.0 - cure_shrinkage - compaction)
+        + final_solvent_mass / _SOLVENT_DENSITY_KG_M3
+    )
 
     final_internal_stress_mpa = np.clip(
         incoming_stress * (1.0 - 0.52 * thermal_relaxation)

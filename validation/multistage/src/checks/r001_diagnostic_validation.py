@@ -94,6 +94,7 @@ def _oracle_valid_holdout(count: int = 4096, seed: int = 20260908) -> tuple[dict
     )
     cure_bounds = curing_oracle.INCOMING_STATE_BOUNDS
     cure_inputs = {
+        "incoming_film_temperature_c": dry["terminal_film_temperature_c"],
         "incoming_dry_thickness_um": dry["dry_thickness_um"],
         "incoming_residual_solvent_pct": dry["residual_solvent_pct"],
         "incoming_internal_stress_mpa": dry["internal_stress_mpa"],
@@ -154,6 +155,7 @@ def _end_to_end(config: dict, predictors: list, connections: dict[str, str]) -> 
         "incoming_coating_defect_index": truth["coating"]["coating_defect_index"],
     })
     teacher["curing"] = _teacher_forced_stage(*predictors[2], conditions, {
+        "incoming_film_temperature_c": truth["drying"]["terminal_film_temperature_c"],
         "incoming_dry_thickness_um": truth["drying"]["dry_thickness_um"],
         "incoming_residual_solvent_pct": truth["drying"]["residual_solvent_pct"],
         "incoming_internal_stress_mpa": truth["drying"]["internal_stress_mpa"],
@@ -279,7 +281,8 @@ def _local_risk(predictors: list, conditions: dict, means: dict) -> dict[str, ob
                            "incoming_thickness_cv_fraction": means["coating"]["thickness_cv_fraction"],
                            "incoming_coating_defect_index": means["coating"]["coating_defect_index"]})
         else:
-            inputs.update({"incoming_dry_thickness_um": means["drying"]["dry_thickness_um"],
+            inputs.update({"incoming_film_temperature_c": means["drying"]["terminal_film_temperature_c"],
+                           "incoming_dry_thickness_um": means["drying"]["dry_thickness_um"],
                            "incoming_residual_solvent_pct": means["drying"]["residual_solvent_pct"],
                            "incoming_internal_stress_mpa": means["drying"]["internal_stress_mpa"],
                            "incoming_drying_defect_index": means["drying"]["drying_defect_index"],

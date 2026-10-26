@@ -4,6 +4,12 @@
 
 現行の個別閉ループ判定は [`stage_closed_loop_final_validation.json`](results/stage_closed_loop_final_validation.json) を参照してください。smoke・初期失敗・修正前の履歴は [`_old/validation/multistage/results/README.md`](../../_old/validation/multistage/results/README.md) に整理しています。
 
+## 塗工ラインの物理整合性 v2
+
+乾燥出口温度の引継ぎ、溶剤質量保存による濃度・膜厚計算、固定炉長の連続ライン評価を追加しました。
+[変更内容・CLI例・旧bundleの再学習・検証範囲](PHYSICS_CONSISTENCY_V2.md)を参照してください。
+既存の保存結果は旧モデルの履歴です。
+
 ## Cu/Al電気接続部品の追加ライン
 
 [`electrical_interconnect/`](electrical_interconnect/README.md)は、Cu/Alの切り出し・成形を

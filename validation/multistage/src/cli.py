@@ -13,7 +13,7 @@ import sys
 import numpy as np
 
 from ..functional_coating.benchmark import audit
-from ..functional_coating.pipeline import DEFAULT_MATERIAL_STATE, LINE_INPUT_BOUNDS, evaluate_line
+from ..functional_coating.pipeline import DEFAULT_MATERIAL_STATE, LINE_INPUT_BOUNDS, evaluate_line, evaluate_continuous_line
 from .stages import available, load
 
 
@@ -85,6 +85,9 @@ def build_parser() -> argparse.ArgumentParser:
     stage.add_argument("--set", nargs="+", required=True, metavar="NAME=VALUE")
 
     line = subparsers.add_parser("evaluate-line", help="evaluate the connected three-stage line")
+    line.add_argument("--drying-length-m", type=float, help="continuous-line dryer length; derive dwell times")
+    line.add_argument("--curing-length-m", type=float, help="continuous-line curing oven length")
+    line.add_argument("--web-width-m", type=float, default=1.0)
     line.add_argument("--set", nargs="+", required=True, metavar="NAME=VALUE")
     line.add_argument(
         "--require-material",
@@ -132,9 +135,18 @@ def main(argv: list[str] | None = None) -> int:
             values = _assignments(args.set)
             if not args.require_material:
                 values = {**DEFAULT_MATERIAL_STATE, **values}
-            if set(values) != set(LINE_INPUT_BOUNDS):
-                raise ValueError(f"Expected inputs: {', '.join(LINE_INPUT_BOUNDS)}")
-            _write_or_print(evaluate_line(values), None)
+            if args.drying_length_m is not None or args.curing_length_m is not None:
+                if args.drying_length_m is None or args.curing_length_m is None:
+                    raise ValueError("Supply both --drying-length-m and --curing-length-m")
+                payload = evaluate_continuous_line(
+                    values, drying_length_m=args.drying_length_m,
+                    curing_length_m=args.curing_length_m, web_width_m=args.web_width_m,
+                )
+            else:
+                if args.web_width_m != 1.0:
+                    raise ValueError("--web-width-m requires continuous-line oven lengths")
+                payload = evaluate_line(values)
+            _write_or_print(payload, None)
         else:
             _write_or_print(audit(args.samples, args.seed), args.output)
     except ValueError as error:

@@ -75,6 +75,7 @@ def evaluate_line(conditions: Mapping[str, ArrayLike]) -> dict[str, Any]:
         oven_temperature_c=x["oven_temperature_c"],
         hold_time_min=x["hold_time_min"],
         nip_pressure_mpa=x["nip_pressure_mpa"],
+        incoming_film_temperature_c=drying_result["terminal_film_temperature_c"],
         incoming_dry_thickness_um=drying_result["dry_thickness_um"],
         incoming_residual_solvent_pct=drying_result["residual_solvent_pct"],
         incoming_internal_stress_mpa=drying_result["internal_stress_mpa"],
@@ -98,6 +99,39 @@ def evaluate_line(conditions: Mapping[str, ArrayLike]) -> dict[str, Any]:
         "curing": curing_result,
         "final": final,
     }
+
+
+def evaluate_continuous_line(
+    conditions: Mapping[str, ArrayLike], *,
+    drying_length_m: float, curing_length_m: float, web_width_m: float = 1.0,
+) -> dict[str, Any]:
+    """Evaluate a fixed-geometry continuous web line with t = L / v.
+
+    Do not supply residence_time_min or hold_time_min: both are derived from
+    the common web speed. Lengths/width describe one machine and must be
+    positive finite scalars. Derived dwell times must fit the model domain.
+    The existing evaluate_line API represents independently scheduled stages.
+    """
+    lengths = {}
+    for name, value in (("drying_length_m", drying_length_m),
+                        ("curing_length_m", curing_length_m),
+                        ("web_width_m", web_width_m)):
+        array = np.asarray(value, dtype=float)
+        if array.ndim != 0 or not np.isfinite(array) or array <= 0:
+            raise ValueError(f"{name} must be a positive finite scalar")
+        lengths[name] = float(array)
+    bounds = {name: bound for name, bound in LINE_INPUT_BOUNDS.items()
+              if name not in ("residence_time_min", "hold_time_min")}
+    x = validate_and_broadcast(conditions, bounds)
+    speed = x["line_speed_m_min"]
+    result = evaluate_line({
+        **x,
+        "residence_time_min": lengths["drying_length_m"] / speed,
+        "hold_time_min": lengths["curing_length_m"] / speed,
+    })
+    result["final"]["line_throughput_m2_h"] = speed * 60.0 * lengths["web_width_m"]
+    result["equipment"] = lengths
+    return result
 
 
 def final_feasible(outputs: Mapping[str, ArrayLike]) -> np.ndarray:

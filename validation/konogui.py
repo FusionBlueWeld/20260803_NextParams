@@ -130,6 +130,7 @@ def _field_from_manifest(row: Mapping[str, object]) -> FieldSpec:
         str(row.get("unit") or ""),
         float(lower),
         float(upper),
+        default=float(row["default"]) if "default" in row else None,
     )
 
 
